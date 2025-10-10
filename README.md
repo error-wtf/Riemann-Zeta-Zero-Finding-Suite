@@ -254,6 +254,6 @@ Anti-Capitalist Software License (ACSL), Version 1.4
 Copyright (c) 2025 Lino Casu and Carmen Wrede
 ```
 
-(Replace 2025 with the appropriate year if needed.)
+
 
 
