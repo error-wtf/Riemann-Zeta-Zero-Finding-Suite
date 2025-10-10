@@ -1,0 +1,36 @@
+python sieve_from_zeros_psi.py --zeros-root big_run_final --x-start 1000000 --x-end 2000000 --H 200000 --max-windows 20 --wheel 210 --qmax 1000 --qwin 120 --Tcut 0 --kernel fejer --rigorous dusart
+python sieve_from_zeros_psi_better.py --zeros-root big_run_final --x-start 1000000 --x-end 2000000 --H 200000 --max-windows 20 --wheel 210 --qmax 1000 --qwin 120 --Tcut 0 --kernel fejer --rigorous dusart --kernel-grid fejer,parzen --tcut-grid 0.5,1.0 --fdr holm --tuple-priors twin
+python sieve_from_zeros_psi_better.py --zeros-root big_run_final --x-start 1000000 --x-end 2000000 --H 200000 --max-windows 20 --wheel 210 --qmax 1000 --qwin 120 --Tcut 0 --kernel fejer --rigorous dusart --kernel-grid fejer,parzen --tcut-grid 0.5,1.0 --grid-plots
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_until_deadline.ps1 -TStart 10 -Hours 310 -OutRoot "big_run_10h" -Dps 80 -MinBlock 5 -MaxBlock 30 -Mult 8
+python merge_zeros.py --roots big_run_10h big_run_48h --out-root merged_runs
+
+
+
+
+python sieve_from_zeros_psi_rigorous.py --zeros-root merged_runs --x-start 1000000 --x-end 2000000 --H 200000 --max-windows 20 --wheel 210 --qmax 1000 --qwin 120 --kernel fejer --Tcut 0 --rigorous dusart --rigorous-tail on --tail-C 80.0 --out-bounds prime_bounds.csv
+
+# am sichersten ohne Profilreste starten:
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_until_deadline.ps1 -TStart 8 -Hours 48 -OutRoot "big_run_48h_good" -Dps 90 -MinBlock 3 -MaxBlock 20 -Mult 6 -AutoRestart
+
+# clamp auf T_max, feines Unwrap-Raster, mehr Bins
+python turing_check.py --zeros-root merged_runs --T0 0.1 --T1 2000 --bins 40 --steps 12000 --csv turing_v1.csv
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_until_deadline.ps1 -TStart 8 -Hours 48 -OutRoot "big_run_48h_good_v2" -Dps 110 -MinBlock 2 -MaxBlock 12 -Mult 4 -AutoRestart --rho 0.6
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_until_deadline.ps1 -TStart 8 -Hours 48 -OutRoot "big_run_48h_final" -Dps 110 -MinBlock 2 -MaxBlock 12 -Mult 4 -Rho 0.6 -AutoRestart
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_until_deadline.ps1 -TStart 8 -Hours 0.25 -OutRoot "runs\big_run_test_final" -Dps 120 -MinBlock 2 -MaxBlock 12 -Mult 4 -Rho 0.6 -AutoRestart
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_until_deadline.ps1 -TStart 1000 -Hours 0.1 -OutRoot "runs\big_run_test_rho" -Dps 120 -MinBlock 2 -MaxBlock 12 -Mult 4 -Rho 0.6 -AutoRestart
+
+python all_in_one_runner.py --merge-roots runs\big_run_48h_final --out-merged runs\merged_runs --minutes 60 --T0 0.1 --T1 2000 --bins 80 --steps 20000 --noS
+
+python all_in_one_runner.py --merge-roots runs\big_run_48h_final --out-merged runs\merged_runs --minutes 60 --T0 0.1 --T1 2000 --steps 20000 --noS
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_until_deadline.ps1 -TStart 8 -Hours 48 -OutRoot "runs\big_run_48h_final_ultrafine" -Dps 140 -MinBlock 1 -MaxBlock 4 -Mult 3 -Rho 0.2 -AutoRestart
+
+
+
+
+
+

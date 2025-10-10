@@ -1,0 +1,28 @@
+{
+  "zero_bracket_cert": {
+    "required": [
+      "type",
+      "bracket",
+      "Z(a)",
+      "Z(b)",
+      "sign_change",
+      "Zprime_lower_bound_abs",
+      "bisection_root_estimate",
+      "dps",
+      "created_utc"
+    ],
+    "notes": "Prototype schema for a single zero certificate on [a,b]."
+  },
+  "block_count_cert": {
+    "required": [
+      "type",
+      "T1",
+      "T2",
+      "mode",
+      "count",
+      "dps",
+      "created_utc"
+    ],
+    "notes": "Prototype schema for block counting (to be replaced by Turing certificate)."
+  }
+}
