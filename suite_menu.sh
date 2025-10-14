@@ -1,32 +1,26 @@
 #!/usr/bin/env bash
-set -euo pipefail
-command -v python3 >/dev/null || { echo "python3 missing"; exit 127; }
+set -Eeuo pipefail
 
-# Optional debug: VERBOSE=1 rieman-zeta-zero
-: "${VERBOSE:=0}"
-if [[ "$VERBOSE" == "1" ]]; then set -x; fi
+# ------------------------------------------------------------
+# Riemann Zeta Zero Finding Suite – simple orchestrator (Linux)
+# Uses ONLY master_zeros.csv for Turing & Sieve
+# ------------------------------------------------------------
 
-# Installpfad (per ENV übersteuerbar)
-SCRIPTDIR="${RZS_SCRIPTDIR:-/usr/lib/rieman-zeta-suite}"
-export PYTHONPATH="$SCRIPTDIR:${PYTHONPATH:-}"
+# Resolve paths
+SCRIPT_PATH="$(readlink -f "$0" || true)"
+ROOT_DIR="$(dirname "${SCRIPT_PATH:-$PWD}")"
 
-# Arbeitskontext: temp_<UTC-Timestamp> direkt im aktuellen Verzeichnis
-TS="$(date -u +%Y%m%d_%H%M%S)"
-WORKDIR="$PWD/temp_${TS}"
+# Work directories (timestamped under CWD so it works anywhere)
+STAMP="$(date -u +%Y%m%d_%H%M%S)"
+WORKDIR="${WORKDIR:-$PWD/temp_${STAMP}}"
 LOGDIR="$WORKDIR/logs"
 RUNROOT="$WORKDIR/runs"
-BATCH_DIR="$RUNROOT/batch"
-SIEVE_DIR="$RUNROOT/sieve"
-mkdir -p "$LOGDIR" "$BATCH_DIR" "$SIEVE_DIR"
-
-# Sauber abbrechen (alle Kinder beenden)
-trap 'echo; echo "INT received, stopping…"; pkill -P "$$" || true; exit 130' INT
+mkdir -p "$LOGDIR" "$RUNROOT"
 
 echo "DEBUG: WORKDIR=$WORKDIR"
 echo "DEBUG: LOGDIR=$LOGDIR"
 echo "DEBUG: RUNROOT=$RUNROOT"
 
-header() {
 cat <<'ACSL'
 ============================================================
 Anti-Capitalist Software License (ACSL), Version 1.4
@@ -42,161 +36,124 @@ license and attribution intact and apply the same license to
 derivative works. (Full text in LICENSE)
 ============================================================
 ACSL
-}
 
-step()    { printf "\n=== [%s UTC] %s ===\n" "$(date -u +%H:%M:%S)" "$*"; }
-done_in() { local s=$1; printf "✓ done in %02d:%02d:%02d\n" $((s/3600)) $(((s%3600)/60)) $((s%60)); }
-
-# Live-Runner mit sauberem Exit-Code (auch mit tee)
-run_live() {
-  local LOG="$1"; shift
-  if command -v stdbuf >/dev/null 2>&1; then
-    PYTHONUNBUFFERED=1 stdbuf -oL -eL "$@" 2>&1 | tee "$LOG"
-  else
-    PYTHONUNBUFFERED=1 "$@" 2>&1 | tee "$LOG"
-  fi
-  return "${PIPESTATUS[0]}"
-}
-
-# Python-Datei bevorzugen, sonst Modul als Fallback
-# -> gibt ein **Array** zurück (über nameref)
-make_cmd() { # <name der Ziel-Array-Var> <file.py> [module.fallback] [args...]
-  local __out="$1"; shift
-  local file="$1"; shift
-  local mod="${1:-}"; [[ -n "$mod" ]] && shift || true
-  local -a base
-  if [[ -f "$SCRIPTDIR/$file" ]]; then
-    base=(python3 -u "$SCRIPTDIR/$file")
-  elif [[ -n "$mod" ]]; then
-    base=(python3 -u -m "$mod")
-  else
-    echo "FATAL: $SCRIPTDIR/$file not found and no module fallback given." >&2
-    exit 127
-  fi
-  local -n ref="$__out"
-  ref=("${base[@]}" "$@")
-}
-
-# Schön formatierte Vorschau einer Array-Commandline
-preview_cmd() {
-  local -a arr=( "$@" )
-  local out=()
-  for tok in "${arr[@]}"; do
-    printf -v q %q "$tok"
-    out+=( "$q" )
-  done
-  printf "%s\n" "${out[*]}"
-}
-
-# ── Banner ──────────────────────────────────────────────────────────────────────
-header
-
-# ── Eingaben ───────────────────────────────────────────────────────────────────
-read -rp "Hours (>= 0.1) [default 0.1]: " HOURS_RAW
-HOURS_RAW="${HOURS_RAW:-0.1}"
-CLEAN_HOURS="$(echo "$HOURS_RAW" | tr ',' '.' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
-echo "DEBUG: CLEAN_HOURS=$CLEAN_HOURS"
-python3 - "$CLEAN_HOURS" <<'PY' || { echo "Hours must be numeric and >= 0.1"; exit 2; }
+# -------------------------
+# Input (hours, sieve_max, dps)
+# -------------------------
+read -rp "Hours (>= 0.1) [default 0.1]: " HOURS_IN || true
+HOURS="$(printf '%s' "${HOURS_IN:-0.1}" | tr ',' '.' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+if python3 - <<'PY' "$HOURS"; then :; else echo "Invalid hours"; exit 1; fi
 import sys
 try:
     h=float(sys.argv[1]); assert h>=0.1
-except Exception: raise SystemExit(1)
+    print("DEBUG: CLEAN_HOURS=",h)
+except Exception:
+    sys.exit(1)
 PY
-HOURS="$CLEAN_HOURS"
 
-read -rp "SIEVE_MAX (>= 10) [default 100000]: " SIEVE_MAX_RAW
-SIEVE_MAX_RAW="${SIEVE_MAX_RAW:-100000}"
-CLEAN_SIEVE_MAX="$(echo "$SIEVE_MAX_RAW" | tr -d '[:space:]')"
-python3 - "$CLEAN_SIEVE_MAX" <<'PY' || { echo "SIEVE_MAX must be integer and >= 10"; exit 3; }
+read -rp "SIEVE_MAX (>= 10) [default 100]: " SIEVE_IN || true
+SIEVE_MAX="${SIEVE_IN:-100}"
+if ! python3 - <<'PY' "$SIEVE_MAX"; then echo "Invalid SIEVE_MAX"; exit 1; fi
 import sys
 try:
-    v=int(sys.argv[1]); assert v>=10
-except Exception: raise SystemExit(1)
+    n=int(sys.argv[1]); assert n>=10
+except Exception:
+    sys.exit(1)
 PY
-SIEVE_MAX="$CLEAN_SIEVE_MAX"
 
-read -rp "DPS (>= 1) [default 80]: " DPS_RAW
-DPS_RAW="${DPS_RAW:-80}"
-CLEAN_DPS="$(echo "$DPS_RAW" | tr -d '[:space:]')"
-python3 - "$CLEAN_DPS" <<'PY' || { echo "DPS must be integer and >= 1"; exit 4; }
+read -rp "DPS (>= 1) [default 80]: " DPS_IN || true
+DPS="${DPS_IN:-80}"
+if ! python3 - <<'PY' "$DPS"; then echo "Invalid DPS"; exit 1; fi
 import sys
 try:
-    v=int(sys.argv[1]); assert v>=1
-except Exception: raise SystemExit(1)
+    n=int(sys.argv[1]); assert n>=1
+except Exception:
+    sys.exit(1)
 PY
-DPS="$CLEAN_DPS"
 
-# ── 1) Batch bis Deadline ──────────────────────────────────────────────────────
-BATCH_LOG="$LOGDIR/batch_${TS}.log"
-step "1/3 Batch run --tstart 10 --hours $HOURS --dps $DPS"
-start=$(date +%s)
-make_cmd batch_cmd batch_until_deadline.py rieman_zeta_suite.batch_until_deadline   --tstart 10 --hours "$HOURS" --outroot "$BATCH_DIR" --dps "$DPS"
-echo "DEBUG: Executing batch command: $(preview_cmd "${batch_cmd[@]}")"
-run_live "$BATCH_LOG" "${batch_cmd[@]}"
-dur=$(( $(date +%s) - start )); done_in "$dur"
-
-ZEROS_CSV="$BATCH_DIR/master_zeros.csv"
-ZEROS_DIR="$BATCH_DIR"
-if [[ ! -s "$ZEROS_CSV" ]]; then
-  echo "!! No zeros found at $ZEROS_CSV"; exit 5
+# -------------------------
+# 1) Batch – produce master_zeros.csv
+# -------------------------
+echo
+echo "=== [$(date -u +%H:%M:%S) UTC] 1/3 Batch run --tstart 10 --hours $HOURS --dps $DPS ==="
+mkdir -p "$RUNROOT/batch"
+BATCH_LOG="$LOGDIR/batch_${STAMP}.log"
+BATCH_CMD=( python3 -u /usr/lib/rieman-zeta-suite/batch_until_deadline.py
+  --tstart 10
+  --hours "$HOURS"
+  --outroot "$RUNROOT/batch"
+  --dps "$DPS"
+)
+echo "DEBUG: Executing batch command: ${BATCH_CMD[*]}"
+# run & tee
+if ! "${BATCH_CMD[@]}" 2>&1 | tee "$BATCH_LOG"; then
+  echo "!! Batch failed (exit=$?). See: $BATCH_LOG"
+  exit 2
 fi
 
-# ── 2) Turing-Check (CSV + zeros-root, Fallback zeros-root) ────────────────────
-: "${TURING_BINS:=10}"
-: "${TURING_STEPS:=20000}"
-: "${TURING_T0:=0.1}"
-: "${TURING_T1:=4.0}"
-: "${TURING_MPDPS:=80}"   # <— fehlt bisher
-TURING_LOG="$LOGDIR/turing_${TS}.log"
-
-step "2/3 Turing (CSV) --T0 $TURING_T0 --T1 $TURING_T1 --bins $TURING_BINS --steps $TURING_STEPS --mp-dps $TURING_MPDPS"
-start=$(date +%s)
-set +e
-make_cmd turing_cmd turing_check.py rieman_zeta_suite.turing_check   --csv "$ZEROS_CSV" --zeros-root "$ZEROS_DIR"   --T0 "$TURING_T0" --T1 "$TURING_T1"   --bins "$TURING_BINS" --steps "$TURING_STEPS" --mp-dps "$TURING_MPDPS"
-echo "DEBUG: Executing Turing CSV command: $(preview_cmd "${turing_cmd[@]}")"
-run_live "$TURING_LOG" "${turing_cmd[@]}"
-RC=$?
-set -e
-dur=$(( $(date +%s) - start )); done_in "$dur"
-
-if (( RC != 0 )); then
-  step "2/3 Turing (Fallback zeros-root) --T0 $TURING_T0 --T1 $TURING_T1"
-  start=$(date +%s)
-  make_cmd turing_fb_cmd turing_check.py rieman_zeta_suite.turing_check     --zeros-root "$ZEROS_DIR"     --T0 "$TURING_T0" --T1 "$TURING_T1"     --bins "$TURING_BINS" --steps "$TURING_STEPS" --mp-dps "$TURING_MPDPS"
-  echo "DEBUG: Executing Turing Fallback command: $(preview_cmd "${turing_fb_cmd[@]}")"
-  run_live "$TURING_LOG" "${turing_fb_cmd[@]}"
-  dur=$(( $(date +%s) - start )); done_in "$dur"
+MASTER_CSV="$RUNROOT/batch/master_zeros.csv"
+if [[ ! -s "$MASTER_CSV" ]]; then
+  echo "!! master_zeros.csv not found or empty: $MASTER_CSV"
+  exit 3
 fi
 
-# ── 3) Rigorous Sieve [2, SIEVE_MAX] ───────────────────────────────────────────
-SIEVE_LOG="$LOGDIR/sieve_${TS}.log"
-SIEVE_KERNEL="${SIEVE_KERNEL:-fejer}"    # {none,fejer,parzen}
-SIEVE_RIGOR="${SIEVE_RIGOR:-dusart}"     # {none,dusart,bertrand}
-SIEVE_RIGTAIL="${SIEVE_RIGTAIL:-on}"     # {off,on}
-SIEVE_TAILC="${SIEVE_TAILC:-50}"
-SIEVE_WHEEL="${SIEVE_WHEEL:-210}"        # {1,6,30,210,2310,30030}
-SIEVE_H="${SIEVE_H:-}"                   # optional
-SIEVE_TCUT="${SIEVE_TCUT:-}"             # optional
-SIEVE_QMAX="${SIEVE_QMAX:-}"             # optional
-SIEVE_QWIN="${SIEVE_QWIN:-}"             # optional
-SIEVE_MAXWIN="${SIEVE_MAXWIN:-}"         # optional
+# -------------------------
+# 2) Turing – FORCE using master_zeros.csv
+# -------------------------
+echo
+echo "=== [$(date -u +%H:%M:%S) UTC] 2/3 Turing (CSV) --T0 0.1 --T1 4.0 --bins 10 --steps 20000 --mp-dps $DPS ==="
+TURING_LOG="$LOGDIR/turing_${STAMP}.log"
+TURING_CSV="$LOGDIR/turing_${STAMP}.csv"
+TURING_CMD=( python3 -u /usr/lib/rieman-zeta-suite/turing_check.py
+  --zeros-root "$RUNROOT/batch"    # required by script
+  --csv "$MASTER_CSV"              # << use EXACTLY the master_zeros.csv
+  --T0 0.1 --T1 4.0
+  --bins 10 --steps 20000
+  --mp-dps "$DPS"
+)
+echo "DEBUG: Executing Turing CSV command: ${TURING_CMD[*]}"
+# run & tee
+if ! "${TURING_CMD[@]}" 2>&1 | tee "$TURING_LOG"; then
+  echo "!! Turing (CSV) failed; see $TURING_LOG"
+  # continue anyway; sieve can still run with master CSV
+fi
 
-step "3/3 Sieve [2, $SIEVE_MAX]  kernel=$SIEVE_KERNEL rigor=$SIEVE_RIGOR"
-start=$(date +%s)
-# optionale Flags nur setzen, wenn belegt
-opt_flags=()
-[[ -n "$SIEVE_H"      ]] && opt_flags+=( --H "$SIEVE_H" )
-[[ -n "$SIEVE_TCUT"   ]] && opt_flags+=( --Tcut "$SIEVE_TCUT" )
-[[ -n "$SIEVE_QMAX"   ]] && opt_flags+=( --qmax "$SIEVE_QMAX" )
-[[ -n "$SIEVE_QWIN"   ]] && opt_flags+=( --qwin "$SIEVE_QWIN" )
-[[ -n "$SIEVE_MAXWIN" ]] && opt_flags+=( --max-windows "$SIEVE_MAXWIN" )
+# -------------------------
+# 3) Sieve – ONLY master_zeros.csv
+#    Create isolated folder so scanning sees only that file
+# -------------------------
+echo
+echo "=== [$(date -u +%H:%M:%S) UTC] 3/3 Sieve [2, $SIEVE_MAX]  kernel=fejer rigor=dusart ==="
 
-make_cmd sieve_cmd sieve_from_zeros_psi_rigorous.py rieman_zeta_suite.sieve_from_zeros_psi_rigorous   --zeros-root "$ZEROS_DIR"   --x-start 2 --x-end "$SIEVE_MAX"   --kernel "$SIEVE_KERNEL"   --rigorous "$SIEVE_RIGOR"   --rigorous-tail "$SIEVE_RIGTAIL"   --tail-C "$SIEVE_TAILC"   --wheel "$SIEVE_WHEEL"   "${opt_flags[@]}"   --out-primes "$SIEVE_DIR/primes_2_${SIEVE_MAX}.txt"   --out-bounds "$SIEVE_DIR/bounds_2_${SIEVE_MAX}.csv"   --out-windows "$SIEVE_DIR/windows_2_${SIEVE_MAX}.csv"   --out-residues "$SIEVE_DIR/residues_2_${SIEVE_MAX}.csv"   --out-residues-win "$SIEVE_DIR/residues_win_2_${SIEVE_MAX}.csv"   --out-zeroqc "$SIEVE_DIR/zeroqc_2_${SIEVE_MAX}.csv"   --out-gaps "$SIEVE_DIR/gaps_2_${SIEVE_MAX}.csv"
+# Make outputs + isolated zeros-root
+ONLY_ZR="$RUNROOT/batch_master_only"
+rm -rf "$ONLY_ZR"
+mkdir -p "$ONLY_ZR"
+cp -f "$MASTER_CSV" "$ONLY_ZR/master_zeros.csv"
 
-echo "DEBUG: Executing Sieve command: $(preview_cmd "${sieve_cmd[@]}")"
-run_live "$SIEVE_LOG" "${sieve_cmd[@]}"
-dur=$(( $(date +%s) - start )); done_in "$dur"
+mkdir -p "$RUNROOT/sieve"
 
-echo ""
+SIEVE_LOG="$LOGDIR/sieve_${STAMP}.log"
+SIEVE_CMD=( python3 -u /usr/lib/rieman-zeta-suite/sieve_from_zeros_psi_rigorous.py
+  --zeros-root "$ONLY_ZR"                 # << points to folder with ONLY master_zeros.csv
+  --x-start 2 --x-end "$SIEVE_MAX"
+  --kernel fejer
+  --rigorous dusart
+  --rigorous-tail on --tail-C 50
+  --wheel 210
+  --out-primes       "$RUNROOT/sieve/primes_2_${SIEVE_MAX}.txt"
+  --out-bounds       "$RUNROOT/sieve/bounds_2_${SIEVE_MAX}.csv"
+  --out-windows      "$RUNROOT/sieve/windows_2_${SIEVE_MAX}.csv"
+  --out-residues     "$RUNROOT/sieve/residues_2_${SIEVE_MAX}.csv"
+  --out-residues-win "$RUNROOT/sieve/residues_win_2_${SIEVE_MAX}.csv"
+  --out-zeroqc       "$RUNROOT/sieve/zeroqc_2_${SIEVE_MAX}.csv"
+  --out-gaps         "$RUNROOT/sieve/gaps_2_${SIEVE_MAX}.csv"
+)
+echo "DEBUG: Executing Sieve command: ${SIEVE_CMD[*]}"
+if ! "${SIEVE_CMD[@]}" 2>&1 | tee -a "$SIEVE_LOG"; then
+  echo "!! Sieve failed. See $SIEVE_LOG"
+fi
+
+echo
 echo "FINISHED. Workdir: $WORKDIR"
-echo "Logs: $LOGDIR"
+echo "Logs:    $LOGDIR"
