@@ -47,6 +47,8 @@ They then run three steps in order:
 
   ```bash
   pip install -r requirements.txt
+  export LC_ALL=C
+  export LANG=C
   ```
 * Bash (Linux/macOS) or PowerShell (Windows).
   The Windows `.bat` file launches PowerShell with a relaxed execution policy just for this run.
