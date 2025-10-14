@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+command -v python3 >/dev/null || { echo "python3 missing"; exit 127; }
 
 # Optional debug: VERBOSE=1 rieman-zeta-zero
 : "${VERBOSE:=0}"
@@ -99,8 +100,8 @@ except Exception: raise SystemExit(1)
 PY
 HOURS="$CLEAN_HOURS"
 
-read -rp "SIEVE_MAX (>= 10) [default 100]: " SIEVE_MAX_RAW
-SIEVE_MAX_RAW="${SIEVE_MAX_RAW:-100}"
+read -rp "SIEVE_MAX (>= 10) [default 100000]: " SIEVE_MAX_RAW
+SIEVE_MAX_RAW="${SIEVE_MAX_RAW:-100000}"
 CLEAN_SIEVE_MAX="$(echo "$SIEVE_MAX_RAW" | tr -d '[:space:]')"
 python3 - "$CLEAN_SIEVE_MAX" <<'PY' || { echo "SIEVE_MAX must be integer and >= 10"; exit 3; }
 import sys
@@ -137,11 +138,10 @@ if [[ ! -s "$ZEROS_CSV" ]]; then
 fi
 
 # ── 2) Turing-Check (CSV + zeros-root, Fallback zeros-root) ────────────────────
-TURING_T0="${TURING_T0:-1}"
-TURING_T1="${TURING_T1:-2}"
-TURING_BINS="${TURING_BINS:-80}"
-TURING_STEPS="${TURING_STEPS:-20000}"
-TURING_MPDPS="${TURING_MPDPS:-80}"
+: "${TURING_BINS:=10}"
+: "${TURING_STEPS:=20000}"
+: "${TURING_T0:=0.1}"
+: "${TURING_T1:=4.0}"
 TURING_LOG="$LOGDIR/turing_${TS}.log"
 
 step "2/3 Turing (CSV) --T0 $TURING_T0 --T1 $TURING_T1 --bins $TURING_BINS --steps $TURING_STEPS --mp-dps $TURING_MPDPS"
