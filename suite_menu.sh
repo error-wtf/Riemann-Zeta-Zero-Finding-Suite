@@ -55,17 +55,18 @@ run_live() {
 
 # Python-Datei bevorzugen, sonst Modul als Fallback
 # -> gibt ein **Array** zurück (über nameref)
-make_cmd() { # args: <name der Ziel-Array-Variable> <file.py> [module.fallback] [args...]
+make_cmd() { # <name der Ziel-Array-Var> <file.py> [module.fallback] [args...]
   local __out="$1"; shift
   local file="$1"; shift
   local mod="${1:-}"; [[ -n "$mod" ]] && shift || true
   local -a base
   if [[ -f "$SCRIPTDIR/$file" ]]; then
     base=(python3 -u "$SCRIPTDIR/$file")
-elif [[ -n "$mod" ]]; then
+  elif [[ -n "$mod" ]]; then
     base=(python3 -u -m "$mod")
   else
-    base=(python3 -u "$SCRIPTDIR/$file")
+    echo "FATAL: $SCRIPTDIR/$file not found and no module fallback given." >&2
+    exit 127
   fi
   local -n ref="$__out"
   ref=("${base[@]}" "$@")
@@ -76,7 +77,7 @@ preview_cmd() {
   local -a arr=( "$@" )
   local out=()
   for tok in "${arr[@]}"; do
-    printf -v q '%%q' "$tok"
+    printf -v q %q "$tok"
     out+=( "$q" )
   done
   printf "%s\n" "${out[*]}"
