@@ -50,7 +50,11 @@ done_in() { local s=$1; printf "✓ done in %02d:%02d:%02d\n" $((s/3600)) $(((s%
 # Live-Runner mit sauberem Exit-Code (auch mit tee)
 run_live() {
   local LOG="$1"; shift
-  PYTHONUNBUFFERED=1 stdbuf -oL -eL "$@" 2>&1 | tee "$LOG"
+  if command -v stdbuf >/dev/null 2>&1; then
+    PYTHONUNBUFFERED=1 stdbuf -oL -eL "$@" 2>&1 | tee "$LOG"
+  else
+    PYTHONUNBUFFERED=1 "$@" 2>&1 | tee "$LOG"
+  fi
   return "${PIPESTATUS[0]}"
 }
 
@@ -142,6 +146,7 @@ fi
 : "${TURING_STEPS:=20000}"
 : "${TURING_T0:=0.1}"
 : "${TURING_T1:=4.0}"
+: "${TURING_MPDPS:=80}"   # <— fehlt bisher
 TURING_LOG="$LOGDIR/turing_${TS}.log"
 
 step "2/3 Turing (CSV) --T0 $TURING_T0 --T1 $TURING_T1 --bins $TURING_BINS --steps $TURING_STEPS --mp-dps $TURING_MPDPS"
