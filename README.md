@@ -16,6 +16,177 @@ The non-trivial zeros of the Riemann–Zeta function play a central role in anal
 
 - **Prime-counting via the explicit formula.**  Using certified zeros, `sieve_from_zeros_psi_rigorous.py` estimates psi(x+h) - psi(x) with smoothing kernels and a tail bound; if needed it runs a segmented sieve to produce rigorous bounds for pi(x).
 
+---
+
+# Quick Start (from a cloned repo)
+
+This project includes simple launcher scripts so you can run the suite without learning all internal Python entrypoints first.
+
+* **Linux / macOS:** `./suite_menu.sh` (Bash)
+* **Windows:** `rieman-zeta-zero.bat` (calls `rieman-zeta-zero.ps1`)
+
+Both launchers ask only for:
+
+* **Hours** (how long to run the batch; minimum `0.1`)
+* **SIEVE_MAX** (upper bound for prime sieving; e.g. `100000` for 1e5)
+* **DPS** (decimal precision for math; e.g. `80`)
+
+They then run three steps in order:
+
+1. compute zeros for about the requested time,
+2. do a Turing consistency check,
+3. run a rigorous sieve using the zeros just computed.
+
+---
+
+## Prerequisites
+
+* **Python 3.10+** on PATH
+  (Windows users: the scripts try `py -3`, then `python3`, then `python`.)
+* Project dependencies (from the repo root):
+
+  ```bash
+  pip install -r requirements.txt
+  ```
+* Bash (Linux/macOS) or PowerShell (Windows).
+  The Windows `.bat` file launches PowerShell with a relaxed execution policy just for this run.
+
+> **License notice (ACSL 1.4):** The launcher prints the Anti-Capitalist Software License header on start. By using these scripts you agree to the terms. See `LICENSE` for the full text.
+
+---
+
+## Linux / macOS
+
+1. Open a terminal and `cd` into the repo folder.
+2. Make the script executable (first time only):
+
+   ```bash
+   chmod +x suite_menu.sh
+   ```
+3. Run it:
+
+   ```bash
+   ./suite_menu.sh
+   ```
+4. You’ll be asked:
+
+   * `Hours (>= 0.1) [default 0.1]:`
+   * `SIEVE_MAX (>= 10) [default 1000000]:`
+   * `DPS (>= 1) [default 80]:`
+
+The script creates a timestamped working directory like `temp_YYYYMMDD_HHMMSS` in the current folder, with subfolders:
+
+```
+temp_YYYYMMDD_HHMMSS/
+  ├─ logs/
+  └─ runs/
+      ├─ batch/   # zeros, master_zeros.csv
+      └─ sieve/   # primes, bounds, windows, residues, gaps
+```
+
+---
+
+## Windows
+
+1. Open the repo folder in Explorer.
+2. Double-click **`rieman-zeta-zero.bat`**.
+   (It starts `rieman-zeta-zero.ps1` and prints the same ACSL header and prompts.)
+3. Answer the three prompts. That’s it.
+
+The working directory `temp_YYYYMMDD_HHMMSS` is created next to the scripts, with the same `logs/` and `runs/` layout as on Linux.
+
+---
+
+## What happens under the hood
+
+* **Batch (zeros):**
+  Runs `batch_until_deadline.py` with your `Hours` value (e.g., `0.1` → ~0.1 hours).
+  Output: `runs/batch/master_zeros.csv` and per-block files.
+
+* **Turing check:**
+  Validates zeros over a small, safe interval (e.g., `T ∈ [0.1, 4]`) with conservative defaults.
+  If the direct CSV mode complains, the launcher automatically falls back to `--zeros-root`.
+
+* **Rigorous sieve:**
+  Calls `sieve_from_zeros_psi_rigorous.py` from `x = 2` up to your `SIEVE_MAX`, using:
+
+  * `--kernel fejer`
+  * `--rigorous dusart`
+  * `--rigorous-tail on --tail-C 50`
+  * `--wheel 210`
+    Outputs go to `runs/sieve/` (primes list, bounds, windows, residues, gaps).
+
+All console output is also written to `logs/` (one file per step).
+
+---
+
+## Important runtime note (blocks)
+
+The batch runs in **blocks**. It will **always finish the current block** before stopping, even if the requested time has elapsed. That means:
+
+* `Hours = 0.1` (≈6 minutes) may actually take **~10–20 minutes** depending on CPU speed and where the block ends.
+* This is expected and avoids truncated, low-quality outputs.
+
+---
+
+## Example session (shortened)
+
+```
+$ ./suite_menu.sh
+============================================================
+Anti-Capitalist Software License (ACSL), Version 1.4
+... (license text) ...
+============================================================
+Hours (>= 0.1) [default 0.1]: 1
+SIEVE_MAX (>= 10) [default 100000]: 100000
+DPS (>= 1) [default 80]: 80
+
+=== [00:01:07 UTC] 1/3 Batch run --tstart 10 --hours 1 --dps 80 ===
+[batch] start t=10.000000, run for ~1.0h ...
+[block 1] [10.000, 31.830] ...
+[done] master_zeros.csv contains N zeros: runs/batch/master_zeros.csv
+
+=== [..] 2/3 Turing (CSV) ... ===
+[turing] Interval [0.100000, 4.000000] ...
+
+=== [..] 3/3 Sieve [2, 100000] kernel=fejer rigor=dusart ===
+[out] wrote primes: runs/sieve/primes_2_100000.txt
+... Done. Logs: logs/
+```
+
+---
+
+## Troubleshooting
+
+* **`Python not found`**
+  Install Python 3.10+ and make sure `python`/`python3` (Linux/macOS) or `py -3` (Windows) is on PATH.
+
+* **`master_zeros.csv not found` after batch**
+  The batch finished too quickly or didn’t complete a block. Increase `Hours` and try again.
+
+* **Turing complains that `--zeros-root` is required**
+  The launcher already retries in a fallback mode. Check `logs/turing_*.log` for details.
+
+* **Sieve outputs are empty/small for tiny SIEVE_MAX**
+  That’s normal for very small ranges. Increase `SIEVE_MAX` for more meaningful results.
+
+* **Interrupting runs**
+  Avoid `Ctrl+C` during a block; you might get partial results. If you must stop, rerun later with a larger `Hours`.
+
+---
+
+## Reproducibility & Logs
+
+Each run writes a dated working directory:
+
+* All step logs: `logs/`
+* Batch zeros: `runs/batch/`
+* Sieve artifacts: `runs/sieve/`
+
+Keep these folders if you want to compare results or resume work later.
+
+---
+
 ## Installation
 
 Requirements: **Python 3.10+**, mpmath, numpy.
