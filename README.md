@@ -364,11 +364,11 @@ python3 sieve_from_zeros_psi_rigorous.py \
 
 ## Recent Improvements (what's new)
 
-* **Repeated halving on scan** (in `run_block.py`, `zeta_zero_finder.py`, `zeros_by_scan.py`): if the full step shows no sign change, halve repeatedly until either a change is found or the step falls below about 1.5*min_step. This eliminates missed zeros in highly oscillatory regions.
+* **Repeated-halving diagnostics** (in `run_block.py`, `zeta_zero_finder.py`, `zeros_by_scan.py`): a sign-change refinement can improve candidate isolation. It is not, by itself, a proof that an interval contains every zero; completeness requires a validated argument-principle/Turing backend.
 
 * **Chebyshev refinement** (optional): after bisection (and optional secant), fit a Chebyshev polynomial on the bracket and take the closest root; improves accuracy with few evaluations.
 
-* **Sharper Turing control**: bin-wise Riemann–von–Mangoldt comparisons; automatic rescan hooks for blocks with mismatches.
+* **Fail-closed Turing control**: bin-wise Riemann–von–Mangoldt comparisons now return a non-zero status on mismatch; the check remains numerical unless all bounds are validated.
 
 * **Logging & modularity**: consistent progress logs; results in CSV/JSON; components can be swapped (e.g., Arb-based certifier).
 
@@ -381,6 +381,95 @@ python3 sieve_from_zeros_psi_rigorous.py \
 * **Chebyshev stability**: use moderate `--cheb-k` (6–12). Validate with secant/Newton if the bracket is wide.
 
 * **Reproducibility**: fix RNG seeds (if any) and record `dps`, step parameters, and certificate metadata.
+
+## Operator and prime-cycle laboratory (experimental)
+
+The `src/` tree contains a separate, non-circular research laboratory for the
+spectral interpretation question. It is intentionally not used to label zeros
+as certified and it does not claim a proof of the Riemann hypothesis.
+
+* `src/hedenmalm/log_operator.py` records the change of variables
+  `x=log(t)`, `D^×=-i d/dx`, the formal `L_Phi` operator, its formal null
+  vector, and the published operator-pair equation. Domain, inverse and
+  boundary questions remain explicit unknowns.
+* `src/inner_products/local_weight_no_go.py` derives the local condition
+  `W'=2 Phi'` for formal symmetry of `L_Phi` alone. Its pair result is marked
+  `undecided_without_inverse_domain`; a diagnostic expression is not a no-go
+  theorem for nonlocal kernels.
+* `src/inner_products/prime_shift_kernel.py` evaluates the finite
+  prime-power recurrence and audits finite positive kernels via
+  `A^†G-GA`. A passing matrix is reported as `PATTERN_ONLY`, never as a proof.
+* `src/audit/noncircularity.py` rejects candidate definitions that take known
+  zero ordinates as inputs. Reference zeros belong only to held-out comparison.
+* `src/hedenmalm/operator_domains.py` declares the minimal
+  `C_c^infinity(R)` cores and records the still-open closure/adjoint questions.
+* `src/hedenmalm/boundary_form.py` exposes the Green boundary form for
+  `D^×` and the weighted `L_Phi` residual. The full pair form is intentionally
+  not reduced until an inverse domain for `L_Phi` is specified.
+* `theta_asymptotics.py`, `adjoint_domains.py` and `closures.py` expose
+  assumption-labelled endpoint, adjoint and graph-norm diagnostics.
+* `inverse_domain.py` fails closed unless the kernel has been removed and a
+  closed range has been proved; `pair_boundary_form.py` records the remaining
+  open pair calculation.
+* `domain_theorem.py` is the P0 theorem ledger: the local nullspace ODE is
+  proved under explicit regularity assumptions, while source-faithful Theta
+  asymptotics and closed range remain `OPEN`.
+* `theta_profile_exact.py` implements the published positive Jacobi-theta
+  series, inversion symmetry and Gaussian bounds. It deliberately does not
+  identify that profile with `Phi` until the operator definition is explicit.
+* `profile_identification.py` now records the source definition
+  `phi_00(t)=-log(Theta_00(i*t^2))` and `Phi(x)=phi_00(exp(x))`, including its
+  inversion law and published leading asymptotic.
+* `pair_non_degeneracy.py` records the source-asymptotic contradiction showing
+  that a nonzero source eigenfunction cannot lie in `ker(L_phi00)`.
+  `POSITIVE_PAIR_FORM` and `RH_CONCLUSION` remain explicitly `OPEN`.
+* `inner_products/local_pair_no_go.py` derives a scoped formal no-go result:
+  within standard weighted L2 on the compact core, the complete pair identity
+  forces `W'=0` and constant `Phi'`. The source profile is nonconstant, so a
+  nonlocal kernel or different domain structure is required; this is not a
+  no-go theorem for all possible Hilbert structures.
+* The nonlocal branch now reduces the formal problem to `Q=L^* G L` with
+  `D Q=Q D`, provides positive prime-shift multipliers, fail-closed weak
+  factorization guards, and a null-free Mellin/Gram-kernel diagnostic. All
+  finite-grid results remain `PATTERN_ONLY`.
+* `prime_multiplier_limit.py`, `quadratic_form.py`,
+  `nullspace_compatibility.py` and `pair_defect.py` classify regularization,
+  positivity, kernel compatibility and finite-basis defects without claiming
+  an infinite-dimensional limit.
+* `global_multiplier_no_go.py` records the analytic obstruction: under global
+  strong `D`-commutation, positivity, `Q=L^* G L` and inclusion of the Theta
+  null vector, the Fourier multiplier vanishes almost everywhere. Restricted
+  model spaces and boundary-defect constructions remain possible.
+* `boundary_solution.py` and `energy_identity.py` implement the direct
+  first-order boundary solution and exact weighted energy residual
+  `R_a=(a Phi'')'-2*a*Phi'*Phi''`. Boundary decay, sign bounds and the coercive
+  multiplier remain `OPEN`.
+* `theta_derivative_diagnostics.py` and `energy_proof_guards.py` separate
+  finite-precision sign sampling from the final contradiction. P1 is
+  diagnostic only; P2/P3/P4 remain `OPEN` until global bounds and endpoint
+  estimates are proved.
+* `canonical_multiplier.py` implements the exact `h_b=exp(-2*b*x)` reduction
+  and `S_Phi` residual. `volterra_coercivity.py` records the remaining
+  half-axis and boundary requirements as `OPEN`.
+* `energy_experiment.py` performs reproducible finite-precision scans of
+  `Phi''` and `S_Phi` without zero inputs. Its result is always
+  `NUMERICALLY_SUPPORTED_ONLY`.
+* `rigorous_energy_bounds.py` defines the three-part validated certification
+  plan and fails closed when Arb/FLINT is unavailable. It never upgrades
+  high-precision samples to a global proof.
+* `theta_derivative_series.py` computes source Theta derivatives term by term
+  through third order and forms `Phi''`/`S_Phi` algebraically, avoiding finite
+  differences; tail certification remains separate.
+
+Run the safeguards with:
+
+```bash
+python3 -m pytest -q
+python3 test_suite_integrity.py
+```
+
+The optional symbolic layer requires `sympy`; the validated Arb/FLINT backend
+is deliberately fail-closed and must not silently fall back to `mpmath`.
 
 ## Quick Reference (common commands)
 
@@ -428,4 +517,3 @@ If the `LICENSE` file is not yet present, create a new file named `LICENSE` at t
 Anti-Capitalist Software License (ACSL), Version 1.4
 Copyright (c) 2025 Lino Casu and Carmen Wrede
 ```
-
