@@ -19,4 +19,4 @@ def test_theta_bounds_enclose_profile():
     lower, upper = vartheta00_bounds(t)
     value = vartheta00_it2(t)
     assert lower <= value <= upper
-    assert theta_asymptotic_status()["phi_identification"] == "OPEN"
+    assert theta_asymptotic_status()["phi_identification"].startswith("PROVED_FROM_SOURCE")

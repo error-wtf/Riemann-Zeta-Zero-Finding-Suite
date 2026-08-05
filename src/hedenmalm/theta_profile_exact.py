@@ -1,8 +1,9 @@
 """Source-faithful Jacobi-theta derivative profile used by Hedenmalm.
 
 This implements the positive real series for ``varTheta_00(i t^2)`` and its
-inversion symmetry.  It is *not* silently identified with ``Phi``: the paper's
-operator profile must be wired explicitly before Phi-asymptotics are claimed.
+inversion symmetry.  The operator identification is recorded explicitly in
+``profile_identification.py``; this module itself remains a source-profile
+implementation and does not silently add any normalization.
 """
 
 from __future__ import annotations
@@ -43,6 +44,6 @@ def theta_asymptotic_status() -> dict[str, str]:
         "profile": "varTheta_00(i t^2)",
         "inversion": "Theta(t)=Theta(1/t)",
         "endpoint_decay": "Gaussian in t^2 and 1/t^2",
-        "phi_identification": "OPEN",
+        "phi_identification": "PROVED_FROM_SOURCE (see profile_identification.py)",
         "status": "PROVED_UNDER_SOURCE_FORMULA",
     }

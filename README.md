@@ -415,8 +415,9 @@ as certified and it does not claim a proof of the Riemann hypothesis.
   proved under explicit regularity assumptions, while source-faithful Theta
   asymptotics and closed range remain `OPEN`.
 * `theta_profile_exact.py` implements the published positive Jacobi-theta
-  series, inversion symmetry and Gaussian bounds. It deliberately does not
-  identify that profile with `Phi` until the operator definition is explicit.
+  series, inversion symmetry and Gaussian bounds. The separate
+  `profile_identification.py` records the source-exact identification with
+  the operator profile; no fitted normalization is introduced.
 * `profile_identification.py` now records the source definition
   `phi_00(t)=-log(Theta_00(i*t^2))` and `Phi(x)=phi_00(exp(x))`, including its
   inversion law and published leading asymptotic.
@@ -458,8 +459,9 @@ as certified and it does not claim a proof of the Riemann hypothesis.
   plan and fails closed when Arb/FLINT is unavailable. It never upgrades
   high-precision samples to a global proof.
 * `theta_derivative_series.py` computes source Theta derivatives term by term
-  through third order and forms `Phi''`/`S_Phi` algebraically, avoiding finite
-  differences; tail certification remains separate.
+  through fourth order and forms `Phi''`/`S_Phi` algebraically, avoiding finite
+  differences; the origin fourth-derivative margin is diagnostic and tail
+  certification remains separate.
 
 Run the safeguards with:
 
