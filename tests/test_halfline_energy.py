@@ -5,6 +5,8 @@ sys.path.insert(0, str(Path(__file__).parents[1]))
 
 from src.hedenmalm.halfline_energy import halfline_energy_status, origin_trace, origin_trace_residual
 from src.hedenmalm.theta_derivative_series import phi_fourth_from_series, origin_slope_margin
+from src.hedenmalm.profile_identification import Phi_log
+import mpmath as mp
 
 
 def test_fourth_derivative_and_origin_margin_are_finite_diagnostics():
@@ -12,6 +14,12 @@ def test_fourth_derivative_and_origin_margin_are_finite_diagnostics():
     margin = origin_slope_margin(terms=80, dps=40)
     assert value == value
     assert margin == margin
+
+
+def test_fourth_derivative_matches_independent_high_precision_differentiation():
+    direct = phi_fourth_from_series(mp.mpf("0.7"), terms=100, dps=60)
+    independent = mp.diff(lambda y: Phi_log(y, terms=100), mp.mpf("0.7"), 4)
+    assert abs(direct - independent) < mp.mpf("1e-10")
 
 
 def test_origin_trace_formula_is_source_convention():
