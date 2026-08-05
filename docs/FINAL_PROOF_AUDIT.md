@@ -8,6 +8,11 @@
   differentiation: passed.
 * Finite-precision scan on `[-4,4]`: `Phi''` and the right-half-axis
   `S_Phi` samples are positive.
+* Exploratory origin-trace stress test: the proposed inequality is not valid
+  for arbitrary complex `alpha` (for example the residual is approximately
+  `-0.345` at `alpha=0.1i`). It can therefore only be used if an additional
+  consequence of `Xi(alpha)=0` is proved; no such consequence is currently
+  established.
 * Fail-closed proof ledger: `unconditional_ready = False`.
 
 ## What is actually proved
@@ -27,7 +32,8 @@ The unconditional argument still requires three global lemmas:
 
 * outward-rounded global bounds for `Phi''` and `S_Phi`;
 * endpoint/trace estimates for the actual complex-alpha Volterra solution;
-* the Volterra-Hardy/coercivity inequality controlling the negative half-axis.
+* the Volterra-Hardy/coercivity inequality controlling the negative half-axis;
+  the naive unrestricted origin trace inequality is not sufficient.
 
 The current environment has no FLINT/Arb backend, and finite-precision scans
 cannot establish any of these global statements. Therefore the mathematically

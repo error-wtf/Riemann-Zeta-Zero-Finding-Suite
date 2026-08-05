@@ -75,6 +75,9 @@ not available in the current environment.
 All weighted boundary terms must vanish, and the half-line origin trace must
 obey the required inequality. This has not been proved. The repository now
 contains the exact trace formula \(w'(0)=1-i\alpha w(0)\) as a diagnostic.
+An exploratory calculation shows that the naive trace inequality fails for
+generic complex \(\alpha\); it cannot be used unless an additional,
+rigorously derived consequence of \(\Xi(\alpha)=0\) is supplied.
 
 ## Lemma 5 — Volterra coercivity (`OPEN`)
 
