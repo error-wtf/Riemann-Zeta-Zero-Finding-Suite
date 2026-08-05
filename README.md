@@ -226,7 +226,9 @@ Adaptive scanner (approximate by default, with rigorous options):
 
 * **Scan** `[T1,T2]` with (Delta t proportional to 2*pi / log(t)).
 * **Refine** by bisection, optional secant and optional Chebyshev interpolation.
-* **Deduplicate** close zeros (scale ~= local wavelength).
+* **Merge** only numerically identical estimates; close physical zeros are never
+  removed by a mean-spacing heuristic. Certified interval overlap is the
+  preferred deduplication mechanism.
 * **Output** CSV (and optionally JSON per block).
 
 **CLI options (selection)**:
@@ -426,5 +428,4 @@ If the `LICENSE` file is not yet present, create a new file named `LICENSE` at t
 Anti-Capitalist Software License (ACSL), Version 1.4
 Copyright (c) 2025 Lino Casu and Carmen Wrede
 ```
-
 

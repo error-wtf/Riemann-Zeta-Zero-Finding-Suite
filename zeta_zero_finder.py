@@ -133,13 +133,19 @@ def local_wavelength(t):
     t_ref = max(mp.mpf(t), mp.mpf('3.0'))
     return float(2 * mp.pi / mp.log(t_ref))
 
-def dedup_zeros(zs, factor=0.8):
+def dedup_zeros(zs, tolerance=1e-18):
+    """Merge only numerically identical estimates, never close physical zeros.
+
+    A fraction of the mean zero spacing is not a valid deduplication rule:
+    genuine neighbouring zeros can be closer than that threshold.  Certified
+    workflows should deduplicate by overlapping certified intervals instead.
+    """
     if not zs:
         return []
     zs = sorted(float(z) for z in zs)
     out = [zs[0]]
     for t in zs[1:]:
-        if t - out[-1] >= factor * local_wavelength(t):
+        if t - out[-1] > tolerance:
             out.append(t)
     return out
 
@@ -263,7 +269,7 @@ def main():
     ap.add_argument("--dps", type=int, default=60, help="mpmath precision")
     ap.add_argument("--bisect-steps", type=int, default=80, help="bisection refinement steps")
     ap.add_argument("--no-sec", action="store_true", help="disable secant refinement (use only bisection)")
-    ap.add_argument("--dedup", action="store_true", help="deduplicate zeros by local wavelength")
+    ap.add_argument("--dedup", action="store_true", help="merge only numerically identical zero estimates")
     ap.add_argument("--fixed-step", type=float, default=None, help="override adaptive step with a fixed Δt")
     ap.add_argument("--adapt-scale", type=float, default=0.25, help="scale for adaptive step (Δt ≈ scale*2π/log t)")
     ap.add_argument("--json", action="store_true", help="write JSON 'certificates' alongside CSV per block")
