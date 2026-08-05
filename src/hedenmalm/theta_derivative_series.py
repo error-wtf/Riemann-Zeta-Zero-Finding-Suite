@@ -24,8 +24,8 @@ def _poly_derivative_factor(a: mp.mpf, k: mp.mpf, order: int, y: mp.mpf) -> mp.m
 
 
 def theta_derivative_series(x: float, order: int = 0, terms: int = 100, dps: int = 50) -> mp.mpf:
-    if order < 0 or order > 3:
-        raise ValueError("order must be between 0 and 3")
+    if order < 0 or order > 4:
+        raise ValueError("order must be between 0 and 4")
     with mp.workdps(dps):
         x = mp.mpf(x)
         y = mp.exp(2 * x)
@@ -42,6 +42,27 @@ def phi_derivatives_from_series(x: float, terms: int = 100, dps: int = 50) -> tu
     t0, t1, t2, t3 = (theta_derivative_series(x, j, terms, dps) for j in range(4))
     r1 = t1 / t0
     return -r1, r1**2 - t2 / t0, -t3 / t0 + 3 * t1 * t2 / t0**2 - 2 * r1**3
+
+
+def phi_fourth_from_series(x: float, terms: int = 100, dps: int = 50) -> mp.mpf:
+    """Return Phi'''' from direct termwise Theta derivatives.
+
+    This is an analytic quotient identity evaluated with high precision; it is
+    not an interval certificate.  The fourth derivative is needed because
+    S_Phi(0)=0 and its first nonzero Taylor coefficient is
+    2 Phi''(0)^2 - Phi''''(0).
+    """
+    with mp.workdps(dps):
+        t0, t1, t2, t3, t4 = (theta_derivative_series(x, j, terms, dps) for j in range(5))
+        r1, r2, r3, r4 = t1 / t0, t2 / t0, t3 / t0, t4 / t0
+        return -r4 + 4 * r1 * r3 + 3 * r2**2 - 12 * r1**2 * r2 + 6 * r1**4
+
+
+def origin_slope_margin(terms: int = 100, dps: int = 50) -> mp.mpf:
+    """Numerical value of 2 Phi''(0)^2 - Phi''''(0); status remains non-rigorous."""
+    with mp.workdps(dps):
+        _, p2, _ = phi_derivatives_from_series(0, terms, dps)
+        return 2 * p2**2 - phi_fourth_from_series(0, terms, dps)
 
 
 def s_phi_from_series(x: float, terms: int = 100, dps: int = 50) -> mp.mpf:
