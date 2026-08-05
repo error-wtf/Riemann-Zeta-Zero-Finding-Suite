@@ -178,7 +178,8 @@ def _eval_arb(t: float, dps: int) -> Tuple[Tuple[float,float], Tuple[float,float
     Zp = ((z1*e1).real() - (z2*e2).real())/(2*hh)
     I  = _as_interval_from_acb(Z)
     Ip = _as_interval_from_acb(Zp)
-    return I, Ip, {"mode": "arb", "prec": fl_ctx.prec}
+    return I, Ip, {"mode": "arb_diagnostic", "prec": fl_ctx.prec, "rigorous": False,
+                   "note": "Approximate theta/remainder and finite-difference derivative; not a proof enclosure until independently validated."}
 
 # ---------- öffentliche API ----------
 

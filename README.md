@@ -1,18 +1,18 @@
 # Riemann Zeta Zero-Finding Suite
 
-This repository contains a **modular Python toolkit** for studying the Riemann–Zeta function on the critical line and certifying its non-trivial zeros. It combines exact and asymptotic evaluations of Hardy's `Z`-function, interval arithmetic for rigorous certification, adaptive scanning techniques, and prime sieving methods. The original suite is described in the accompanying analysis documents; this README consolidates those descriptions, explains the purpose of each module, and shows how to run the tools yourself.
+This repository contains a **modular Python toolkit** for studying the Riemann–Zeta function on the critical line and testing candidate zero certificates. It combines complete available Hardy-`Z` evaluations, an explicitly labelled leading Riemann–Siegel main-sum approximation, interval-style diagnostics, adaptive scanning techniques, and prime-sieving experiments. The current interval paths are numerical enclosures unless an independently validated outward-rounded Arb path is selected; this README keeps that distinction explicit.
 
 ## Motivation and Background
 
-The non-trivial zeros of the Riemann–Zeta function play a central role in analytic number theory. Hardy's `Z`-function `Z(t)` evaluates zeta(1/2 + i*t) up to a phase so that zeros of `Z(t)` correspond to zeros on the critical line. Our suite implements a **hybrid evaluation** of `Z(t)`: for small heights it calls mpmath's `zeta` and `gamma`, while for larger heights it uses the Riemann–Siegel formula. When strict rigor is needed, interval arithmetic via `rigorous_Z.py` returns an enclosure for `Z(t)` and its derivative together with a Lipschitz constant.
+The non-trivial zeros of the Riemann–Zeta function play a central role in analytic number theory. Hardy's `Z`-function `Z(t)` evaluates zeta(1/2 + i*t) up to a phase so that zeros of `Z(t)` correspond to zeros on the critical line. Our suite uses exact mpmath zeta evaluation at small heights and the complete available `mpmath.siegelz` evaluation at larger heights. The leading Riemann–Siegel main sum remains available under the explicit `Z_rs_main_sum` helper for exploratory scans. Interval modules return numerical enclosures and diagnostic derivative bounds; they must not be called mathematical proof certificates unless their outward-rounding assumptions and remainder bounds have been independently validated.
 
 ### Core Concepts
 
 - **Adaptive scanning of Hardy's `Z`-function.**  `zeta_zero_finder.py` scans a height interval `[T1, T2]` with a step proportional to the local wavelength (Delta t ~= 2*pi / log(t/(2*pi))) so sign changes aren't skipped. Found brackets are refined by bisection, optional secant, and (optionally) Chebyshev interpolation.
 
-- **Rigorous certification with interval arithmetic.**  `run_block.py` uses interval evaluations of `Z(t)` to certify zeros. For each detected sign change it calls `certify_zero_unique`, bisecting and then performing a uniqueness grid test to prove exactly one zero lies in the bracket. Certificates are written as JSON.
+- **Candidate certification with interval diagnostics.**  `run_block.py` uses interval-style evaluations of `Z(t)` to test sign changes and local uniqueness. JSON records preserve brackets, derivative margins and method metadata; they are numerical candidate certificates unless validated outward-rounded Arb, complete remainder bounds and an independent counting argument are all present.
 
-- **Turing checks as a safety net.**  After each block, the number of detected zeros is compared with the Riemann–von–Mangoldt prediction. Mismatches trigger rescans (finer step, higher precision, Gram fallback).
+- **Turing checks as a consistency diagnostic.**  After each block, the number of detected zeros is compared with the Riemann–von–Mangoldt prediction. Mismatches should trigger rescans (finer step, higher precision, Gram fallback); they are not silently converted into a pass.
 
 - **Prime-counting via the explicit formula.**  Using certified zeros, `sieve_from_zeros_psi_rigorous.py` estimates psi(x+h) - psi(x) with smoothing kernels and a tail bound; if needed it runs a segmented sieve to produce rigorous bounds for pi(x).
 
@@ -210,8 +210,8 @@ Each script supports `-h/--help` for details.
 Core math utilities:
 
 * `theta(t)` — Riemann's theta function.
-* `Z(t)` — hybrid Hardy's Z (exact below a switch, Riemann–Siegel above).
-* `Z_exact(t)`, `Z_rs(t)` — exact vs. RS helper paths.
+* `Z(t)` — complete available Hardy's Z evaluation (exact zeta below a switch, `mpmath.siegelz` above).
+* `Z_exact(t)`, `Z_rs(t)`, `Z_rs_main_sum(t)` — exact, complete Siegel, and explicitly approximate leading-sum paths.
 
 ### `rigorous_Z.py`
 
@@ -257,7 +257,7 @@ python3 zeta_zero_finder.py \
 
 ### `run_block.py`
 
-**Rigorous certification** on `[T1,T2]` using interval arithmetic and repeated halving to avoid missed sign changes.
+**Candidate certification** on `[T1,T2]` using interval-style diagnostics and repeated halving to reduce missed sign changes. Formal certification requires independently validated outward rounding, complete approximation remainders and a counting theorem.
 
 **Parameters** (programmatic use):
 
@@ -426,7 +426,5 @@ If the `LICENSE` file is not yet present, create a new file named `LICENSE` at t
 Anti-Capitalist Software License (ACSL), Version 1.4
 Copyright (c) 2025 Lino Casu and Carmen Wrede
 ```
-
-
 
 

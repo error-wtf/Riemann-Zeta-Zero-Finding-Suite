@@ -8,7 +8,7 @@ from pathlib import Path
 import mpmath as mp
 import numpy as np
 
-# ---------- Hardy Z(t): hybrid (exact for small t, RS main sum for larger t) ----------
+# ---------- Hardy Z(t): complete mpmath Siegel evaluation by default ----------
 mp.mp.dps = 60  # default; can be overridden via --dps
 
 _TWO_PI = mp.mpf('6.283185307179586476925286766559005768394338798750211641949')
@@ -27,7 +27,8 @@ def theta(t):
     t = mp.mpf(t)
     return mp.im(mp.log(mp.gamma(mp.mpf('0.25') + 0.5j*t))) - (t/2)*mp.log(mp.pi)
 
-def Z_rs(t):
+def Z_rs_main_sum(t):
+    """Leading Riemann–Siegel sum only; never label its roots certified."""
     t  = mp.mpf(t)
     th = theta(t)
     N  = int(mp.floor(mp.sqrt(t / _TWO_PI)))
@@ -40,13 +41,22 @@ def Z_rs(t):
         s += (1 / invsqrt(n)) * mp.cos(th - t * _ln_cache[n])
     return 2*s
 
+def Z_rs(t):
+    """Complete available Riemann–Siegel evaluation supplied by mpmath."""
+    return mp.siegelz(mp.mpf(t))
+
 def Z_exact(t):
     t = mp.mpf(t)
     return mp.re(mp.exp(1j*theta(t)) * mp.zeta(0.5 + 1j*t))
 
-def Z(t, switch=50.0):
-    """Hybrid: exact for t <= switch, RS-main-sum for t > switch."""
+def Z(t, switch=50.0, approximate=False):
+    """Use exact zeta below the switch and complete Siegel Z above it.
+
+    Set approximate=True only for exploratory leading-sum scans.
+    """
     t = mp.mpf(t)
+    if approximate and t > switch:
+        return Z_rs_main_sum(t)
     return Z_exact(t) if t <= switch else Z_rs(t)
 
 # ---------- Refinement ----------

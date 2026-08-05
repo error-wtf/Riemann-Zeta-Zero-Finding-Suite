@@ -75,7 +75,9 @@ def certify_zero_unique(a, b, eps, dps, rad0=1e-12):
             "min_margin": min_margin,
             "test": uniqueness_ok
         },
-        "method": "bisect+interval",
+        "method": "bisect+interval-diagnostic",
+        "rigorous": False,
+        "rigor_note": "Numerical padded intervals are not a proof certificate without validated outward rounding and complete Z/Z' remainder bounds.",
         "ok": bool(uniqueness_ok)
     }
     return bool(uniqueness_ok), (A,B), cert

@@ -308,8 +308,9 @@ def main():
         csv_file.close()
         print(f"[out] wrote CSV: {csv_path}", flush=True)
 
-    # Exit-Code optional: 0 auch bei MISMATCH (reiner Report). Wer strikt sein will, hier ändern.
-    sys.exit(0)
+    # A mismatch is a failed consistency check, not a successful run with a
+    # warning.  Callers may rescan or record the diagnostic explicitly.
+    sys.exit(2 if (status_any_mismatch or status_total == "MISMATCH") else 0)
 
 
 if __name__ == "__main__":

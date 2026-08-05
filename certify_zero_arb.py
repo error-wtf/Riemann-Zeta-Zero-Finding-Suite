@@ -129,6 +129,8 @@ def certify_zero_unique(tL: float, tR: float, *, eps: float = 1e-10, dps: int = 
                 "schema":"zeta_zero_cert/arb-krawczyk",
                 "interval":[J[0], J[1]],
                 "uniqueness":{"ok":True, "method":"krawczyk"},
+                "rigorous": False,
+                "rigor_note": "The current Arb path still uses approximate theta/remainder and finite-difference derivative enclosures; validate all remainder bounds before calling this a proof.",
                 "meta":{"dps":dps_now, "attempts":attempt+1}
             }
             return True, (J[0], J[1]), cert
@@ -162,6 +164,8 @@ def certify_zero_unique(tL: float, tR: float, *, eps: float = 1e-10, dps: int = 
         "schema":"zeta_zero_cert/arb-krawczyk",
         "interval":[J[0], J[1]],
         "uniqueness":{"ok": bool(same_sign), "method":"newton+mono"},
+        "rigorous": False,
+        "rigor_note": "Fallback uses floating-point Newton/monotonicity diagnostics and is not a formal proof certificate.",
         "meta":{"fallback":"mp","pad":pad,"dps_final":dps_now}
     }
     return bool(same_sign and _width(J) <= 10*eps), (J[0], J[1]), cert
