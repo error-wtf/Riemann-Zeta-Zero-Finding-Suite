@@ -29,8 +29,9 @@ def weyl_lyapunov_status() -> dict[str, str]:
     return {
         "system_matrix": "PROVED_ALGEBRAICALLY",
         "visible_diagonal_flux": "PROVED_FORMALLY_UNDER_GREEN_ASSUMPTIONS",
+        "right_residual_identity": "PROVED_EXACT_SYMBOLIC",
         "common_origin_trace": "OPEN",
-        "positive_J_or_H": "OPEN",
+        "positive_J_or_H": "CONDITIONAL_ON_RESIDUE_IDENTIFICATION",
         "coupled_halfline_flux": "OPEN",
         "rh_conclusion": "CONDITIONAL_ONLY",
     }

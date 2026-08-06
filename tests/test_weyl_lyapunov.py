@@ -25,4 +25,4 @@ def test_flux_residual_is_exposed_without_positive_claim():
     J = diagonal_flux_matrix(a, p2)
     residual = lyapunov_residual(J, A, x)
     assert residual.shape == (2, 2)
-    assert weyl_lyapunov_status()["positive_J_or_H"] == "OPEN"
+    assert weyl_lyapunov_status()["positive_J_or_H"] == "CONDITIONAL_ON_RESIDUE_IDENTIFICATION"

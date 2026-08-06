@@ -43,3 +43,17 @@ The profile, far-range, correction-Sturm, weighted-source, and absolute
 Volterra convergence blocks are now certified and provenance-bound. The
 mathematically valid conclusion remains conditional. The repository does not
 claim an unconditional proof of RH.
+
+The right-hand algebraic residual identity is now independently verified:
+with (q=e^{2\Phi-2\beta x}),
+
+\[
+J_+'+A_\alpha^*J_++J_+A_\alpha
+=q\,\operatorname{diag}(2\beta,S_\Phi).
+\]
+
+The corresponding corrected reflected-left matrix has not yet been derived
+from a canonical exported (A_-) and (J_-). Consequently the transfer from
+the left Schur/Sturm certificate to the actual Hermitian residual remains
+conditional, and `GLOBAL_LYAPUNOV_PRODUCTION` must not be read as an
+unconditional matrix theorem.
