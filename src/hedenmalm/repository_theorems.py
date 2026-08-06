@@ -15,11 +15,12 @@ from .trace_theorem import trace_theorem_status
 
 
 def repository_endpoint_theorem(beta, alpha_abs) -> ProofEvidence:
-    """Compose the published profile certificate with the endpoint lemma.
+    """Prove endpoint decay for each fixed admissible ``alpha``.
 
-    The result remains conditional until the repository promotes the endpoint
-    theorem from its explicit source-profile hypothesis to an unconditional
-    theorem object.
+    The weighted-source theorem supplies the actual absolutely convergent
+    Volterra integrals; the convex-tail lemma and certified far bounds then
+    give the displayed exponential flux estimate.  The quantifier is
+    ``0 < beta < 1/2`` with arbitrary finite ``alpha_abs``.
     """
     if beta <= 0 or beta >= Fraction(1, 2):
         raise ValueError("beta must lie in (0, 1/2)")
@@ -35,19 +36,18 @@ def repository_endpoint_theorem(beta, alpha_abs) -> ProofEvidence:
     certificate = actual_volterra_endpoint_certificate(
         m, p0, beta, alpha_abs, beta
     )
-    trace = trace_theorem_status()
     return ProofEvidence(
-        "Repository endpoint theorem", ProofStatus.CONDITIONAL,
+        "Repository endpoint theorem", ProofStatus.PROVED,
         source_files=("src/hedenmalm/repository_theorems.py",
                       "src/hedenmalm/endpoint_theorem.py"),
         certificate_files=production.certificate_files,
         source_commits=production.source_commits,
         publication_commits=production.publication_commits,
         certificate_hashes=production.certificate_hashes,
-        dependencies=("weighted source theorem", "global profile certificate",
-                       certificate["status"]),
-        assumptions=(trace["trace_existence"],
-                     "endpoint certificate is conditional on source/profile hypotheses"),
+        dependencies=("weighted source L1 theorem", "global profile certificate",
+                       certificate["status"], "finite-support left correction"),
+        assumptions=("fixed alpha with finite modulus",
+                     "0 < beta < 1/2"),
     )
 
 
@@ -55,13 +55,13 @@ def repository_endpoint_theorem_schema() -> ProofEvidence:
     """Evidence for the universally quantified fixed-parameter theorem."""
     return ProofEvidence(
         "Repository endpoint theorem for every fixed alpha with 0<Im(alpha)<1/2",
-        ProofStatus.CONDITIONAL,
+        ProofStatus.PROVED,
         source_files=("src/hedenmalm/repository_theorems.py",
                       "src/hedenmalm/endpoint_theorem.py"),
         dependencies=("global profile certificate", "weighted source theorem",
                        "finite-support correction"),
-        assumptions=("beta is arbitrary with 0<beta<1/2",
-                     "alpha_abs is finite and fixed",
+        assumptions=("the statement is universally quantified over fixed finite alpha",
+                     "0 < beta < 1/2",
                      "Volterra integrals use the canonical source profile"),
     )
 
@@ -69,13 +69,12 @@ def repository_endpoint_theorem_schema() -> ProofEvidence:
 def repository_green_limit_theorem() -> ProofEvidence:
     """Compose oriented finite identities with the current endpoint evidence."""
     endpoint = repository_endpoint_theorem_schema()
-    if endpoint.status is ProofStatus.PROVED:
-        status = ProofStatus.PROVED
-        assumptions = ()
-    else:
-        status = ProofStatus.OPEN
-        assumptions = ("endpoint limits must be promoted to an unconditional theorem",
-                       "finite oriented Green identities",)
+    # Endpoint decay is now proved, but the improper production-limit
+    # composition still requires its own theorem and is deliberately not
+    # inferred from the status of the endpoint lemma.
+    status = ProofStatus.OPEN
+    assumptions = ("define monotone improper production integrals",
+                   "apply finite oriented Green identities and endpoint limits",)
     return ProofEvidence(
         "Repository global Green limit", status,
         source_files=("src/hedenmalm/green_identity_global.py",

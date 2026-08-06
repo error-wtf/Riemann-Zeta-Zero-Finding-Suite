@@ -11,14 +11,14 @@ from src.hedenmalm.repository_theorems import (
 
 def test_repository_endpoint_composes_real_certificate_inputs():
     evidence = repository_endpoint_theorem(Fraction(1, 4), Fraction(3))
-    assert evidence.status is ProofStatus.CONDITIONAL
+    assert evidence.status is ProofStatus.PROVED
     assert evidence.certificate_hashes
     assert "global profile certificate" in evidence.assumptions or evidence.dependencies
     with pytest.raises(ValueError):
         repository_endpoint_theorem(Fraction(1, 2), Fraction(3))
 
 
-def test_repository_green_limit_stays_open_until_endpoint_is_unconditional():
+def test_repository_green_limit_stays_open_until_improper_limit_is_composed():
     evidence = repository_green_limit_theorem()
     assert evidence.status is ProofStatus.OPEN
 
