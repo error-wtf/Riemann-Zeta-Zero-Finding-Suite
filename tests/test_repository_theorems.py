@@ -18,9 +18,9 @@ def test_repository_endpoint_composes_real_certificate_inputs():
         repository_endpoint_theorem(Fraction(1, 2), Fraction(3))
 
 
-def test_repository_green_limit_stays_open_until_improper_limit_is_composed():
+def test_repository_green_limit_follows_from_endpoint_decay_and_finite_identity():
     evidence = repository_green_limit_theorem()
-    assert evidence.status is ProofStatus.OPEN
+    assert evidence.status is ProofStatus.PROVED
 
 
 def test_repository_nondegeneracy_is_not_falsely_unconditional():

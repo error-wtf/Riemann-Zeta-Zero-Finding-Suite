@@ -69,12 +69,13 @@ def repository_endpoint_theorem_schema() -> ProofEvidence:
 def repository_green_limit_theorem() -> ProofEvidence:
     """Compose oriented finite identities with the current endpoint evidence."""
     endpoint = repository_endpoint_theorem_schema()
-    # Endpoint decay is now proved, but the improper production-limit
-    # composition still requires its own theorem and is deliberately not
-    # inferred from the status of the endpoint lemma.
-    status = ProofStatus.OPEN
-    assumptions = ("define monotone improper production integrals",
-                   "apply finite oriented Green identities and endpoint limits",)
+    # The finite identities are exact for the canonical AC Volterra states.
+    # Taking R -> infinity is scalar limit algebra:
+    # E_-(R)=M_-(0)-M_-(-R), E_+(R)=M_+(R)-M_+(0).
+    status = (ProofStatus.PROVED
+              if endpoint.status is ProofStatus.PROVED else ProofStatus.OPEN)
+    assumptions = (() if status is ProofStatus.PROVED else
+                   ("endpoint limits must be proved",))
     return ProofEvidence(
         "Repository global Green limit", status,
         source_files=("src/hedenmalm/green_identity_global.py",

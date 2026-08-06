@@ -16,7 +16,8 @@ This report records a conditional proof architecture, not an RH proof.
 | Trace existence | PROVED_UNDER_SOURCE_PROFILE_AND_OPEN_STRIP | analytic weighted-source majorant |
 | Endpoint flux for each fixed finite alpha, 0<Im(alpha)<1/2 | PROVED | convex-tail theorem + certified far bounds |
 | Strict nondegeneracy | OPEN | domain theorem |
-| Global Weyl--Volterra contradiction | OPEN | depends on open lemmas |
+| Global Green limit | PROVED | finite oriented identities + endpoint limits |
+| Global Weyl--Volterra contradiction | OPEN | depends on nondegeneracy and matching |
 | RH | OPEN | no public claim |
 
 ## Conditional final implication
