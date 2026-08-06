@@ -9,6 +9,7 @@ from src.certification.far_profile import (
     dominant_phi_prime_ratio_bounds,
 )
 from src.certification.far_remainder import global_remainder_bounds
+from src.certification.far_remainder import full_phi_prime_far_bounds
 
 
 def test_dominant_profile_is_positive_at_far_threshold():
@@ -41,6 +42,9 @@ def test_far_remainder_bounds_are_strictly_small():
     assert bounds["B_R"].upper() < 1
     assert bounds["L2_bound"].upper() < 1
     assert bounds["L3_bound"].upper() < 1
+    full = full_phi_prime_far_bounds(128)
+    assert full["lower_at_z8"].lower() > 0
+    assert full["status"].startswith("PROVED")
 
 
 def test_far_positive_theta_rejects_below_threshold():

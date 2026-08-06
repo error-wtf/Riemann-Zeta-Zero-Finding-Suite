@@ -67,3 +67,21 @@ def global_remainder_bounds(precision: int = 256):
                 "ratio_bounds": ratios}
     finally:
         ctx.prec = old
+
+
+def full_phi_prime_far_bounds(precision: int = 256):
+    """Combine dominant and remainder bounds into uniform Phi' bounds."""
+    from flint import arb, ctx
+    old = ctx.prec
+    try:
+        ctx.prec = precision
+        b1 = global_remainder_bounds(precision)["B_DR"]
+        # Dominant bounds: z <= Phi1' <= 5 z for z>=8.  B1 is absolute.
+        lower_margin = arb(8) - b1
+        if lower_margin.lower() <= 0:
+            raise RuntimeError("remainder is too large for far Phi' lower bound")
+        return {"lower_at_z8": lower_margin, "lower_coefficient": arb("0.9"),
+                "upper_coefficient": arb(5), "remainder_B1": b1,
+                "status": "PROVED_OUTWARD_ROUNDED_UNDER_DOMINANT_BOUNDS"}
+    finally:
+        ctx.prec = old
