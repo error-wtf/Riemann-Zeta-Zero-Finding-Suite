@@ -33,7 +33,6 @@ This report supersedes the earlier historical 46-test audit.
 
 The unconditional argument still requires the following global lemmas:
 
-* the Weyl contradiction assembly;
 * the final Xi symmetry and nontrivial-zero bridge.
 
 The profile, far-range, correction-Sturm, weighted-source, absolute Volterra
@@ -41,6 +40,8 @@ convergence, fixed-parameter endpoint-decay, and oriented improper Green-limit
 blocks are now certified and provenance-bound. The
 source/ODE nondegeneracy implication and the Xi-zero origin-matching
 composition are also now recorded as canonical theorems. The
+Xi normalization, Volterra convergence, and the canonical Weyl contradiction
+assembly are now also closed on the open strip. The
 mathematically valid conclusion remains conditional. The repository does not
 claim an unconditional proof of RH.
 

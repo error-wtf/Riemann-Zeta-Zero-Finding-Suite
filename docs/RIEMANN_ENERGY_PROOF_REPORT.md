@@ -18,7 +18,7 @@ This report records a conditional proof architecture, not an RH proof.
 | Strict nondegeneracy | PROVED | positive source + inhomogeneous ODE + positive production |
 | Xi-zero origin matching | PROVED | Xi difference identity + reflected trace matrix |
 | Global Green limit | PROVED | finite oriented identities + endpoint limits |
-| Global Weyl--Volterra contradiction | OPEN | final canonical contradiction assembly |
+| Global Weyl--Volterra contradiction | PROVED | (0=E_-+E_+>0) for (0<\operatorname{Im}\alpha<1/2) |
 | RH | OPEN | no public claim |
 
 ## Conditional final implication

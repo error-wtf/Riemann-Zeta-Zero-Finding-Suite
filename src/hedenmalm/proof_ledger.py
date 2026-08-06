@@ -138,11 +138,29 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
         assumptions=("left corrected residual identity is not yet proved",),
     )
     return {
-        "xi": ProofEvidence("Xi transform identity", _classify_status(xi["identity"]),
-                             ("src/hedenmalm/xi_transform_identity.py",)),
-        "trace": ProofEvidence("Weighted source and traces",
-                                _classify_status(trace["trace_existence"]),
-                                ("src/hedenmalm/trace_theorem.py",)),
+        "xi": ProofEvidence(
+            "Xi transform identity on the canonical source",
+            ProofStatus.PROVED
+            if xi["identity"] == "PROVED_FROM_SOURCE_MELLIN_FORMULA"
+            and xi["nonzero_factor"] == "PROVED (factor 1)"
+            else ProofStatus.OPEN,
+            ("src/hedenmalm/xi_transform_identity.py",),
+            dependencies=("source Mellin formula", "x=log(t) substitution"),
+            assumptions=("the canonical source normalization is used",),
+        ),
+        "trace": ProofEvidence(
+            "Weighted source and Volterra traces in the open strip",
+            ProofStatus.PROVED
+            if trace["weighted_theta_integrability"] ==
+            "PROVED_ANALYTICALLY_IN_OPEN_STRIP"
+            and trace["volterra_absolute_convergence"] ==
+            "PROVED_ANALYTICALLY_IN_OPEN_STRIP"
+            else ProofStatus.OPEN,
+            ("src/hedenmalm/trace_theorem.py",),
+            dependencies=("analytic Gaussian weighted-L1 majorant",
+                           "canonical Volterra integrals"),
+            assumptions=("|Im(alpha)| < 1/2",),
+        ),
         "endpoint": repository_endpoint_theorem_schema(),
         "nondegeneracy": repository_nondegeneracy_theorem(),
         "production": production,

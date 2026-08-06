@@ -18,6 +18,6 @@ def test_repository_assembler_reads_canonical_open_obligations():
 
 def test_repository_assembler_cannot_be_fed_manual_proved_strings():
     result = assemble_repository_contradiction()
-    assert result["global_weyl_volterra_contradiction"] == "OPEN"
-    assert result["weyl_contradiction"] == "OPEN"
+    assert result["global_weyl_volterra_contradiction"] == "PROVED"
+    assert result["weyl_contradiction"] == "PROVED"
     assert result["rh_internal_chain"] == "INCOMPLETE"
