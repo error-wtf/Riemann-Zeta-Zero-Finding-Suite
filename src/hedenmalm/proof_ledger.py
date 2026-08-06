@@ -88,13 +88,15 @@ def load_global_production_evidence() -> ProofEvidence:
     return ProofEvidence(
         theorem="Global Lyapunov production", status=status,
         certificate_files=(compact_path, far_path, sturm_path),
-        source_commits=tuple(filter(None, (
+    source_commits=tuple(filter(None, (
             compact.get("certificate_source_commit", compact.get("source_commit")),
             far.get("source_commit"),
+            sturm.get("source_commit"),
         ))),
         publication_commits=tuple(filter(None, (
             compact.get("certificate_published_in"),
             far.get("certificate_published_in"),
+            sturm.get("certificate_published_in"),
         ))),
         certificate_hashes=(compact_hash, far_hash, sturm_hash),
         dependencies=("compact profile certificate", "far remainder certificate",
@@ -108,12 +110,14 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
     from .repository_theorems import (repository_endpoint_theorem_schema,
                                       repository_green_limit_theorem,
                                       repository_nondegeneracy_theorem)
+    from .rh_bridge import rh_symmetry_bridge_status
     from .trace_theorem import trace_theorem_status
     from .xi_transform_identity import xi_transform_status
 
     trace = trace_theorem_status()
     matching = green_matching_status()
     xi = xi_transform_status()
+    bridge = rh_symmetry_bridge_status()
     return {
         "xi": ProofEvidence("Xi transform identity", _classify_status(xi["identity"]),
                              ("src/hedenmalm/xi_transform_identity.py",)),
@@ -127,20 +131,30 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
         "origin_matching": ProofEvidence("Origin Green matching", ProofStatus.CONDITIONAL,
                                           ("src/hedenmalm/green_matching.py",),
                                           assumptions=("matched traces", "opposite outward normals")),
+        "rh_bridge": ProofEvidence(
+            "RH parameter and symmetry bridge",
+            _classify_status(bridge["rh_bridge"]),
+            ("src/hedenmalm/rh_bridge.py",),
+            dependencies=("Xi functional symmetry", "nontrivial-zero localization"),
+        ),
     }
 
 
 def assemble_repository_contradiction() -> dict[str, object]:
     """Assemble only canonical evidence, requiring exact PROVED statuses."""
     evidence = repository_proof_evidence()
-    complete = all(item.status is ProofStatus.PROVED for item in evidence.values())
+    weyl_keys = ("xi", "trace", "endpoint", "nondegeneracy", "production",
+                 "green_limit", "origin_matching")
+    weyl_complete = all(evidence[key].status is ProofStatus.PROVED for key in weyl_keys)
+    rh_complete = weyl_complete and evidence["rh_bridge"].status is ProofStatus.PROVED
     return {
         "evidence": evidence,
-        "global_weyl_volterra_contradiction": "PROVED" if complete else "OPEN",
-        "rh_internal_chain": "COMPLETE" if complete else "INCOMPLETE",
+        "weyl_contradiction": "PROVED" if weyl_complete else "OPEN",
+        "global_weyl_volterra_contradiction": "PROVED" if weyl_complete else "OPEN",
+        "rh_internal_chain": "COMPLETE" if rh_complete else "INCOMPLETE",
         "rh_public_status": (
             "CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW"
-            if complete else "OPEN"
+            if rh_complete else "OPEN"
         ),
     }
 

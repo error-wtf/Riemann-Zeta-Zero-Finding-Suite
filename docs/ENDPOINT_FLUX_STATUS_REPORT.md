@@ -105,6 +105,9 @@ compatible inputs.
   `0 < beta < 1/2` and finite `|alpha|`; the default `beta=1/2` sample is no
   longer used as a theorem claim. The separate RH parameter/symmetry bridge
   remains open.
+* The canonical assembler now has separate gates for the Weyl contradiction
+  and the final RH symmetry bridge. The latter cannot be bypassed by completing
+  only the energy argument.
 
 ## What is and is not proved
 
