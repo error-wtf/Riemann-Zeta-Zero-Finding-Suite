@@ -175,7 +175,7 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
         "origin_matching": repository_origin_matching_theorem(),
         "rh_bridge": ProofEvidence(
             "RH parameter and symmetry bridge",
-            _classify_status(bridge["rh_bridge"]),
+            ProofStatus.PROVED if bridge["rh_bridge"] == "PROVED" else ProofStatus.OPEN,
             ("src/hedenmalm/rh_bridge.py",),
             dependencies=("Xi functional symmetry", "nontrivial-zero localization"),
         ),

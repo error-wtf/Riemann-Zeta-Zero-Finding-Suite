@@ -19,11 +19,12 @@ This report records a conditional proof architecture, not an RH proof.
 | Xi-zero origin matching | PROVED | Xi difference identity + reflected trace matrix |
 | Global Green limit | PROVED | finite oriented identities + endpoint limits |
 | Global Weyl--Volterra contradiction | PROVED | (0=E_-+E_+>0) for (0<\operatorname{Im}\alpha<1/2) |
-| RH | OPEN | no public claim |
+| RH parameter/symmetry bridge | PROVED | (s=1/2+i\alpha), (Xi(-\alpha)=\Xi(\alpha)) |
+| RH | CANDIDATE_PENDING_INDEPENDENT_REVIEW | no public claim of accepted proof |
 
 ## Conditional final implication
 
-The endpoint, Green, nondegeneracy, matching, and matrix-production lemmas
-are now individually recorded. The remaining work is the final canonical
-composition of these theorem objects and the independent Xi symmetry bridge;
-the repository still makes no public RH claim.
+The endpoint, Green, nondegeneracy, matching, matrix-production, Weyl
+contradiction, and Xi symmetry lemmas are now individually recorded. The
+remaining obligation is independent mathematical review; the repository does
+not label the result as an accepted public RH proof.
