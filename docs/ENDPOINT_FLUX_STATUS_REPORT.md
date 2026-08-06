@@ -99,6 +99,8 @@ compatible inputs.
   discarded until an explicit zero-limit theorem is supplied.
 * The global proof ledger now requires exact `PROVED` inputs for every final
   obligation; `PROVED_UNDER_*` and `PROVED_CONDITIONALLY` cannot close RH.
+* `repository_proof_evidence()` now reads canonical module statuses and
+  provenance instead of accepting caller-supplied status strings.
 
 ## What is and is not proved
 
