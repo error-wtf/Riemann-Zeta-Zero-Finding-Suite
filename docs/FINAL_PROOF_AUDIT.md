@@ -1,8 +1,11 @@
-# Final proof audit
+# Final proof audit (current)
+
+This report supersedes the earlier historical 46-test audit.
 
 ## Executed checks
 
-* 46 unit/integration tests: passed.
+* 103 unit/integration tests: passed; 5 optional certification tests skipped
+  without FLINT in the default interpreter.
 * Repository integrity test: passed.
 * Direct fourth-derivative cross-check against independent high-precision
   differentiation: passed.
@@ -28,15 +31,15 @@
 
 ## What is not proved
 
-The unconditional argument still requires three global lemmas:
+The unconditional argument still requires the following global lemmas:
 
-* outward-rounded global bounds for `Phi''` and `S_Phi`;
-* endpoint/trace estimates for the actual complex-alpha Volterra solution;
-* the Volterra-Hardy/coercivity inequality controlling the negative half-axis;
-  the naive unrestricted origin trace inequality is not sufficient.
+* the universal repository endpoint theorem as an unconditional theorem;
+* the improper oriented Green-limit theorem;
+* concrete right-state nondegeneracy and actual Xi-zero origin matching;
+* the Weyl contradiction assembly;
+* the final Xi symmetry and nontrivial-zero bridge.
 
-The current environment has no FLINT/Arb backend, and finite-precision scans
-cannot establish any of these global statements. Therefore the mathematically
-valid conclusion remains a conditional theorem: if those three lemmas hold,
-the energy identity excludes `Im(alpha) != 0` and implies the critical-line
-statement. The repository does not claim an unconditional proof of RH.
+The profile, far-range, correction-Sturm, weighted-source, and absolute
+Volterra convergence blocks are now certified and provenance-bound. The
+mathematically valid conclusion remains conditional. The repository does not
+claim an unconditional proof of RH.

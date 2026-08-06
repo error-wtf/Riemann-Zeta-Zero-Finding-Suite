@@ -59,32 +59,38 @@ The transformed identity for \(u=\vartheta w\) is formally
 \left(S_\Phi|w'|^2+2b|w|^2\right)dx=0.
 \]
 
-## Lemma 3 — global coefficient bounds (`OPEN`)
+## Lemma 3 — global coefficient bounds (`PROVED_CERTIFIED`)
 
 The required statement is
 \[
 \Phi''(x)>0\quad(x\in\mathbb R),\qquad
 S_\Phi(x)>0\quad(x>0),
 \]
-with outward-rounded tail and compact-interval bounds. Finite-precision
-scans support this statement but do not prove it. FLINT/Arb certification is
-not available in the current environment.
+with outward-rounded tail and compact-interval bounds. The compact Arb
+certificate, positive far-range majorant, and exact rational correction-Sturm
+certificate are independently validated and provenance-bound by the ledger.
+These certificates do not by themselves prove the endpoint or improper-limit
+lemmas below.
 
-## Lemma 4 — endpoint and trace control (`OPEN`)
+## Lemma 4 — endpoint and trace control (`CONDITIONAL_REPOSITORY_THEOREM`)
 
-All weighted boundary terms must vanish, and the half-line origin trace must
-obey the required inequality. This has not been proved. The repository now
-contains the exact trace formula \(w'(0)=1-i\alpha w(0)\) as a diagnostic.
-An exploratory calculation shows that the naive trace inequality fails for
-generic complex \(\alpha\); it cannot be used unless an additional,
-rigorously derived consequence of \(\Xi(\alpha)=0\) is supplied.
+Weighted source integrability, absolute convergence of both Volterra
+integrals, and local trace existence are proved from the analytic Gaussian
+majorant. The convex-tail estimate and certified far-range margins give an
+endpoint-decay theorem under those hypotheses. The repository has not yet
+promoted that conditional theorem to a self-instantiating theorem for the
+actual matched complex-\(\alpha\) solution, so the improper Green boundary
+limit remains open. The old unrestricted trace inequality is not used: it
+fails for generic complex \(\alpha\).
 
-## Lemma 5 — Volterra coercivity (`OPEN`)
+## Lemma 5 — global Green limit and nondegeneracy (`OPEN`)
 
-The negative-half-axis contribution (or the equivalent half-line trace term)
-must be controlled by the positive terms in Lemma 2. This is the central
-remaining inequality; no numerical fit or finite-grid result substitutes for
-it.
+The finite oriented Green identities are implemented, including endpoint
+terms and outer-normal signs. What remains is the improper-limit theorem for
+the actual Volterra states, strict right-production from the nonzero source,
+and the connection from the Xi-zero identity to matched origin traces. No
+numerical fit or finite-grid result substitutes for these functional-analytic
+implications.
 
 ## Conditional theorem
 
