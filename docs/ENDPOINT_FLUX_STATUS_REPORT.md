@@ -98,19 +98,19 @@ compatible inputs.
 | Far remainder `B_DR` and `Phi''` lower bound | `PROVED_OUTWARD_ROUNDED` |
 | Ratio bound `Phi'/(Phi'-beta) <= m/(m-beta)` | `PROVED_OUTWARD_ROUNDED` under the far certificate |
 | Full algebraic flux constant | `PROVED` as a conditional bound |
-| Absolute convergence of the actual Volterra tails | `CONDITIONAL` |
+| Absolute convergence of the actual Volterra tails | `PROVED_ANALYTICALLY_IN_OPEN_STRIP` |
 | Vanishing endpoint flux for the actual Weyl solutions | `OPEN` |
 | Global Weyl--Volterra contradiction | `OPEN` |
 | RH | `OPEN` |
 
-The remaining gap is not a missing upper bound for `Phi'`. It is the rigorous
-Volterra admissibility, trace construction, and improper-limit argument that
-connects the conditional state estimates to the actual solutions.
+The remaining gap is not a missing upper bound for `Phi'`. The weighted source
+and absolute Volterra convergence are now proved analytically; what remains is
+the improper-limit argument that connects the actual solutions to endpoint
+flux decay.
 
 ## Validation
 
-The default test suite passes with `82 passed, 4 skipped`; optional Arb tests
+The default test suite passes with `84 passed, 5 skipped`; optional Arb tests
 are skipped when the system interpreter has no `python-flint`. In the pinned
 certification environment, the ratio helper returns a strictly positive
 denominator and an upper bound below `1.067` for `beta=1/2`.
-

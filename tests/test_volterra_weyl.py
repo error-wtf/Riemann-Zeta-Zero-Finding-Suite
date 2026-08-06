@@ -21,8 +21,9 @@ def test_ode_residual_is_zero_for_formal_derivative():
     assert abs(volterra_ode_residual(alpha, 0.0, u, theta, derivative)) < 1e-15
 
 
-def test_open_functional_analytic_status_is_not_upgraded():
+def test_weighted_source_closes_absolute_convergence_but_not_endpoint_flux():
     status = volterra_weyl_status()
     assert status["ode"] == "PROVED_ALGEBRAIC"
-    assert status["trace_existence"] == "OPEN"
+    assert status["trace_existence"].startswith("PROVED_UNDER_SOURCE_PROFILE")
+    assert status["endpoint_flux"] == "OPEN"
     assert status["xi_transform_identity"] == "OPEN"
