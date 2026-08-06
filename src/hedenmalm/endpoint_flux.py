@@ -24,3 +24,17 @@ def endpoint_flux_status() -> dict[str, str]:
         "left_volterra_endpoint": "OPEN",
         "global_endpoint_flux": "OPEN",
     }
+
+
+def volterra_right_bound(theta_value, phi_prime_lower, beta):
+    """Conditional bound |u_+(x)| <= theta/(Phi'(x)+beta)."""
+    if phi_prime_lower is None or phi_prime_lower + beta <= 0:
+        raise RuntimeError("right Volterra denominator is not certified positive")
+    return theta_value / (phi_prime_lower + beta)
+
+
+def volterra_left_bound(theta_value, phi_prime_lower, beta):
+    """Conditional reflected bound |u_-(-x)| <= theta/(Phi'(x)-beta)."""
+    if phi_prime_lower is None or phi_prime_lower - beta <= 0:
+        raise RuntimeError("left Volterra denominator is not certified positive")
+    return theta_value / (phi_prime_lower - beta)
