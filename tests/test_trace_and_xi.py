@@ -1,7 +1,7 @@
 import pytest
 
 from src.hedenmalm.trace_theorem import require_weighted_l1_majorant, trace_theorem_status
-from src.hedenmalm.xi_transform_identity import require_xi_normalization, xi_transform_status
+from src.hedenmalm.xi_transform_identity import canonical_xi_factor, require_xi_normalization, xi_transform_status
 
 
 def test_trace_certificate_fails_closed_without_majorant():
@@ -11,9 +11,10 @@ def test_trace_certificate_fails_closed_without_majorant():
 
 
 def test_xi_normalization_fails_closed_until_derived():
+    assert require_xi_normalization(canonical_xi_factor()) == 1
+    assert xi_transform_status()["identity"].startswith("PROVED")
     with pytest.raises(RuntimeError):
-        require_xi_normalization(None)
-    assert xi_transform_status()["identity"] == "OPEN"
+        require_xi_normalization(0)
 
 
 def test_finite_certified_majorant_is_accepted():

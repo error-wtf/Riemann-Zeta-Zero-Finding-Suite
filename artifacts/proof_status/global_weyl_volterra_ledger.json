@@ -2,7 +2,7 @@
   "repository_commit": "b7b0452",
   "parameter_convention": "alpha=xi+i beta; s=1/2+i alpha",
   "theta_profile_identity": "PROVED_SOURCE_PROFILE",
-  "xi_transform_identity": "OPEN",
+  "xi_transform_identity": "PROVED_FROM_SOURCE_MELLIN_FORMULA",
   "trace_existence": "OPEN",
   "xi_zero_trace_matching": "OPEN",
   "finite_interval_green_identity": "PROVED_FORMALLY_UNDER_AC_ASSUMPTIONS",

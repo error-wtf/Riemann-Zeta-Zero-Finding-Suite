@@ -11,7 +11,7 @@ This report records a conditional proof architecture, not an RH proof.
 | Far remainder bounds | PROVED outward-rounded | far certificate |
 | Global Lyapunov production | PROVED algebraically | profile + Sturm lemmas |
 | Algebraic Green matching | PROVED under matched traces | symbolic matrix test |
-| Xi transform identity | OPEN | source normalization still to derive |
+| Xi transform identity | PROVED_FROM_SOURCE_MELLIN_FORMULA | source equation 2.2.1, x=log(t) |
 | Trace existence | OPEN | improper integrals |
 | Endpoint flux | OPEN | weighted limits |
 | Strict nondegeneracy | OPEN | domain theorem |

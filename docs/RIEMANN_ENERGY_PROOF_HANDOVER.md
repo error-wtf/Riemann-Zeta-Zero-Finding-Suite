@@ -39,7 +39,9 @@ holds iff \(k_\beta(0)=0\), with opposite outward normals.
 
 ## Open analytic obligations
 
-The repository does **not** claim the Xi normalization, trace existence,
+The repository now records the Xi normalization from the source Mellin
+formula (unit factor after `x=log(t)`, `dt/t=dx`).  It does **not** claim
+trace existence,
 Volterra admissibility, endpoint flux decay, strict nondegeneracy, or the RH
 contradiction.  These require actual improper-integral estimates and a
 functional-analytic domain theorem; passing tests cannot substitute for them.
