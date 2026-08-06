@@ -97,6 +97,8 @@ compatible inputs.
   `left_origin-left_endpoint=left_production` and
   `right_endpoint-right_origin=right_production`.  Endpoint terms are not
   discarded until an explicit zero-limit theorem is supplied.
+* The global proof ledger now requires exact `PROVED` inputs for every final
+  obligation; `PROVED_UNDER_*` and `PROVED_CONDITIONALLY` cannot close RH.
 
 ## What is and is not proved
 
