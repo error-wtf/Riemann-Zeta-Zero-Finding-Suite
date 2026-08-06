@@ -56,8 +56,8 @@ def main() -> None:
     ax.set_xlim(-7.2, 7.2)
     ax.set_ylim(-3.8, 3.8)
     ax.set_aspect("equal", adjustable="box")
-    ax.set_xticks(np.arange(-2, 2.1, 0.5))
-    ax.set_yticks(np.arange(-1.5, 1.6, 0.5))
+    ax.set_xticks(np.arange(-7, 8, 1))
+    ax.set_yticks(np.arange(-3, 4, 1))
     ax.grid(color="#12435a", linewidth=0.9, alpha=0.75)
     ax.axhline(0, color="#a9b9c8", linewidth=1.1)
     ax.axvline(0, color="#a9b9c8", linewidth=1.1)
@@ -85,11 +85,11 @@ def main() -> None:
         color = palette[n % len(palette)]
         for sigma in sigma_grid:
             radius = n ** (-sigma)
-            (line,) = ax.plot(radius * np.cos(phase), radius * np.sin(phase), color=color, alpha=0.34 if n < 12 else 0.22, linewidth=0.8)
+            (line,) = ax.plot(radius * np.cos(phase), radius * np.sin(phase), color=color, alpha=0.42 if n < 12 else 0.28, linewidth=0.9)
             orbit_lines.append(line)
         for tv in t_grid:
             angle = -tv * math.log(n)
-            (line,) = ax.plot(radial * np.cos(angle), radial * np.sin(angle), color=color, alpha=0.26, linewidth=0.7)
+            (line,) = ax.plot(radial * np.cos(angle), radial * np.sin(angle), color=color, alpha=0.34, linewidth=0.8)
             orbit_lines.append(line)
             ray_lines.append(line)
             ray_meta.append((n, tv))
