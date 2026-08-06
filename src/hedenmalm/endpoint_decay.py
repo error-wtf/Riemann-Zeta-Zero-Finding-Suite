@@ -28,3 +28,19 @@ def endpoint_decay_status() -> dict[str, str]:
         "left_endpoint_limit": "CONDITIONAL_ON_BOUNDS",
         "global_endpoint_flux": "OPEN",
     }
+
+
+def flux_decay_constant_from_ratio(phi_prime_lower, phi_prime_ratio,
+                                   beta, alpha_abs):
+    """Uniform far-field version using Phi' upper/lower ratio bounds.
+
+    Unlike a fixed upper bound for Phi', this remains meaningful as
+    Phi'(x) grows at infinity.
+    """
+    if beta <= 0 or phi_prime_lower <= beta:
+        raise RuntimeError("requires beta>0 and a certified Phi'-beta lower bound")
+    if phi_prime_ratio < 1 or alpha_abs < 0:
+        raise ValueError("invalid ratio or absolute spectral bound")
+    ratio = phi_prime_lower / (phi_prime_lower - beta)
+    f_const = 1 + phi_prime_ratio * ratio + alpha_abs / (phi_prime_lower - beta)
+    return f_const * f_const

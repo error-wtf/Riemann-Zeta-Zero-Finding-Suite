@@ -1,6 +1,6 @@
 import pytest
 
-from src.hedenmalm.endpoint_decay import endpoint_decay_status, flux_decay_constant
+from src.hedenmalm.endpoint_decay import endpoint_decay_status, flux_decay_constant, flux_decay_constant_from_ratio
 
 
 def test_decay_constant_is_finite_when_hypotheses_hold():
@@ -16,3 +16,9 @@ def test_decay_rejects_zero_beta_and_bad_denominators():
 
 def test_endpoint_decay_status_remains_conditional():
     assert endpoint_decay_status()["global_endpoint_flux"] == "OPEN"
+
+
+def test_uniform_decay_uses_growth_ratio_not_global_phi_prime_upper():
+    assert flux_decay_constant_from_ratio(10.0, 2.0, 0.5, 3.0) > 0
+    with pytest.raises(RuntimeError):
+        flux_decay_constant_from_ratio(0.25, 2.0, 0.5, 3.0)
