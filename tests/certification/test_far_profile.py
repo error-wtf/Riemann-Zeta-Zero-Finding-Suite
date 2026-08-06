@@ -10,6 +10,7 @@ from src.certification.far_profile import (
 )
 from src.certification.far_remainder import global_remainder_bounds
 from src.certification.far_remainder import full_phi_prime_far_bounds
+from src.certification.far_remainder import certified_phi_prime_ratio_bound
 
 
 def test_dominant_profile_is_positive_at_far_threshold():
@@ -50,3 +51,14 @@ def test_far_remainder_bounds_are_strictly_small():
 def test_far_positive_theta_rejects_below_threshold():
     with pytest.raises(ValueError):
         far_positive_theta_lower_ball(arb("0.49"), 128)
+
+
+def test_phi_prime_ratio_uses_only_lower_bound():
+    cert = certified_phi_prime_ratio_bound(arb("0.5"), 128)
+    assert cert["phi_prime_lower"].lower() > arb(7)
+    assert cert["ratio_upper"].upper() < arb("1.067")
+
+
+def test_phi_prime_ratio_rejects_nonpositive_beta():
+    with pytest.raises(ValueError):
+        certified_phi_prime_ratio_bound(arb(0), 128)

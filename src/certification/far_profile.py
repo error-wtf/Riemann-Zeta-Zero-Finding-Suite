@@ -108,5 +108,4 @@ def far_positive_theta_term(x, terms: int = 30, precision: int = 256):
     whose absolute tail is attached symmetrically.  A caller still has to
     verify the requested box lies in the far range.
     """
-    from .theta_interval import theta_derivative_ball
-    return theta_derivative_ball(x, 0, terms, precision)
+    return far_positive_theta_partial_ball(x, terms, precision)

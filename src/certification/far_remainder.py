@@ -80,8 +80,34 @@ def full_phi_prime_far_bounds(precision: int = 256):
         lower_margin = arb(8) - b1
         if lower_margin.lower() <= 0:
             raise RuntimeError("remainder is too large for far Phi' lower bound")
-        return {"lower_at_z8": lower_margin, "lower_coefficient": arb("0.9"),
+        return {"lower_at_z8": lower_margin, "lower_coefficient": arb(1),
                 "upper_coefficient": arb(5), "remainder_B1": b1,
                 "status": "PROVED_OUTWARD_ROUNDED_UNDER_DOMINANT_BOUNDS"}
+    finally:
+        ctx.prec = old
+
+
+def certified_phi_prime_ratio_bound(beta, precision: int = 256):
+    """Bound Phi'/(Phi'-beta) from the global lower bound Phi'>=8-B1.
+
+    The map f -> f/(f-beta) is strictly decreasing for f>beta.  Thus no
+    upper bound on Phi' is needed.  This helper is only a ratio certificate;
+    endpoint decay still requires the full state/flux constant.
+    """
+    from flint import arb, ctx
+    old = ctx.prec
+    try:
+        ctx.prec = precision
+        if beta <= 0 or beta > arb("0.5"):
+            raise ValueError("beta must lie in (0, 1/2]")
+        lower = full_phi_prime_far_bounds(precision)["lower_at_z8"]
+        if lower.lower() <= beta:
+            raise RuntimeError("Phi'-beta lower bound is not positive")
+        ratio = lower / (lower - beta)
+        if ratio.lower() <= 0:
+            raise RuntimeError("ratio lower bound is not positive")
+        return {"phi_prime_lower": lower, "ratio_upper": ratio,
+                "monotonicity": "f/(f-beta) decreases for f>beta",
+                "status": "PROVED_OUTWARD_ROUNDED"}
     finally:
         ctx.prec = old
