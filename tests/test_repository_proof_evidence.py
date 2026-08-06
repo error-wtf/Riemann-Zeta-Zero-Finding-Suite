@@ -7,7 +7,7 @@ from src.hedenmalm.proof_ledger import (
 
 def test_repository_assembler_reads_canonical_open_obligations():
     evidence = repository_proof_evidence()
-    assert evidence["endpoint"].status is ProofStatus.OPEN
+    assert evidence["endpoint"].status is ProofStatus.CONDITIONAL
     assert evidence["green_limit"].status is ProofStatus.OPEN
     assert evidence["origin_matching"].status is ProofStatus.CONDITIONAL
     assert evidence["production"].status is ProofStatus.PROVED

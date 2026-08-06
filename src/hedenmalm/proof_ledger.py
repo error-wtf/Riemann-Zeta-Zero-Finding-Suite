@@ -93,13 +93,14 @@ def load_global_production_evidence() -> ProofEvidence:
 
 def repository_proof_evidence() -> dict[str, ProofEvidence]:
     """Read canonical module statuses; no caller-supplied status strings."""
-    from .endpoint_theorem import endpoint_theorem_status
     from .green_matching import green_matching_status
+    from .repository_theorems import (repository_endpoint_theorem,
+                                      repository_green_limit_theorem,
+                                      repository_nondegeneracy_theorem)
     from .trace_theorem import trace_theorem_status
     from .xi_transform_identity import xi_transform_status
 
     trace = trace_theorem_status()
-    endpoint = endpoint_theorem_status()
     matching = green_matching_status()
     xi = xi_transform_status()
     return {
@@ -108,16 +109,10 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
         "trace": ProofEvidence("Weighted source and traces",
                                 _classify_status(trace["trace_existence"]),
                                 ("src/hedenmalm/trace_theorem.py",)),
-        "endpoint": ProofEvidence("Endpoint flux limits",
-                                   _classify_status(endpoint["global_endpoint_flux"]),
-                                   ("src/hedenmalm/endpoint_theorem.py",)),
-        "nondegeneracy": ProofEvidence("Right production nondegeneracy",
-                                        ProofStatus.CONDITIONAL,
-                                        ("src/hedenmalm/strict_nondegeneracy.py",),
-                                        assumptions=("source nonzero", "H+ positive on an open set")),
+        "endpoint": repository_endpoint_theorem(),
+        "nondegeneracy": repository_nondegeneracy_theorem(),
         "production": load_global_production_evidence(),
-        "green_limit": ProofEvidence("Oriented global Green limit", ProofStatus.OPEN,
-                                      ("src/hedenmalm/green_identity_global.py",)),
+        "green_limit": repository_green_limit_theorem(),
         "origin_matching": ProofEvidence("Origin Green matching", ProofStatus.CONDITIONAL,
                                           ("src/hedenmalm/green_matching.py",),
                                           assumptions=("matched traces", "opposite outward normals")),
