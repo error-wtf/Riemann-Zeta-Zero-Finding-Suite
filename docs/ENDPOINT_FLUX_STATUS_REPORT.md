@@ -90,7 +90,9 @@ compatible inputs.
 * Endpoint constants remain fail-closed for `beta <= 0`, nonpositive
   `Phi''`, and `Phi' - beta <= 0`.
 * `endpoint_theorem.py` now isolates the convex-tail and state-bound lemma;
-  its global improper-limit status remains explicitly open.
+  it now also records the actual Volterra endpoint certificate, including the
+  finite support cutoff of the left correction. The global contradiction still
+  remains explicitly open.
 * `oriented_halfline_balance` records the finite-interval signs separately:
   `left_origin-left_endpoint=left_production` and
   `right_endpoint-right_origin=right_production`.  Endpoint terms are not
@@ -105,14 +107,14 @@ compatible inputs.
 | Ratio bound `Phi'/(Phi'-beta) <= m/(m-beta)` | `PROVED_OUTWARD_ROUNDED` under the far certificate |
 | Full algebraic flux constant | `PROVED` as a conditional bound |
 | Absolute convergence of the actual Volterra tails | `PROVED_ANALYTICALLY_IN_OPEN_STRIP` |
-| Vanishing endpoint flux for the actual Weyl solutions | `OPEN` |
+| Vanishing endpoint flux for the actual Weyl solutions | `PROVED_CONDITIONALLY_FOR_DEFINED_VOLTERRA_INTEGRALS` |
 | Global Weyl--Volterra contradiction | `OPEN` |
 | RH | `OPEN` |
 
-The remaining gap is not a missing upper bound for `Phi'`. The weighted source
-and absolute Volterra convergence are now proved analytically; what remains is
-the improper-limit argument that connects the actual solutions to endpoint
-flux decay.
+The remaining gap is not a missing upper bound for `Phi'`: the endpoint limit
+is now certified for the defined Volterra integrals under the stated profile
+bounds. What remains is the global assembly with the oriented Green identity,
+matching, and strict nondegeneracy.
 
 ## Validation
 

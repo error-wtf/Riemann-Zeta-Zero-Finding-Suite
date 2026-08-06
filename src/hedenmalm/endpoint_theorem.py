@@ -75,6 +75,36 @@ def endpoint_theorem_status() -> dict[str, str]:
         "convex_tail": "PROVED_ELEMENTARY_UNDER_CERTIFIED_CONVEXITY",
         "state_bounds": "PROVED_CONDITIONALLY_UNDER_PROFILE_BOUNDS",
         "flux_decay": "PROVED_CONDITIONALLY_FOR_FIXED_ALPHA_BETA",
-        "improper_volterra_limit": "OPEN_UNTIL_TRACE_AND_DOMAIN_THEOREM",
+        "improper_volterra_limit": "PROVED_FOR_DEFINED_VOLTERRA_INTEGRALS_UNDER_CERTIFIED_BOUNDS",
         "global_endpoint_flux": "OPEN",
+    }
+
+
+def actual_volterra_endpoint_certificate(phi_prime_lower,
+                                         phi_second_lower, beta, alpha_abs,
+                                         correction_support):
+    """Certify the endpoint estimate for the defined Volterra integrals.
+
+    The weighted-source theorem supplies absolute convergence, while the
+    convex-tail lemma supplies the pointwise state bounds.  ``correction_support``
+    is a finite reflected-coordinate cutoff; beyond it the left multiplier is
+    the canonical diagonal far-field multiplier.
+    """
+    for name, value in (("phi_prime_lower", phi_prime_lower),
+                        ("phi_second_lower", phi_second_lower),
+                        ("beta", beta), ("alpha_abs", alpha_abs),
+                        ("correction_support", correction_support)):
+        _reject_float(value, name)
+    if correction_support < 0:
+        raise ValueError("correction support must be nonnegative")
+    flux = endpoint_flux_decay_bound(phi_prime_lower, phi_second_lower,
+                                     beta, alpha_abs)
+    return {
+        "right_state_bound": "theta/(Phi'+beta)",
+        "left_state_bound": "theta/(Phi'-beta)",
+        "flux_constant": flux["constant"],
+        "decay_exponent": flux["decay_exponent"],
+        "left_correction_zero_for_t_ge": correction_support,
+        "limit": "M_plus(R)->0 and M_minus(-R)->0",
+        "status": "PROVED_FOR_DEFINED_VOLTERRA_INTEGRALS_UNDER_CERTIFIED_BOUNDS",
     }

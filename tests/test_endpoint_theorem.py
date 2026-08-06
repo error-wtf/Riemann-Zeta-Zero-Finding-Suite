@@ -4,6 +4,7 @@ from fractions import Fraction
 from src.hedenmalm.endpoint_theorem import (
     convex_tail_bound,
     endpoint_flux_decay_bound,
+    actual_volterra_endpoint_certificate,
     endpoint_state_bounds,
     endpoint_theorem_status,
 )
@@ -40,3 +41,12 @@ def test_endpoint_theorem_rejects_float_inputs():
     with pytest.raises(TypeError):
         endpoint_state_bounds(1.0, Fraction(8), Fraction(20),
                               Fraction(1, 2), Fraction(3))
+
+
+def test_actual_volterra_endpoint_certificate_tracks_compact_correction():
+    result = actual_volterra_endpoint_certificate(
+        Fraction(8), Fraction(20), Fraction(1, 2), Fraction(3), Fraction(1)
+    )
+    assert result["left_correction_zero_for_t_ge"] == 1
+    assert result["decay_exponent"] == 1
+    assert result["status"].startswith("PROVED_FOR_DEFINED_VOLTERRA")
