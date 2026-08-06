@@ -118,13 +118,16 @@ animated GIFs. They are explanatory artefacts, not proof certificates:
 
 *A wrapped projection of the first prime phases ((tlog 2,tlog 3)mod 2pi); near-returns are approximate only.*
 
-![Complete finite zeta complex-plane term map](artifacts/periodicity/zeta_complex_plane.gif)
+![Complete two-sided finite zeta curve](artifacts/periodicity/zeta_full_curve.gif)
 
 *Precomputed dark-grid portrait of every declared finite term orbit, complete
-fitted circles and rays, the full smooth S_N(t) trajectory, and the current
+fitted closed circles (without rays), the full smooth S_N(t) trajectory, and the current
 vector for (s=sigma+it). The declaration and viewport are explicit; the
 infinite family is not silently claimed to be finite. This is an explanatory
 finite visualisation, not a convergence or zero certificate.*
+
+The earlier `zeta_complex_plane.gif` remains available as a historical
+comparison; `zeta_full_curve.gif` is the canonical two-sided presentation.
 
 ## Motivation and Background
 

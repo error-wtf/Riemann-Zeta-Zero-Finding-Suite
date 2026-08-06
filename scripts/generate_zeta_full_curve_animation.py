@@ -48,31 +48,24 @@ def main() -> None:
     fig.text(.06, .83, r"$\zeta(s)=\sum_{n=1}^{\infty}n^{-s}$", color="white", fontsize=28, family="serif")
     fig.text(.70, .93, r"$s=\sigma+i t$", color="#dbeafe", fontsize=20, family="serif")
     rings = []
-    rays = []
     for i, n in enumerate(terms):
         col = colors[i % len(colors)]
         for radius in radii:
             (line,) = ax.plot(radius * np.cos(phase), radius * np.sin(phase), color=col, alpha=.62, linewidth=.9)
             rings.append(line)
-        for tv in np.linspace(-3.6, 3.6, 17):
-            (line,) = ax.plot([], [], color=col, alpha=.52, linewidth=.8)
-            rays.append((line, n, tv))
     path, = ax.plot([], [], color="#f8a4c2", linewidth=2.2)
     point, = ax.plot([], [], "o", color="#ffd84d", markersize=7)
     label = ax.text(.02, .04, "", transform=ax.transAxes, color="#f8fafc", fontsize=12)
 
     def update(i: int):
         shift = (i / max(1, args.frames - 1) - .5) * 2.4
-        for line, n, tv in rays:
-            angle = -(tv + shift) * math.log(n)
-            line.set_data([0.0, 6.8 * math.cos(angle)], [0.0, 6.8 * math.sin(angle)])
         ts = np.linspace(-4.0 + shift, 4.0 + shift, 720)
         vals = np.array([np.sum(terms ** (-.5) * np.exp(-1j * t * np.log(terms))) for t in ts])
         path.set_data(vals.real, vals.imag)
         current = vals[len(vals) // 2]
         point.set_data([current.real], [current.imag])
-        label.set_text(f"complete closed term curves · finite n=2..{int(terms[-1])} · two-sided viewport · t={shift:+.2f}")
-        return [*rings, *(r[0] for r in rays), path, point, label]
+        label.set_text(f"complete closed term curves · finite n=2..{int(terms[-1])} · two-sided viewport · no rays · t={shift:+.2f}")
+        return [*rings, path, point, label]
 
     animation = FuncAnimation(fig, update, frames=args.frames, interval=80, blit=True)
     args.output.parent.mkdir(parents=True, exist_ok=True)
