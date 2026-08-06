@@ -2,9 +2,8 @@
 
 The profile certificates control scalar expressions.  This module checks the
 missing algebraic bridge from those expressions to the actual first-order
-system.  The right-hand identity is complete; the corrected reflected-left
-system is intentionally not guessed here and remains open until its matrix
-is defined canonically.
+system.  Both the canonical right identity and the explicitly defined
+reflected-left corrected identity are checked symbolically here.
 """
 from __future__ import annotations
 
