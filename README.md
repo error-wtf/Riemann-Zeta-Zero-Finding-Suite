@@ -77,6 +77,17 @@ The portal's animated zeta and Dirichlet plots are deliberately labelled as
 finite visual approximations. They are educational views of the formulas
 above, not independent proof certificates.
 
+The same finite Dirichlet walk is reproducible offline as a GIF:
+
+* generator: `scripts/generate_dirichlet_animation.py`;
+* output: `artifacts/periodicity/dirichlet_partial_sums.gif`;
+* example: `python3 scripts/generate_dirichlet_animation.py --sigma 1.2 --t 14.1 --terms 120`.
+
+The generator requires σ>1 on purpose: there the classical Dirichlet series
+is absolutely convergent. The portal's live explorer can show the critical
+strip as a finite visual experiment, but it labels that continuation and its
+truncation explicitly.
+
 ## Motivation and Background
 
 The non-trivial zeros of the Riemann–Zeta function play a central role in analytic number theory. Hardy's `Z`-function `Z(t)` evaluates zeta(1/2 + i*t) up to a phase so that zeros of `Z(t)` correspond to zeros on the critical line. Our suite uses exact mpmath zeta evaluation at small heights and the complete available `mpmath.siegelz` evaluation at larger heights. The leading Riemann–Siegel main sum remains available under the explicit `Z_rs_main_sum` helper for exploratory scans. Interval modules return numerical enclosures and diagnostic derivative bounds; they must not be called mathematical proof certificates unless their outward-rounding assumptions and remainder bounds have been independently validated.
