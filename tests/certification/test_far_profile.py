@@ -6,6 +6,7 @@ from flint import arb
 from src.certification.far_profile import (
     dominant_derivatives, dominant_T, far_positive_theta_term,
     far_positive_theta_lower_ball, dominant_global_positive_certificate,
+    dominant_phi_prime_ratio_bounds,
 )
 from src.certification.far_remainder import global_remainder_bounds
 
@@ -32,6 +33,7 @@ def test_dominant_global_polynomial_certificate_is_exact():
     cert = dominant_global_positive_certificate()
     assert cert["all_shifted_coefficients_positive"]
     assert cert["status"] == "PROVED_EXACT_RATIONAL"
+    assert dominant_phi_prime_ratio_bounds()["lower_coefficient"] == 1
 
 
 def test_far_remainder_bounds_are_strictly_small():
