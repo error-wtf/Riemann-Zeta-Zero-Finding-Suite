@@ -105,7 +105,7 @@ def load_global_production_evidence() -> ProofEvidence:
 def repository_proof_evidence() -> dict[str, ProofEvidence]:
     """Read canonical module statuses; no caller-supplied status strings."""
     from .green_matching import green_matching_status
-    from .repository_theorems import (repository_endpoint_theorem,
+    from .repository_theorems import (repository_endpoint_theorem_schema,
                                       repository_green_limit_theorem,
                                       repository_nondegeneracy_theorem)
     from .trace_theorem import trace_theorem_status
@@ -120,7 +120,7 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
         "trace": ProofEvidence("Weighted source and traces",
                                 _classify_status(trace["trace_existence"]),
                                 ("src/hedenmalm/trace_theorem.py",)),
-        "endpoint": repository_endpoint_theorem(),
+        "endpoint": repository_endpoint_theorem_schema(),
         "nondegeneracy": repository_nondegeneracy_theorem(),
         "production": load_global_production_evidence(),
         "green_limit": repository_green_limit_theorem(),

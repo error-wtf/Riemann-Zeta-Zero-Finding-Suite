@@ -101,6 +101,10 @@ compatible inputs.
   obligation; `PROVED_UNDER_*` and `PROVED_CONDITIONALLY` cannot close RH.
 * `repository_proof_evidence()` now reads canonical module statuses and
   provenance instead of accepting caller-supplied status strings.
+* The endpoint schema is now explicitly quantified over arbitrary fixed
+  `0 < beta < 1/2` and finite `|alpha|`; the default `beta=1/2` sample is no
+  longer used as a theorem claim. The separate RH parameter/symmetry bridge
+  remains open.
 
 ## What is and is not proved
 

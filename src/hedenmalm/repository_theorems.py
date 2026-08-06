@@ -14,15 +14,17 @@ from .proof_ledger import (
 from .trace_theorem import trace_theorem_status
 
 
-def repository_endpoint_theorem(beta=Fraction(1, 2), alpha_abs=Fraction(0)) -> ProofEvidence:
+def repository_endpoint_theorem(beta, alpha_abs) -> ProofEvidence:
     """Compose the published profile certificate with the endpoint lemma.
 
     The result remains conditional until the repository promotes the endpoint
     theorem from its explicit source-profile hypothesis to an unconditional
     theorem object.
     """
-    if beta <= 0 or beta > Fraction(1, 2):
-        raise ValueError("beta must lie in (0, 1/2]")
+    if beta <= 0 or beta >= Fraction(1, 2):
+        raise ValueError("beta must lie in (0, 1/2)")
+    if alpha_abs < 0:
+        raise ValueError("alpha_abs must be nonnegative")
     production = load_global_production_evidence()
     if production.status is not ProofStatus.PROVED:
         return ProofEvidence("Repository endpoint theorem", ProofStatus.OPEN,
@@ -49,9 +51,24 @@ def repository_endpoint_theorem(beta=Fraction(1, 2), alpha_abs=Fraction(0)) -> P
     )
 
 
+def repository_endpoint_theorem_schema() -> ProofEvidence:
+    """Evidence for the universally quantified fixed-parameter theorem."""
+    return ProofEvidence(
+        "Repository endpoint theorem for every fixed alpha with 0<Im(alpha)<1/2",
+        ProofStatus.CONDITIONAL,
+        source_files=("src/hedenmalm/repository_theorems.py",
+                      "src/hedenmalm/endpoint_theorem.py"),
+        dependencies=("global profile certificate", "weighted source theorem",
+                       "finite-support correction"),
+        assumptions=("beta is arbitrary with 0<beta<1/2",
+                     "alpha_abs is finite and fixed",
+                     "Volterra integrals use the canonical source profile"),
+    )
+
+
 def repository_green_limit_theorem() -> ProofEvidence:
     """Compose oriented finite identities with the current endpoint evidence."""
-    endpoint = repository_endpoint_theorem()
+    endpoint = repository_endpoint_theorem_schema()
     if endpoint.status is ProofStatus.PROVED:
         status = ProofStatus.PROVED
         assumptions = ()

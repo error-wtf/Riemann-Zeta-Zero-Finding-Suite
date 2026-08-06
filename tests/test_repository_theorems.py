@@ -1,4 +1,5 @@
 from fractions import Fraction
+import pytest
 
 from src.hedenmalm.proof_ledger import ProofStatus
 from src.hedenmalm.repository_theorems import (
@@ -9,10 +10,12 @@ from src.hedenmalm.repository_theorems import (
 
 
 def test_repository_endpoint_composes_real_certificate_inputs():
-    evidence = repository_endpoint_theorem(Fraction(1, 2), Fraction(3))
+    evidence = repository_endpoint_theorem(Fraction(1, 4), Fraction(3))
     assert evidence.status is ProofStatus.CONDITIONAL
     assert evidence.certificate_hashes
     assert "global profile certificate" in evidence.assumptions or evidence.dependencies
+    with pytest.raises(ValueError):
+        repository_endpoint_theorem(Fraction(1, 2), Fraction(3))
 
 
 def test_repository_green_limit_stays_open_until_endpoint_is_unconditional():
