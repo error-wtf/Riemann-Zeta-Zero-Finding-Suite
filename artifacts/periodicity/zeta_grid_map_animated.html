@@ -55,6 +55,7 @@
       height: 100%;
       display: block;
       background: var(--background);
+      transition: background-color 0.3s ease;
     }
 
     .title-block {
@@ -66,6 +67,12 @@
       text-shadow:
         0 2px 8px rgba(0, 0, 0, 0.95),
         0 0 18px rgba(0, 0, 0, 0.82);
+    }
+
+    html[data-theme="light"] .title-block {
+      text-shadow:
+        0 2px 8px rgba(255, 255, 255, 0.96),
+        0 0 18px rgba(255, 255, 255, 0.88);
     }
 
     h1 {
@@ -580,14 +587,62 @@
       }
     };
 
-    const palette = {
-      negativeA: "#97cad1",
-      negativeB: "#aaa4f5",
-      positiveA: "#eff05c",
-      positiveB: "#f3a0b7",
-      verticalA: "#9ed8d1",
-      verticalB: "#a49cf0",
-      zero: "#faec5b"
+    const themePalettes = {
+      dark: {
+        background: "#01060b",
+        gridMajor: "rgba(23,72,94,0.90)",
+        gridMinor: "rgba(12,43,57,0.70)",
+        axis: "rgba(167,182,196,0.93)",
+        text: "rgba(237,243,248,0.94)",
+        negativeA: "#97cad1",
+        negativeB: "#aaa4f5",
+        positiveA: "#eff05c",
+        positiveB: "#f3a0b7",
+        verticalA: "#9ed8d1",
+        verticalB: "#a49cf0",
+        zero: "#faec5b"
+      },
+      light: {
+        background: "#f8fbff",
+        gridMajor: "rgba(73,126,151,0.64)",
+        gridMinor: "rgba(174,203,217,0.72)",
+        axis: "rgba(39,75,94,0.92)",
+        text: "rgba(16,32,43,0.96)",
+        negativeA: "#087681",
+        negativeB: "#5140ad",
+        positiveA: "#887000",
+        positiveB: "#ad365e",
+        verticalA: "#087064",
+        verticalB: "#6244ae",
+        zero: "#8b6900"
+      }
+    };
+    let activeTheme = "dark";
+    const getPalette = () => themePalettes[activeTheme];
+    const resolveSegmentColor = segment => {
+      const palette = getPalette();
+      if (segment.colorRole === "negative") {
+        return mixColor(
+          palette.negativeA,
+          palette.negativeB,
+          segment.colorPosition
+        );
+      }
+      if (segment.colorRole === "positive") {
+        return mixColor(
+          palette.positiveA,
+          palette.positiveB,
+          segment.colorPosition
+        );
+      }
+      if (segment.colorRole === "vertical") {
+        return mixColor(
+          palette.verticalA,
+          palette.verticalB,
+          segment.colorPosition
+        );
+      }
+      return palette.zero;
     };
 
     function clamp(value, minimum, maximum) {
@@ -876,6 +931,7 @@
       );
 
       const geometry = [];
+      const palette = getPalette();
       let completed = 0;
       const total = horizontalCount + verticalCount;
 
@@ -914,6 +970,10 @@
           geometry.push({
             values: segment,
             color,
+            colorRole:
+              fixedT < -1e-12 ? "negative" :
+              fixedT > 1e-12 ? "positive" : "zero",
+            colorPosition: normalized,
             width: major ? 1.35 : 0.78,
             alpha: major ? 0.86 : 0.47,
             phase:
@@ -962,6 +1022,8 @@
           geometry.push({
             values: segment,
             color,
+            colorRole: "vertical",
+            colorPosition: normalized,
             width: major ? 1.24 : 0.70,
             alpha: major ? 0.70 : 0.36,
             phase:
@@ -1024,7 +1086,8 @@
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
       const { xMin, xMax, yMin, yMax } = state.view;
 
-      targetContext.fillStyle = "#01060b";
+      const palette = getPalette();
+      targetContext.fillStyle = palette.background;
       targetContext.fillRect(0, 0, width, height);
 
       const drawVertical = (value, color, lineWidth) => {
@@ -1055,7 +1118,7 @@
         const major = Math.abs(value - Math.round(value)) < 1e-9;
         drawVertical(
           value,
-          major ? "rgba(23,72,94,0.90)" : "rgba(12,43,57,0.70)",
+          major ? palette.gridMajor : palette.gridMinor,
           major ? 1.05 : 0.48
         );
       }
@@ -1068,18 +1131,18 @@
         const major = Math.abs(value - Math.round(value)) < 1e-9;
         drawHorizontal(
           value,
-          major ? "rgba(23,72,94,0.90)" : "rgba(12,43,57,0.70)",
+          major ? palette.gridMajor : palette.gridMinor,
           major ? 1.05 : 0.48
         );
       }
 
-      drawVertical(0, "rgba(167,182,196,0.93)", 1.15);
-      drawHorizontal(0, "rgba(167,182,196,0.93)", 1.15);
+      drawVertical(0, palette.axis, 1.15);
+      drawHorizontal(0, palette.axis, 1.15);
 
       const fontSize = Math.max(11, 12 * pixelRatio);
       targetContext.font =
         `${fontSize}px "Times New Roman", Georgia, serif`;
-      targetContext.fillStyle = "rgba(237,243,248,0.94)";
+      targetContext.fillStyle = palette.text;
       targetContext.textAlign = "center";
       targetContext.textBaseline = "top";
 
@@ -1124,10 +1187,10 @@
       drawGrid(staticContext);
 
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-
       for (const segment of state.geometry) {
+        const color = resolveSegmentColor(segment);
         drawPath(staticContext, segment.values);
-        staticContext.strokeStyle = rgba(segment.color, 0.055);
+        staticContext.strokeStyle = rgba(color, 0.055);
         staticContext.lineWidth =
           segment.width * 3.2 * pixelRatio;
         staticContext.lineCap = "round";
@@ -1136,7 +1199,7 @@
 
         drawPath(staticContext, segment.values);
         staticContext.strokeStyle = rgba(
-          segment.color,
+          color,
           segment.alpha
         );
         staticContext.lineWidth =
@@ -1168,6 +1231,7 @@
         index += 1
       ) {
         const segment = state.highlightSegments[index];
+        const segmentColor = resolveSegmentColor(segment);
         const values = segment.values;
         const position =
           (
@@ -1190,7 +1254,7 @@
 
           drawPath(context, local);
           context.strokeStyle = rgba(
-            segment.color,
+            segmentColor,
             0.42 + 0.48 * pulse
           );
           context.lineWidth =
@@ -1198,7 +1262,7 @@
           context.lineCap = "round";
           context.lineJoin = "round";
           context.shadowBlur = 14 * pixelRatio;
-          context.shadowColor = rgba(segment.color, 0.72);
+          context.shadowColor = rgba(segmentColor, 0.72);
           context.stroke();
           context.shadowBlur = 0;
         }
@@ -1211,9 +1275,9 @@
 
         context.beginPath();
         context.arc(point.x, point.y, radius, 0, Math.PI * 2);
-        context.fillStyle = rgba(segment.color, 0.95);
+        context.fillStyle = rgba(segmentColor, 0.95);
         context.shadowBlur = 12 * pixelRatio;
-        context.shadowColor = rgba(segment.color, 0.90);
+        context.shadowColor = rgba(segmentColor, 0.90);
         context.fill();
         context.shadowBlur = 0;
       }
@@ -1313,6 +1377,22 @@
     resizeCanvas();
     buildGeometry();
     requestAnimationFrame(renderDynamicLayer);
+
+    window.addEventListener("message", event => {
+      if (!event.data || event.data.type !== "ssz-theme") return;
+      const light = event.data.theme === "light";
+      activeTheme = light ? "light" : "dark";
+      document.documentElement.dataset.theme = light ? "light" : "dark";
+      document.documentElement.style.setProperty("--background", light ? "#f8fbff" : "#01060b");
+      document.documentElement.style.setProperty("--panel", light ? "rgba(255,255,255,.88)" : "rgba(6,18,27,.76)");
+      document.documentElement.style.setProperty("--panel-border", light ? "rgba(30,76,99,.28)" : "rgba(126,182,211,.28)");
+      document.documentElement.style.setProperty("--text", light ? "#10202b" : "#f7f8fb");
+      document.documentElement.style.setProperty("--muted", light ? "#29465a" : "#bfd0dd");
+      document.documentElement.style.setProperty("--grid-major", light ? "#78a8bc" : "#17485e");
+      document.documentElement.style.setProperty("--grid-minor", light ? "#c5dbe5" : "#0c2b39");
+      document.documentElement.style.setProperty("--axis", light ? "#36586a" : "#a7b6c4");
+      renderStaticLayer();
+    });
   </script>
 </body>
 </html>
