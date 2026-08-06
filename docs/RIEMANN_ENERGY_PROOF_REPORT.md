@@ -12,7 +12,7 @@ This report records a conditional proof architecture, not an RH proof.
 | Global Lyapunov production | PROVED algebraically | profile + Sturm lemmas |
 | Algebraic Green matching | PROVED under matched traces | symbolic matrix test |
 | Xi transform identity | PROVED_FROM_SOURCE_MELLIN_FORMULA | source equation 2.2.1, x=log(t) |
-| Trace existence | OPEN | improper integrals |
+| Trace existence | CONDITIONAL | global Gaussian weighted-L1 bound |
 | Endpoint flux | OPEN | weighted limits |
 | Strict nondegeneracy | OPEN | domain theorem |
 | Global Weyl--Volterra contradiction | OPEN | depends on open lemmas |

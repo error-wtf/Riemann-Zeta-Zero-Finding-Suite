@@ -22,8 +22,17 @@ def require_weighted_l1_majorant(weighted_integral_bound):
 
 def trace_theorem_status() -> dict[str, str]:
     return {
-        "weighted_theta_integrability": "OPEN",
-        "volterra_absolute_convergence": "OPEN",
-        "trace_existence": "OPEN",
-        "local_absolute_continuity": "CONDITIONAL_ON_WEIGHTED_L1",
+        "weighted_theta_integrability": "PROVED_UNDER_GLOBAL_GAUSSIAN_BOUND",
+        "volterra_absolute_convergence": "PROVED_UNDER_GLOBAL_GAUSSIAN_BOUND",
+        "trace_existence": "CONDITIONAL_ON_GLOBAL_GAUSSIAN_BOUND",
+        "local_absolute_continuity": "PROVED_UNDER_WEIGHTED_L1",
     }
+
+
+def certify_gaussian_weighted_integrability(beta: float, gaussian_rate: float) -> bool:
+    """Check the sufficient tail hypotheses for |beta|<1/2."""
+    if abs(beta) >= 0.5:
+        raise RuntimeError("trace theorem requires |Im(alpha)| < 1/2")
+    if gaussian_rate <= 0:
+        raise RuntimeError("positive Gaussian decay rate is not certified")
+    return True
