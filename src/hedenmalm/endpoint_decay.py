@@ -32,10 +32,12 @@ def endpoint_decay_status() -> dict[str, str]:
 
 def flux_decay_constant_from_ratio(phi_prime_lower, phi_prime_ratio,
                                    beta, alpha_abs):
-    """Uniform far-field version using Phi' upper/lower ratio bounds.
+    """Legacy state-only bound using Phi' upper/lower ratio bounds.
 
-    Unlike a fixed upper bound for Phi', this remains meaningful as
-    Phi'(x) grows at infinity.
+    This returns only the ``F``-component square and is *not* the complete
+    flux constant.  Use ``certified_endpoint_flux_constant`` for the full
+    quadratic flux.  Unlike a fixed upper bound for Phi', this remains
+    meaningful as Phi'(x) grows at infinity.
     """
     if beta <= 0 or phi_prime_lower <= beta:
         raise RuntimeError("requires beta>0 and a certified Phi'-beta lower bound")
