@@ -38,3 +38,23 @@ def volterra_left_bound(theta_value, phi_prime_lower, beta):
     if phi_prime_lower is None or phi_prime_lower - beta <= 0:
         raise RuntimeError("left Volterra denominator is not certified positive")
     return theta_value / (phi_prime_lower - beta)
+
+
+def state_second_component_bound(theta_value, u_bound, phi_prime_upper, alpha_abs):
+    """Bound |F| from F=-i*theta-i*(Phi'-i*alpha)u."""
+    if min(theta_value, u_bound, phi_prime_upper, alpha_abs) < 0:
+        raise ValueError("bounds must be nonnegative")
+    return theta_value + (phi_prime_upper + alpha_abs) * u_bound
+
+
+def endpoint_flux_bound(theta_value, u_bound, f_bound, phi_second_lower,
+                       phi_exponent, beta, phi_second_upper=None):
+    """Conditional absolute bound for the canonical quadratic flux."""
+    if phi_second_lower <= 0 or beta <= 0:
+        raise RuntimeError("endpoint flux requires P>0 and beta>0")
+    if phi_second_upper is None:
+        phi_second_upper = phi_second_lower
+    if min(theta_value, u_bound, f_bound, phi_exponent) < 0:
+        raise ValueError("bounds must be nonnegative")
+    # a=e^(2Phi-2 beta x)/P and theta=e^-Phi.
+    return (phi_exponent * (phi_second_upper*u_bound*u_bound + f_bound*f_bound/phi_second_lower))

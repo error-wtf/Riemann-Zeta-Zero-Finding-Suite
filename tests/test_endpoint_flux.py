@@ -6,6 +6,8 @@ from src.hedenmalm.endpoint_flux import (
     require_convex_tail,
     volterra_left_bound,
     volterra_right_bound,
+    state_second_component_bound,
+    endpoint_flux_bound,
 )
 
 
@@ -32,3 +34,11 @@ def test_volterra_denominators_fail_closed():
     assert volterra_left_bound(2.0, 3.0, 0.5) == 2.0 / 2.5
     with pytest.raises(RuntimeError):
         volterra_left_bound(2.0, 0.25, 0.5)
+
+
+def test_state_and_flux_bounds_are_conditional_and_positive():
+    f = state_second_component_bound(2.0, 0.5, 3.0, 1.0)
+    assert f == 4.0
+    assert endpoint_flux_bound(2.0, 0.5, f, 2.0, 0.1, 0.2, 4.0) > 0
+    with pytest.raises(RuntimeError):
+        endpoint_flux_bound(2.0, 0.5, f, 0.0, 0.1, 0.2)
