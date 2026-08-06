@@ -11,9 +11,9 @@ def test_repository_assembler_reads_canonical_open_obligations():
     assert evidence["green_limit"].status is ProofStatus.OPEN
     assert evidence["origin_matching"].status is ProofStatus.CONDITIONAL
     assert evidence["rh_bridge"].status is ProofStatus.OPEN
-    assert evidence["production"].status is ProofStatus.CONDITIONAL
+    assert evidence["production"].status is ProofStatus.PROVED
     assert len(evidence["production"].certificate_hashes) == 3
-    assert evidence["matrix_residue"].status is ProofStatus.CONDITIONAL
+    assert evidence["matrix_residue"].status is ProofStatus.PROVED
 
 
 def test_repository_assembler_cannot_be_fed_manual_proved_strings():
