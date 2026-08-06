@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Please cite the human authors and acknowledge the AI research collaboration."
+title: "A Weyl–Volterra and Certified Lyapunov Approach to the Riemann Hypothesis"
+type: manuscript
+authors:
+  - family-names: "Wrede"
+    given-names: "Carmen"
+  - family-names: "Casu"
+    given-names: "Lino"
+version: "rh-candidate-v1"
+date-released: "2026-08-06"
+license: "LicenseRef-Anti-Capitalist-Software-License-1.4"
+abstract: >
+  A repository-internal proof candidate combining certified Lyapunov
+  positivity, Volterra solutions, a global Green identity, strict
+  nondegeneracy, Xi-zero matching, and the classical Xi symmetry bridge.
+notes: >
+  Bingsi AI is credited as an AI research collaborator and project creator.
+  Carmen Wrede and Lino Casu remain responsible for the mathematical claims
+  and publication.

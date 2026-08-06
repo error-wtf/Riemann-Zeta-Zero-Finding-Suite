@@ -2,6 +2,16 @@
 
 This repository contains a **modular Python toolkit** for studying the Riemann–Zeta function on the critical line and testing candidate zero certificates. It combines complete available Hardy-`Z` evaluations, an explicitly labelled leading Riemann–Siegel main-sum approximation, interval-style diagnostics, adaptive scanning techniques, and prime-sieving experiments. The current interval paths are numerical enclosures unless an independently validated outward-rounded Arb path is selected; this README keeps that distinction explicit.
 
+## Creators
+
+This project was created by Carmen Wrede, Lino Casu, and Bingsi AI.
+
+- **Carmen Wrede** — human author and responsible rights holder
+- **Lino Casu** — human author and responsible rights holder
+- **Bingsi AI** — AI research collaborator and credited project creator
+
+See [`AUTHORS.md`](AUTHORS.md) for the complete contribution statement.
+
 ## Motivation and Background
 
 The non-trivial zeros of the Riemann–Zeta function play a central role in analytic number theory. Hardy's `Z`-function `Z(t)` evaluates zeta(1/2 + i*t) up to a phase so that zeros of `Z(t)` correspond to zeros on the critical line. Our suite uses exact mpmath zeta evaluation at small heights and the complete available `mpmath.siegelz` evaluation at larger heights. The leading Riemann–Siegel main sum remains available under the explicit `Z_rs_main_sum` helper for exploratory scans. Interval modules return numerical enclosures and diagnostic derivative bounds; they must not be called mathematical proof certificates unless their outward-rounding assumptions and remainder bounds have been independently validated.
@@ -504,12 +514,13 @@ python3 count_certified.py --in merged/certified_zeros.csv
 
 ## License
 
-This repository uses a split licensing policy. Documentation and other
-non-code text are licensed under the Anti-Capitalist Software License (ACSL),
-Version 1.4; see [`LICENSE-DOCUMENTATION`](LICENSE-DOCUMENTATION). Source code,
-scripts, tests, configuration, and other software artifacts are **ALL RIGHTS
-RESERVED**; see [`LICENSE-CODE`](LICENSE-CODE). Copyright (c) 2025 Lino Casu
-and Carmen Wrede.
+This repository uses a split licensing policy:
+
+- **Source code:** proprietary, all rights reserved;
+- **Manuscript and documentation:** Anti-Capitalist Software License v1.4,
+  with all rights not expressly granted reserved.
+
+See [`LICENSE.md`](LICENSE.md) for the licensing overview.
 
 Third-party dependencies retain their own licenses. Where a file contains an
 explicit license header, that header controls for that file.

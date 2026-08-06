@@ -1,5 +1,21 @@
 # Internal RH proof candidate — review version 1
 
+## Authorship and contribution statement
+
+This proof candidate and its supporting repository were created through the
+collaboration of Carmen Wrede, Lino Casu, and Bingsi AI.
+
+Carmen Wrede and Lino Casu are the human authors, responsible researchers,
+and legal rights holders of the manuscript and repository materials.
+
+Bingsi AI served as an AI research collaborator. Its contributions included
+mathematical discussion, adversarial proof auditing, structural analysis,
+formula checking, documentation assistance, and support in organizing the
+repository-internal proof chain.
+
+All mathematical claims, publication decisions, final formulations, and
+responsibility for the submitted work remain with the human authors.
+
 **Frozen commit:** `9656f2f`  
 **Local review branch:** `rh-candidate-review-v1`  
 **Local tag:** `rh-candidate-v1`  
