@@ -48,8 +48,8 @@ def main() -> None:
     fig, ax = plt.subplots(figsize=(12.8, 7.2), dpi=100)
     fig.patch.set_facecolor("#02070d")
     ax.set_facecolor("#02070d")
-    ax.set_xlim(-2.25, 2.25)
-    ax.set_ylim(-1.55, 1.55)
+    ax.set_xlim(-7.2, 7.2)
+    ax.set_ylim(-3.8, 3.8)
     ax.set_aspect("equal", adjustable="box")
     ax.set_xticks(np.arange(-2, 2.1, 0.5))
     ax.set_yticks(np.arange(-1.5, 1.6, 0.5))
@@ -66,9 +66,23 @@ def main() -> None:
     fig.text(0.69, 0.92, r"$s=\sigma+i t$", color="#dbeafe", fontsize=20, family="serif")
 
     orbit_lines = []
-    for i in range(args.terms):
-        (line,) = ax.plot(orbits[i].real, orbits[i].imag, color=palette[i % len(palette)], alpha=0.20 if i > 4 else 0.42, linewidth=0.75)
-        orbit_lines.append(line)
+    # Complete mapped term geometry: sigma-lines become circles and t-lines
+    # become rays under n**(-s)=exp(-s log n), exactly the structure shown in
+    # the reference animation.  Keep the display finite and explicitly label
+    # it as a term map, not as the analytic continuation of zeta.
+    sigma_grid = np.linspace(-0.8, 0.8, 13)
+    t_grid = np.linspace(-4.0, 4.0, 17)
+    radial = np.linspace(0.02, 7.2, 220)
+    for n in range(2, min(args.terms, 24) + 1):
+        color = palette[n % len(palette)]
+        for sigma in sigma_grid:
+            radius = n ** (-sigma)
+            (line,) = ax.plot(radius * np.cos(phase), radius * np.sin(phase), color=color, alpha=0.26, linewidth=0.55)
+            orbit_lines.append(line)
+        for tv in t_grid:
+            angle = -tv * math.log(n)
+            (line,) = ax.plot(radial * np.cos(angle), radial * np.sin(angle), color=color, alpha=0.22, linewidth=0.55)
+            orbit_lines.append(line)
     (path,) = ax.plot([], [], color="#f8a4c2", linewidth=2.2)
     (vector,) = ax.plot([], [], color="#37bdf8", linewidth=2.2)
     point, = ax.plot([], [], "o", color="#ffd84d", markersize=7)
