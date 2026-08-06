@@ -25,6 +25,25 @@ complete fitted Dirichlet term-map geometry and the full smooth S_N(t)
 trajectory. These are explanatory finite computations, not
 substitutes for exact certificates or independent mathematical review.
 
+### Reference-style analytic-continuation map
+
+The canonical reference-style animation is now
+[`artifacts/periodicity/zeta_full_curve.gif`](artifacts/periodicity/zeta_full_curve.gif).
+It maps a complete rectangular grid in the source (s)-plane through the
+analytically continued function (w=zeta(s)), preserving the long curved
+arcs on both sides and splitting only at the pole or a genuine viewport jump.
+It is generated from the supplied high-resolution implementation:
+
+```text
+scripts/generate_zeta_grid_map_animation.py
+```
+
+The interactive browser version is
+[`zeta_grid_map_animated.html`](https://error-wtf.github.io/ssz-research-portal/assets/media/zeta_grid_map_animated.html)
+and is embedded near the top of the research portal. This visualization is
+deliberately separate from the finite Dirichlet-term map: neither one is a
+proof of a zero or of RH.
+
 The linear manuscript remains the canonical written statement:
 
 * `docs/RH_PROOF_CANDIDATE_COMPLETE.md`
