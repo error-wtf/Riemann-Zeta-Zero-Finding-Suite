@@ -44,3 +44,21 @@ def flux_decay_constant_from_ratio(phi_prime_lower, phi_prime_ratio,
     ratio = phi_prime_lower / (phi_prime_lower - beta)
     f_const = 1 + phi_prime_ratio * ratio + alpha_abs / (phi_prime_lower - beta)
     return f_const * f_const
+
+
+def certified_endpoint_flux_constant(phi_prime_lower, phi_second_lower,
+                                     beta, alpha_abs):
+    """Correct full constant for |Y*JY| <= C exp(-2 beta x)."""
+    if beta <= 0:
+        raise RuntimeError("endpoint decay requires beta > 0")
+    if phi_prime_lower <= beta:
+        raise RuntimeError("Phi' - beta is not certified positive")
+    if phi_second_lower <= 0:
+        raise RuntimeError("Phi'' positivity is not certified")
+    if alpha_abs < 0:
+        raise ValueError("alpha_abs must be nonnegative")
+    denominator = phi_prime_lower - beta
+    u_const = 1 / denominator
+    phi_ratio = phi_prime_lower / denominator
+    f_const = 1 + phi_ratio + alpha_abs / denominator
+    return u_const*u_const + f_const*f_const/phi_second_lower

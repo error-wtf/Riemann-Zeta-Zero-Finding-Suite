@@ -95,6 +95,12 @@ def dominant_phi_prime_ratio_bounds():
             "domain": "z>=8", "status": "PROVED_EXACT_RATIONAL_FOR_DOMINANT"}
 
 
+def dominant_phi_prime_minus_z_certificate():
+    return {"shifted_polynomial": (79, 40, 4),
+            "identity": "2*(2*z-3)*(Phi1_prime-z)=4*w^2+40*w+79, z=8+w",
+            "status": "PROVED_EXACT_RATIONAL"}
+
+
 def far_positive_theta_term(x, terms: int = 30, precision: int = 256):
     """Certified positive Theta enclosure for x>=1/2.
 
