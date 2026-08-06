@@ -35,12 +35,20 @@ def theta_derivative_ball(x, order: int = 0, terms: int = 40, precision: int = 2
         y = (2 * x).exp()
         total = arb(0)
         pi = arb.pi()
+        # For the far range use the source-faithful positive representation
+        # for Theta itself.  The generic derivative formula is a difference
+        # of two large terms and can lose the strict denominator sign on a
+        # wide Arb box even though the underlying profile is positive.
+        positive_source = order == 0 and x.lower() >= arb("0.5")
         for n in range(1, terms + 1):
             nn = arb(n)
             k = pi * nn * nn
             e = (-k * y).exp()
-            total += 2 * pi**2 * nn**4 * (arb(9) * x / 2).exp() * e * _poly_factor(arb(9) / 2, k, order, y, arb)
-            total -= 3 * pi * nn**2 * (arb(5) * x / 2).exp() * e * _poly_factor(arb(5) / 2, k, order, y, arb)
+            if positive_source:
+                total += pi * nn**2 * (arb(9) * x / 2).exp() * (2*pi*nn**2 - 3*(-2*x).exp()) * e
+            else:
+                total += 2 * pi**2 * nn**4 * (arb(9) * x / 2).exp() * e * _poly_factor(arb(9) / 2, k, order, y, arb)
+                total -= 3 * pi * nn**2 * (arb(5) * x / 2).exp() * e * _poly_factor(arb(5) / 2, k, order, y, arb)
         from .theta_tail_bounds import tail_bound
         bound = tail_bound(x, order, terms, precision)
         # tail_bound is an absolute-value majorant: attach [-B, B], never +B.
