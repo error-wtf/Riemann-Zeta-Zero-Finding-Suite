@@ -33,6 +33,7 @@ def main() -> None:
         raise SystemExit("frames >= 2, terms >= 2 and sigma > 0 are required")
 
     tau = np.linspace(args.t0 - args.sweep / 2, args.t0 + args.sweep / 2, args.frames)
+    trajectory_tau = np.linspace(args.t0 - args.sweep / 2, args.t0 + args.sweep / 2, 240)
     phase = np.linspace(-math.pi, math.pi, 360)
     terms = np.arange(1, args.terms + 1, dtype=float)
     radii = terms ** (-args.sigma)
@@ -43,6 +44,10 @@ def main() -> None:
     partial = np.array([
         [np.sum(terms[:k] ** (-args.sigma) * np.exp(-1j * t * np.log(terms[:k]))) for t in tau]
         for k in range(1, args.terms + 1)
+    ])
+    trajectory = np.array([
+        np.sum(terms ** (-args.sigma) * np.exp(-1j * t * np.log(terms)))
+        for t in trajectory_tau
     ])
 
     fig, ax = plt.subplots(figsize=(12.8, 7.2), dpi=100)
@@ -66,6 +71,8 @@ def main() -> None:
     fig.text(0.69, 0.92, r"$s=\sigma+i t$", color="#dbeafe", fontsize=20, family="serif")
 
     orbit_lines = []
+    ray_lines = []
+    ray_meta = []
     # Complete mapped term geometry: sigma-lines become circles and t-lines
     # become rays under n**(-s)=exp(-s log n), exactly the structure shown in
     # the reference animation.  Keep the display finite and explicitly label
@@ -84,6 +91,8 @@ def main() -> None:
             angle = -tv * math.log(n)
             (line,) = ax.plot(radial * np.cos(angle), radial * np.sin(angle), color=color, alpha=0.26, linewidth=0.7)
             orbit_lines.append(line)
+            ray_lines.append(line)
+            ray_meta.append((n, tv))
     (path,) = ax.plot([], [], color="#f8a4c2", linewidth=2.2)
     (vector,) = ax.plot([], [], color="#37bdf8", linewidth=2.2)
     point, = ax.plot([], [], "o", color="#ffd84d", markersize=7)
@@ -93,15 +102,19 @@ def main() -> None:
 
     def update(i: int):
         t = tau[i]
-        current = partial[-1, i]
+        current = trajectory[int(i * (len(trajectory) - 1) / max(1, args.frames - 1))]
         previous = partial[-2, i]
-        path.set_data(partial[:, i].real, partial[:, i].imag)
+        path.set_data(trajectory.real, trajectory.imag)
         vector.set_data([previous.real, current.real], [previous.imag, current.imag])
         point.set_data([current.real], [current.imag])
+        # Move the complete t-grid smoothly; sigma circles remain fixed.
+        for line, (n, tv) in zip(ray_lines, ray_meta):
+            angle = -(tv + (t - args.t0) * 0.35) * math.log(n)
+            line.set_data(radial * np.cos(angle), radial * np.sin(angle))
         for n, marker in enumerate(phase_points, start=1):
             value = n ** (-args.sigma) * np.exp(-1j * t * math.log(n))
             marker.set_data([value.real], [value.imag])
-        frame_text.set_text(f"finite terms N={args.terms}   σ={args.sigma:.2f}   t={t:.2f}   |S_N|={abs(current):.4f}")
+        frame_text.set_text(f"finite terms N={args.terms}   σ={args.sigma:.2f}   t={t:.2f}   |S_N|={abs(current):.4f}   smooth precomputed trajectory")
         return [*orbit_lines, path, vector, point, *phase_points, frame_text]
 
     animation = FuncAnimation(fig, update, frames=args.frames, interval=70, blit=True)
