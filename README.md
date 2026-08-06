@@ -145,7 +145,7 @@ They then run three steps in order:
 * Bash (Linux/macOS) or PowerShell (Windows).
   The Windows `.bat` file launches PowerShell with a relaxed execution policy just for this run.
 
-> **License notice (ACSL 1.4):** The launcher prints the Anti-Capitalist Software License header on start. By using these scripts you agree to the terms. See `LICENSE` for the full text.
+> **License notice:** The launcher and all executable repository components are proprietary and subject to `LICENSE-CODE.md`. The manuscript and non-executable research documentation are covered separately by `LICENSE-DOCUMENTATION.md` under the Anti-Capitalist Software License v1.4. Inspecting or running the software for permitted peer review does not grant reuse or redistribution rights.
 
 ---
 
@@ -606,8 +606,3 @@ See [`LICENSE.md`](LICENSE.md) for the licensing overview.
 
 Third-party dependencies retain their own licenses. Where a file contains an
 explicit license header, that header controls for that file.
-
-```
-Anti-Capitalist Software License (ACSL), Version 1.4
-Copyright (c) 2025 Lino Casu and Carmen Wrede
-```
