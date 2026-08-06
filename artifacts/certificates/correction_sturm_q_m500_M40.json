@@ -1,0 +1,28 @@
+{
+  "status": "PROVED_EXACT_RATIONAL",
+  "formula_version": "scaled-correction-q-v1",
+  "source_commit": "c42f6d7",
+  "certificate_published_in": "c42f6d7",
+  "cut": "1/125",
+  "q_minus": {
+    "coefficients_descending": [-500, 2000, -1750, -510, 800, 450, 6],
+    "interval": "[0,1/125]",
+    "root_count": 0,
+    "left_value": "6",
+    "right_value": "294523064496/30517578125",
+    "sample_value": "6",
+    "positive_if_no_roots": true,
+    "status": "PROVED_EXACT_RATIONAL"
+  },
+  "q_plus": {
+    "coefficients_descending": [-500, 2000, -3000, 2000, -470, 460, 6],
+    "interval": "[1/125,1]",
+    "root_count": 0,
+    "left_value": "294523064496/30517578125",
+    "right_value": "496",
+    "sample_value": "294523064496/30517578125",
+    "positive_if_no_roots": true,
+    "status": "PROVED_EXACT_RATIONAL"
+  },
+  "proof_method": "exact rational Sturm root counts plus positive endpoint/sample values"
+}

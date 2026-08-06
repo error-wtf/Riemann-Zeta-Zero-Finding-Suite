@@ -60,8 +60,10 @@ def _lower_ball(value: str) -> Decimal:
 def load_global_production_evidence() -> ProofEvidence:
     compact_path = "artifacts/certificates/compact_profile_m500_M40.json"
     far_path = "artifacts/certificates/far_asymptotic_profile.json"
+    sturm_path = "artifacts/certificates/correction_sturm_q_m500_M40.json"
     compact, compact_hash = _load_json_certificate(compact_path)
     far, far_hash = _load_json_certificate(far_path)
+    sturm, sturm_hash = _load_json_certificate(sturm_path)
     compact_ok = (
         compact.get("status") == "PROVED_OUTWARD_ROUNDED_ON_[0,1/2]"
         and compact.get("all_boxes_covered") is True
@@ -74,10 +76,18 @@ def load_global_production_evidence() -> ProofEvidence:
         and _lower_ball(far["T_lower"]) > 2
         and bool(far.get("formula_version"))
     )
-    status = ProofStatus.PROVED if compact_ok and far_ok else ProofStatus.OPEN
+    sturm_ok = (
+        sturm.get("status") == "PROVED_EXACT_RATIONAL"
+        and sturm.get("formula_version")
+        and sturm.get("q_minus", {}).get("root_count") == 0
+        and sturm.get("q_plus", {}).get("root_count") == 0
+        and sturm.get("q_minus", {}).get("positive_if_no_roots") is True
+        and sturm.get("q_plus", {}).get("positive_if_no_roots") is True
+    )
+    status = ProofStatus.PROVED if compact_ok and far_ok and sturm_ok else ProofStatus.OPEN
     return ProofEvidence(
         theorem="Global Lyapunov production", status=status,
-        certificate_files=(compact_path, far_path),
+        certificate_files=(compact_path, far_path, sturm_path),
         source_commits=tuple(filter(None, (
             compact.get("certificate_source_commit", compact.get("source_commit")),
             far.get("source_commit"),
@@ -86,8 +96,9 @@ def load_global_production_evidence() -> ProofEvidence:
             compact.get("certificate_published_in"),
             far.get("certificate_published_in"),
         ))),
-        certificate_hashes=(compact_hash, far_hash),
-        dependencies=("compact profile certificate", "far remainder certificate"),
+        certificate_hashes=(compact_hash, far_hash, sturm_hash),
+        dependencies=("compact profile certificate", "far remainder certificate",
+                       "exact correction Sturm certificate"),
     )
 
 

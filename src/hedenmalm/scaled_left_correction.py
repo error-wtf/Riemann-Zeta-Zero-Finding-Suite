@@ -30,7 +30,7 @@ def scaled_correction_status() -> dict[str, str]:
     return {
         "ansatz": "k_beta=beta^2*A*(t/beta)*(1-t/(beta*L))^2 on 0<=t<=beta*L",
         "sampled_schur_residual": "NUMERICALLY_SUPPORTED_ONLY",
-        "global_interval_certificate": "OPEN",
+        "global_interval_certificate": "PROVED_EXACT_RATIONAL_UNDER_CERTIFIED_PROFILE_BOUNDS",
         "left_endpoint_and_matching": "OPEN",
         "status": "OPEN",
     }
