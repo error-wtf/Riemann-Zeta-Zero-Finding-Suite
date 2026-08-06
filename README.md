@@ -660,3 +660,5 @@ See [`LICENSE.md`](LICENSE.md) for the licensing overview.
 
 Third-party dependencies retain their own licenses. Where a file contains an
 explicit license header, that header controls for that file.
+
+The canonical interactive reference animation is the supplied `artifacts/periodicity/zeta_grid_map_animated.html`; open it in a browser to use the density, quality, speed, pause, rebuild, PNG, hide-UI and fullscreen controls.
