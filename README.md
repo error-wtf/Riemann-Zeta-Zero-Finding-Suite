@@ -36,7 +36,7 @@ For s=sigma+it with sigma>1,
     zeta(s) = sum_{n=1}^infinity n^{-s}
            = sum_{n=1}^infinity n^{-sigma} exp(-i t log n).
 
-The n-th term has frequency log n, amplitude n^{-sigma,} and individual
+The n-th term has frequency log n, amplitude n^{-sigma} and individual
 period 2*pi/log n. There is no single common finite period for the prime
 frequencies log 2 and log 3: such a period would imply 2^m=3^n for nonzero
 integers m,n. The useful global concept is approximate recurrence
