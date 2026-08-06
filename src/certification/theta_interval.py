@@ -35,7 +35,8 @@ def theta_derivative_ball(x, order: int = 0, terms: int = 40, precision: int = 2
         e = (-k * y).exp()
         total += 2 * pi**2 * nn**4 * (arb(9) * x / 2).exp() * e * _poly_factor(arb(9) / 2, k, order, y, arb)
         total -= 3 * pi * nn**2 * (arb(5) * x / 2).exp() * e * _poly_factor(arb(5) / 2, k, order, y, arb)
-    return total
+    from .theta_tail_bounds import tail_bound
+    return total + tail_bound(x, order, terms, precision)
 
 
 def finite_phi_derivative_balls(x, terms: int = 40, precision: int = 256):
@@ -48,6 +49,6 @@ def finite_profile_status() -> dict[str, str]:
     return {
         "backend": "python-flint/Arb",
         "outward_rounding": "TRUE",
-        "theta_tail": "NOT_INCLUDED",
-        "status": "FINITE_TRUNCATION_ONLY",
+        "theta_tail": "GAUSSIAN_MAJORANT_INCLUDED",
+        "status": "TAIL_INCLUDED_NOT_PROFILE_CERTIFIED",
     }
