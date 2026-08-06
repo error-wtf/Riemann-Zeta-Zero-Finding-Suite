@@ -89,6 +89,8 @@ compatible inputs.
   outward-rounded Arb result.
 * Endpoint constants remain fail-closed for `beta <= 0`, nonpositive
   `Phi''`, and `Phi' - beta <= 0`.
+* `endpoint_theorem.py` now isolates the convex-tail and state-bound lemma;
+  its global improper-limit status remains explicitly open.
 
 ## What is and is not proved
 
