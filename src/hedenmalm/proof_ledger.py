@@ -113,11 +113,29 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
     from .rh_bridge import rh_symmetry_bridge_status
     from .trace_theorem import trace_theorem_status
     from .xi_transform_identity import xi_transform_status
+    from .residue_identification import matrix_residue_identification_status
 
     trace = trace_theorem_status()
     matching = green_matching_status()
     xi = xi_transform_status()
     bridge = rh_symmetry_bridge_status()
+    matrix = matrix_residue_identification_status()
+    scalar_production = load_global_production_evidence()
+    matrix_closed = all(
+        matrix[key] == "PROVED_EXACT_SYMBOLIC"
+        for key in ("right_residual_identity", "left_residual_identity",
+                    "left_schur_identification", "certificate_formula_match")
+    )
+    production = scalar_production if matrix_closed else ProofEvidence(
+        theorem="Global Lyapunov production",
+        status=ProofStatus.CONDITIONAL,
+        certificate_files=scalar_production.certificate_files,
+        source_commits=scalar_production.source_commits,
+        publication_commits=scalar_production.publication_commits,
+        certificate_hashes=scalar_production.certificate_hashes,
+        dependencies=scalar_production.dependencies + ("matrix residual identification",),
+        assumptions=("left corrected residual identity is not yet proved",),
+    )
     return {
         "xi": ProofEvidence("Xi transform identity", _classify_status(xi["identity"]),
                              ("src/hedenmalm/xi_transform_identity.py",)),
@@ -126,7 +144,14 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
                                 ("src/hedenmalm/trace_theorem.py",)),
         "endpoint": repository_endpoint_theorem_schema(),
         "nondegeneracy": repository_nondegeneracy_theorem(),
-        "production": load_global_production_evidence(),
+        "production": production,
+        "matrix_residue": ProofEvidence(
+            "Hermitian Lyapunov residual identification",
+            ProofStatus.PROVED if matrix_closed else ProofStatus.CONDITIONAL,
+            ("src/hedenmalm/residue_identification.py",),
+            dependencies=("right residual identity", "left corrected residual identity",
+                           "certificate Schur formula"),
+        ),
         "green_limit": repository_green_limit_theorem(),
         "origin_matching": ProofEvidence("Origin Green matching", ProofStatus.CONDITIONAL,
                                           ("src/hedenmalm/green_matching.py",),
@@ -144,7 +169,7 @@ def assemble_repository_contradiction() -> dict[str, object]:
     """Assemble only canonical evidence, requiring exact PROVED statuses."""
     evidence = repository_proof_evidence()
     weyl_keys = ("xi", "trace", "endpoint", "nondegeneracy", "production",
-                 "green_limit", "origin_matching")
+                 "matrix_residue", "green_limit", "origin_matching")
     weyl_complete = all(evidence[key].status is ProofStatus.PROVED for key in weyl_keys)
     rh_complete = weyl_complete and evidence["rh_bridge"].status is ProofStatus.PROVED
     return {
