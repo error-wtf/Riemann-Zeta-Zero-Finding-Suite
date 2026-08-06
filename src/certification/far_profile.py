@@ -19,7 +19,10 @@ def far_positive_theta_partial_ball(x_ball, terms: int = 30, precision: int = 25
     old = ctx.prec
     try:
         ctx.prec = precision
-        x = arb(x_ball); z = arb.pi() * (2*x).exp(); total = arb(0)
+        x = arb(x_ball)
+        if x.lower() < arb("0.5"):
+            raise ValueError("far positive Theta requires x.lower() >= 1/2")
+        z = arb.pi() * (2*x).exp(); total = arb(0)
         pi = arb.pi()
         for n in range(1, terms + 1):
             nn = arb(n)
@@ -35,7 +38,10 @@ def far_positive_theta_lower_ball(x_ball, precision: int = 256):
     old = ctx.prec
     try:
         ctx.prec = precision
-        x = arb(x_ball); z = arb.pi()*(2*x).exp()
+        x = arb(x_ball)
+        if x.lower() < arb("0.5"):
+            raise ValueError("far positive Theta requires x.lower() >= 1/2")
+        z = arb.pi()*(2*x).exp()
         return arb.pi()*(arb(5)*x/2).exp()*(2*z-3)*(-z).exp()
     finally:
         ctx.prec = old

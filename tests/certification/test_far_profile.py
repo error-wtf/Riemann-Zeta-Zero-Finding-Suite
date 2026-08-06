@@ -7,6 +7,7 @@ from src.certification.far_profile import (
     dominant_derivatives, dominant_T, far_positive_theta_term,
     far_positive_theta_lower_ball, dominant_global_positive_certificate,
 )
+from src.certification.far_remainder import global_remainder_bounds
 
 
 def test_dominant_profile_is_positive_at_far_threshold():
@@ -31,3 +32,15 @@ def test_dominant_global_polynomial_certificate_is_exact():
     cert = dominant_global_positive_certificate()
     assert cert["all_shifted_coefficients_positive"]
     assert cert["status"] == "PROVED_EXACT_RATIONAL"
+
+
+def test_far_remainder_bounds_are_strictly_small():
+    bounds = global_remainder_bounds(128)
+    assert bounds["B_R"].upper() < 1
+    assert bounds["L2_bound"].upper() < 1
+    assert bounds["L3_bound"].upper() < 1
+
+
+def test_far_positive_theta_rejects_below_threshold():
+    with pytest.raises(ValueError):
+        far_positive_theta_lower_ball(arb("0.49"), 128)

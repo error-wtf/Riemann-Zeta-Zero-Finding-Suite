@@ -1,0 +1,39 @@
+{
+  "status": "PROVED_OUTWARD_ROUNDED_ON_[z>=8]",
+  "threshold_z": "8",
+  "equivalent_x_range": "[1/2,infinity)",
+  "precision_bits": 256,
+  "formula_version": "far-remainder-v1",
+  "source_commit": "48da3ce",
+  "dominant_certificate": {
+    "threshold": 8,
+    "phi1_second_identity": "4*(z-3/2)^2+6",
+    "t1_minus_2_shifted_coefficients": [
+      113038,
+      70644,
+      16408,
+      1680,
+      64
+    ],
+    "all_shifted_coefficients_positive": true,
+    "status": "PROVED_EXACT_RATIONAL"
+  },
+  "B_R": "[7.43411110258038e-10 +/- 2.73e-25]",
+  "B_DR": "[4.89507623369908e-8 +/- 6.82e-24]",
+  "B_D2R": "[3.63931850312167e-6 +/- 2.01e-21]",
+  "B_D3R": "[0.000298810850746576 +/- 3.77e-19]",
+  "weighted_B_DR": "[3.91606098695926e-7 +/- 3.46e-22]",
+  "weighted_B_D2R": "[2.91145480249733e-5 +/- 4.40e-20]",
+  "L1_bound": "[4.89507623369908e-8 +/- 6.82e-24]",
+  "L2_bound": "[3.63931850551785e-6 +/- 4.88e-21]",
+  "L3_bound": "[0.000298810851281019 +/- 3.79e-19]",
+  "Phi_second_lower": "[19.9999963606815 +/- 1.06e-14]",
+  "T_lower": "[287.999426626821 +/- 4.07e-13]",
+  "ratio_bounds": {
+    "4": "[2.15072934174137e-17 +/- 3.08e-32]",
+    "6": "[4.83914101891808e-17 +/- 4.42e-32]",
+    "8": "[1.08880672925657e-16 +/- 3.00e-31]",
+    "10": "[2.44981514082728e-16 +/- 4.24e-31]"
+  },
+  "monotonicity_certificate": "a/z-2b/(2z-3)-c<0 for a<=4,z>=8,c>=3"
+}
