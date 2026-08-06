@@ -1,11 +1,19 @@
-Anti-Capitalist Software License (ACSL), Version 1.4
-Copyright (c) 2025 Lino Casu and Carmen Wrede
+Repository licensing notice
+===========================
 
-You may use, modify, and distribute this software, but not
-for the purpose of generating profit, advertising, or in
-service of capitalist enterprise. You may not use it on
-behalf of organizations or individuals who fund, support, or
-perform exploitation, oppression, surveillance, policing,
-incarceration, or warfare. Distributions must keep this
-license and attribution intact and apply the same license to
-derivative works.
+This repository uses a split licensing policy:
+
+1. Documentation and other non-code text are licensed under the Anti-Capitalist
+   Software License (ACSL), Version 1.4. The complete text is in
+   LICENSE-DOCUMENTATION.
+
+2. Source code, scripts, tests, configuration, generated executables, and
+   other software artifacts are ALL RIGHTS RESERVED. No license to copy,
+   modify, distribute, sublicense, or use the software is granted except by
+   a separate written permission from the copyright holders. The complete
+   notice is in LICENSE-CODE.
+
+Copyright (c) 2025 Lino Casu and Carmen Wrede.
+
+Where a file contains an explicit license header, that header controls for
+that file. Third-party dependencies retain their own licenses.

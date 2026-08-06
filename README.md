@@ -504,16 +504,15 @@ python3 count_certified.py --in merged/certified_zeros.csv
 
 ## License
 
-Anti-Capitalist Software License (ACSL) 1.4  
-Copyright (c) 2025 Lino Casu and Carmen Wrede
+This repository uses a split licensing policy. Documentation and other
+non-code text are licensed under the Anti-Capitalist Software License (ACSL),
+Version 1.4; see [`LICENSE-DOCUMENTATION`](LICENSE-DOCUMENTATION). Source code,
+scripts, tests, configuration, and other software artifacts are **ALL RIGHTS
+RESERVED**; see [`LICENSE-CODE`](LICENSE-CODE). Copyright (c) 2025 Lino Casu
+and Carmen Wrede.
 
-Summary (non-binding, for convenience only):
-- You may use, modify, and distribute this software, but **not** for the purpose of generating profit, advertising, or in service of capitalist enterprise.  
-- You may **not** use it on behalf of organizations or individuals who fund, support, or perform exploitation, oppression, surveillance, policing, incarceration, or warfare.  
-- Any distribution must keep this license and attribution intact and apply the same license to derivative works.  
-- The full legal text is provided in the `LICENSE` file of this repository.
-
-If the `LICENSE` file is not yet present, create a new file named `LICENSE` at the repository root and paste the complete text of ACSL v1.4 with the copyright line:
+Third-party dependencies retain their own licenses. Where a file contains an
+explicit license header, that header controls for that file.
 
 ```
 Anti-Capitalist Software License (ACSL), Version 1.4
