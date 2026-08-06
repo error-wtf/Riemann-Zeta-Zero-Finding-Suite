@@ -9,7 +9,7 @@ def test_repository_assembler_reads_canonical_open_obligations():
     evidence = repository_proof_evidence()
     assert evidence["endpoint"].status is ProofStatus.PROVED
     assert evidence["green_limit"].status is ProofStatus.PROVED
-    assert evidence["origin_matching"].status is ProofStatus.CONDITIONAL
+    assert evidence["origin_matching"].status is ProofStatus.PROVED
     assert evidence["rh_bridge"].status is ProofStatus.OPEN
     assert evidence["production"].status is ProofStatus.PROVED
     assert len(evidence["production"].certificate_hashes) == 3

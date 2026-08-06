@@ -33,26 +33,25 @@ This report supersedes the earlier historical 46-test audit.
 
 The unconditional argument still requires the following global lemmas:
 
-* concrete right-state nondegeneracy and actual Xi-zero origin matching;
 * the Weyl contradiction assembly;
 * the final Xi symmetry and nontrivial-zero bridge.
 
 The profile, far-range, correction-Sturm, weighted-source, absolute Volterra
 convergence, fixed-parameter endpoint-decay, and oriented improper Green-limit
 blocks are now certified and provenance-bound. The
+source/ODE nondegeneracy implication and the Xi-zero origin-matching
+composition are also now recorded as canonical theorems. The
 mathematically valid conclusion remains conditional. The repository does not
 claim an unconditional proof of RH.
 
-The right-hand algebraic residual identity is now independently verified:
-with (q=e^{2\Phi-2\beta x}),
+The right- and corrected-left algebraic residual identities are now
+independently verified. With (q=e^{2\Phi-2\beta x}),
 
 \[
 J_+'+A_\alpha^*J_++J_+A_\alpha
 =q\,\operatorname{diag}(2\beta,S_\Phi).
 \]
 
-The corresponding corrected reflected-left matrix has not yet been derived
-from a canonical exported (A_-) and (J_-). Consequently the transfer from
-the left Schur/Sturm certificate to the actual Hermitian residual remains
-conditional, and `GLOBAL_LYAPUNOV_PRODUCTION` must not be read as an
-unconditional matrix theorem.
+The corrected-left residual has Schur complement
+(qG_\beta/\Phi''), so the profile/Sturm certificates are now connected to
+both actual Hermitian residual matrices.

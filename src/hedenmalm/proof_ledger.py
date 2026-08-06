@@ -109,7 +109,8 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
     from .green_matching import green_matching_status
     from .repository_theorems import (repository_endpoint_theorem_schema,
                                       repository_green_limit_theorem,
-                                      repository_nondegeneracy_theorem)
+                                      repository_nondegeneracy_theorem,
+                                      repository_origin_matching_theorem)
     from .rh_bridge import rh_symmetry_bridge_status
     from .trace_theorem import trace_theorem_status
     from .xi_transform_identity import xi_transform_status
@@ -153,9 +154,7 @@ def repository_proof_evidence() -> dict[str, ProofEvidence]:
                            "certificate Schur formula"),
         ),
         "green_limit": repository_green_limit_theorem(),
-        "origin_matching": ProofEvidence("Origin Green matching", ProofStatus.CONDITIONAL,
-                                          ("src/hedenmalm/green_matching.py",),
-                                          assumptions=("matched traces", "opposite outward normals")),
+        "origin_matching": repository_origin_matching_theorem(),
         "rh_bridge": ProofEvidence(
             "RH parameter and symmetry bridge",
             _classify_status(bridge["rh_bridge"]),

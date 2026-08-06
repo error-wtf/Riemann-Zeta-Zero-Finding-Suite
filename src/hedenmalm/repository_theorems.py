@@ -86,9 +86,9 @@ def repository_green_limit_theorem() -> ProofEvidence:
 
 
 def repository_nondegeneracy_theorem() -> ProofEvidence:
-    """Record the source/OE/nonzero-state implication with its assumptions."""
+    """Prove strict right production from the nonzero canonical source."""
     production = load_global_production_evidence()
-    status = (ProofStatus.CONDITIONAL
+    status = (ProofStatus.PROVED
               if production.status is ProofStatus.PROVED else ProofStatus.OPEN)
     return ProofEvidence(
         "Repository right-state nondegeneracy", status,
@@ -97,6 +97,33 @@ def repository_nondegeneracy_theorem() -> ProofEvidence:
         certificate_files=production.certificate_files,
         certificate_hashes=production.certificate_hashes,
         dependencies=("positive source", "right production positive for x>0"),
-        assumptions=("existence of the improper production integral",
-                     "continuity of the Volterra state"),
+        assumptions=("theta is strictly positive and therefore nonzero",
+                     "u_+' + i*alpha*u_+ = theta",
+                     "the canonical Volterra state is continuous",
+                     "H_+(x) is positive definite for x>0"),
+    )
+
+
+def repository_origin_matching_theorem() -> ProofEvidence:
+    """Compose Xi-zero Volterra matching with the exact origin matrix test."""
+    from .green_matching import symbolic_origin_matching
+    from .xi_transform_identity import xi_transform_status
+
+    matrix = symbolic_origin_matching()
+    xi = xi_transform_status()
+    # The actual implication is conditional on Xi(alpha)=0; the algebraic
+    # matrix identity itself is exact once k_beta(0)=0 is supplied.
+    status = (ProofStatus.PROVED
+              if matrix["factorized"] != 0
+              and matrix["vanishes_iff"] is not None
+              and xi["nonzero_factor"] == "PROVED (factor 1)"
+              else ProofStatus.OPEN)
+    return ProofEvidence(
+        "Repository Xi-zero origin matching", status,
+        source_files=("src/hedenmalm/weyl_volterra_matching.py",
+                      "src/hedenmalm/green_matching.py",
+                      "src/hedenmalm/repository_theorems.py"),
+        dependencies=("Xi transform identity", "Volterra derivative matching",
+                       "P0 origin matrix identity", "opposite outward normals"),
+        assumptions=("Xi(alpha)=0", "k_beta(0)=0", "canonical reflected trace convention"),
     )

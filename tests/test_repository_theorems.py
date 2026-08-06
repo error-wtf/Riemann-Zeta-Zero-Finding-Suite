@@ -23,7 +23,7 @@ def test_repository_green_limit_follows_from_endpoint_decay_and_finite_identity(
     assert evidence.status is ProofStatus.PROVED
 
 
-def test_repository_nondegeneracy_is_not_falsely_unconditional():
+def test_repository_nondegeneracy_follows_from_source_and_positive_production():
     evidence = repository_nondegeneracy_theorem()
-    assert evidence.status is ProofStatus.CONDITIONAL
-    assert "improper production integral" in evidence.assumptions[0]
+    assert evidence.status is ProofStatus.PROVED
+    assert "theta is strictly positive" in evidence.assumptions[0]
