@@ -51,8 +51,9 @@ def main() -> None:
     markers = []
     for i, n in enumerate(terms):
         col = colors[i % len(colors)]
-        for radius in radii:
-            (line,) = ax.plot(radius * np.cos(phase), radius * np.sin(phase), color=col, alpha=.62, linewidth=.9)
+        for j, radius in enumerate(radii):
+            ring_col = colors[(i + j) % len(colors)]
+            (line,) = ax.plot(radius * np.cos(phase), radius * np.sin(phase), color=ring_col, alpha=.70, linewidth=1.0)
             rings.append(line)
         (marker,) = ax.plot([], [], "o", color=col, markersize=3.5, alpha=.95)
         markers.append((marker, radii[-1], n))
