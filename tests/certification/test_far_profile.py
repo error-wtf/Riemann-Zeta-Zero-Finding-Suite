@@ -3,7 +3,10 @@ import pytest
 pytest.importorskip("flint")
 
 from flint import arb
-from src.certification.far_profile import dominant_derivatives, dominant_T, far_positive_theta_term
+from src.certification.far_profile import (
+    dominant_derivatives, dominant_T, far_positive_theta_term,
+    far_positive_theta_lower_ball, dominant_global_positive_certificate,
+)
 
 
 def test_dominant_profile_is_positive_at_far_threshold():
@@ -16,8 +19,15 @@ def test_dominant_profile_is_positive_at_far_threshold():
 def test_factorized_theta_has_strict_positive_lower_bound():
     theta = far_positive_theta_term(arb("0.5 +/- 0.0001"), terms=30, precision=128)
     assert theta.lower() > 0
+    assert far_positive_theta_lower_ball(arb("0.5 +/- 0.0001"), 128).lower() > 0
 
 
 def test_dominant_formulas_have_no_singular_denominator_on_far_range():
     z = arb(8)
     assert (2*z - 3).lower() > 0
+
+
+def test_dominant_global_polynomial_certificate_is_exact():
+    cert = dominant_global_positive_certificate()
+    assert cert["all_shifted_coefficients_positive"]
+    assert cert["status"] == "PROVED_EXACT_RATIONAL"

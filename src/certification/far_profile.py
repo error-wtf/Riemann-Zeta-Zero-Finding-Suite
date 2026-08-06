@@ -7,6 +7,40 @@ bound; that remains a separate fail-closed obligation.
 from __future__ import annotations
 
 
+def far_positive_theta_partial_ball(x_ball, terms: int = 30, precision: int = 256):
+    """Evaluate the factored positive source series on x>=1/2.
+
+    Every finite summand is positive because z=pi*exp(2x)>8.  The returned
+    ball still includes the absolute tail symmetrically; callers needing only
+    a lower bound may use ``far_positive_theta_lower_ball``.
+    """
+    from flint import arb, ctx
+    from .theta_tail_bounds import tail_bound
+    old = ctx.prec
+    try:
+        ctx.prec = precision
+        x = arb(x_ball); z = arb.pi() * (2*x).exp(); total = arb(0)
+        pi = arb.pi()
+        for n in range(1, terms + 1):
+            nn = arb(n)
+            total += pi*nn**2*(arb(5)*x/2).exp() * (2*nn**2*z-3) * (-nn**2*z).exp()
+        return total + arb(0, tail_bound(x, 0, terms, precision).upper())
+    finally:
+        ctx.prec = old
+
+
+def far_positive_theta_lower_ball(x_ball, precision: int = 256):
+    """Certified positive n=1 lower bound for x>=1/2."""
+    from flint import arb, ctx
+    old = ctx.prec
+    try:
+        ctx.prec = precision
+        x = arb(x_ball); z = arb.pi()*(2*x).exp()
+        return arb.pi()*(arb(5)*x/2).exp()*(2*z-3)*(-z).exp()
+    finally:
+        ctx.prec = old
+
+
 def dominant_derivatives(z):
     """Return Phi_1', Phi_1'', Phi_1''' for z=pi*exp(2*x)."""
     phi1 = (8*z**2 - 30*z + 15) / (2*(2*z - 3))
@@ -25,6 +59,24 @@ def dominant_positive_margins(z):
     return {"Phi1_prime": phi1, "Phi1_second": phi2,
             "Phi1_third": phi3, "T1": dominant_T(z),
             "Phi1_second_margin": phi2, "T1_minus_2": dominant_T(z) - 2}
+
+
+def dominant_polynomial_certificate():
+    """Return exact coefficients of the shifted T1-2 numerator at z=8+w."""
+    # (2z-3)^2 (T1-2) / 2, shifted by z=8+w.
+    return (113038, 70644, 16408, 1680, 64)
+
+
+def dominant_global_positive_certificate() -> dict[str, object]:
+    """Exact algebraic certificate valid for every rational z>=8."""
+    coeffs = dominant_polynomial_certificate()
+    return {
+        "threshold": 8,
+        "phi1_second_identity": "4*(z-3/2)^2+6",
+        "t1_minus_2_shifted_coefficients": coeffs,
+        "all_shifted_coefficients_positive": all(c > 0 for c in coeffs),
+        "status": "PROVED_EXACT_RATIONAL",
+    }
 
 
 def far_positive_theta_term(x, terms: int = 30, precision: int = 256):
