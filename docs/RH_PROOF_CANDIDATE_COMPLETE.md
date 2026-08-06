@@ -1,6 +1,6 @@
 # Complete RH proof candidate
 
-**Frozen candidate:** `f1c13d6`  
+**Frozen candidate:** tag `rh-candidate-v1` (review-branch tip)  
 **Local tag:** `rh-candidate-v1`  
 **Public status:** `CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`
 

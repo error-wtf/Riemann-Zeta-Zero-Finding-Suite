@@ -1,7 +1,7 @@
 # Adversarial review guide for the RH candidate
 
-Review the frozen candidate at commit `f1c13d6` (local branch/tag
-`rh-candidate-review-v1` / `rh-candidate-v1`). The public status is
+Review the frozen candidate at tag `rh-candidate-v1` (local branch
+`rh-candidate-review-v1`). The public status is
 `CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`.
 
 ## Priority checks
