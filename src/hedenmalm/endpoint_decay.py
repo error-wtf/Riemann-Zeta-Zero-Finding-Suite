@@ -2,6 +2,11 @@
 from __future__ import annotations
 
 
+def _reject_float(value, name):
+    if isinstance(value, float):
+        raise TypeError(f"{name} must be Fraction/int/Arb, not float")
+
+
 def flux_decay_constant(phi_prime_lower, phi_prime_upper, phi_second_lower,
                         beta, alpha_abs):
     """Return C in |Y*JY| <= C exp(-2 beta x).
@@ -51,6 +56,9 @@ def flux_decay_constant_from_ratio(phi_prime_lower, phi_prime_ratio,
 def certified_endpoint_flux_constant(phi_prime_lower, phi_second_lower,
                                      beta, alpha_abs):
     """Correct full constant for |Y*JY| <= C exp(-2 beta x)."""
+    for name, value in (("phi_prime_lower", phi_prime_lower), ("phi_second_lower", phi_second_lower),
+                        ("beta", beta), ("alpha_abs", alpha_abs)):
+        _reject_float(value, name)
     if beta <= 0:
         raise RuntimeError("endpoint decay requires beta > 0")
     if phi_prime_lower <= beta:
@@ -60,7 +68,8 @@ def certified_endpoint_flux_constant(phi_prime_lower, phi_second_lower,
     if alpha_abs < 0:
         raise ValueError("alpha_abs must be nonnegative")
     denominator = phi_prime_lower - beta
-    u_const = 1 / denominator
+    one = denominator * 0 + 1
+    u_const = one / denominator
     phi_ratio = phi_prime_lower / denominator
-    f_const = 1 + phi_ratio + alpha_abs / denominator
+    f_const = one + phi_ratio + alpha_abs / denominator
     return u_const*u_const + f_const*f_const/phi_second_lower

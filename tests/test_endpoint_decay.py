@@ -1,4 +1,5 @@
 import pytest
+from fractions import Fraction
 
 from src.hedenmalm.endpoint_decay import endpoint_decay_status, flux_decay_constant, flux_decay_constant_from_ratio, certified_endpoint_flux_constant
 
@@ -25,7 +26,9 @@ def test_uniform_decay_uses_growth_ratio_not_global_phi_prime_upper():
 
 
 def test_full_flux_constant_has_both_state_components():
-    value = certified_endpoint_flux_constant(8.0, 20.0, 0.5, 3.0)
+    value = certified_endpoint_flux_constant(Fraction(8), Fraction(20), Fraction(1, 2), Fraction(3))
     assert value > 0
     with pytest.raises(RuntimeError):
-        certified_endpoint_flux_constant(0.25, 20.0, 0.5, 3.0)
+        certified_endpoint_flux_constant(Fraction(1, 4), Fraction(20), Fraction(1, 2), Fraction(3))
+    with pytest.raises(TypeError):
+        certified_endpoint_flux_constant(8.0, 20.0, 0.5, 3.0)
