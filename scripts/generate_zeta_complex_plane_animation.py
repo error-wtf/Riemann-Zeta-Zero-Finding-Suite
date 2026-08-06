@@ -70,18 +70,19 @@ def main() -> None:
     # become rays under n**(-s)=exp(-s log n), exactly the structure shown in
     # the reference animation.  Keep the display finite and explicitly label
     # it as a term map, not as the analytic continuation of zeta.
-    sigma_grid = np.linspace(-0.8, 0.8, 13)
-    t_grid = np.linspace(-4.0, 4.0, 17)
+    sigma_grid = np.linspace(-1.25, 1.0, 18)
+    t_grid = np.linspace(-4.0, 4.0, 21)
     radial = np.linspace(0.02, 7.2, 220)
-    for n in range(2, min(args.terms, 24) + 1):
+    display_terms = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
+    for n in display_terms:
         color = palette[n % len(palette)]
         for sigma in sigma_grid:
             radius = n ** (-sigma)
-            (line,) = ax.plot(radius * np.cos(phase), radius * np.sin(phase), color=color, alpha=0.26, linewidth=0.55)
+            (line,) = ax.plot(radius * np.cos(phase), radius * np.sin(phase), color=color, alpha=0.34 if n < 12 else 0.22, linewidth=0.8)
             orbit_lines.append(line)
         for tv in t_grid:
             angle = -tv * math.log(n)
-            (line,) = ax.plot(radial * np.cos(angle), radial * np.sin(angle), color=color, alpha=0.22, linewidth=0.55)
+            (line,) = ax.plot(radial * np.cos(angle), radial * np.sin(angle), color=color, alpha=0.26, linewidth=0.7)
             orbit_lines.append(line)
     (path,) = ax.plot([], [], color="#f8a4c2", linewidth=2.2)
     (vector,) = ax.plot([], [], color="#37bdf8", linewidth=2.2)
