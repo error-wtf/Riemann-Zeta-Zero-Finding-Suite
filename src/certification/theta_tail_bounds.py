@@ -29,14 +29,22 @@ def tail_bound(x_ball, order, terms=30, precision=256):
         from flint import arb, ctx
     except ImportError as exc:
         raise RuntimeError("install requirements-certify.txt") from exc
-    ctx.prec = precision
-    x = arb(x_ball); y = (2*x).exp(); ym = y.lower(); yp = y.upper(); pi=arb.pi()
-    lam = pi * ym; n0=arb(terms+1); total=arb(0)
-    for a,p,pref in ((Fraction(9,2),4,2*pi**2*(arb(9)*x.upper()/2).exp()),
-                     (Fraction(5,2),2,3*pi*(arb(5)*x.upper()/2).exp())):
-        for j,q in enumerate(q_coefficients(a,order)):
-            if not q: continue
-            power=p+2*j
-            rho=((n0+1)/n0)**power * (-lam*(2*n0+1)).exp()
-            total += (arb(abs(q.numerator))/abs(q.denominator)) * pref * (pi*yp)**j * gaussian_tail_bound(n0,lam,power,rho)
-    return total
+    if not 0 <= order <= 4:
+        raise ValueError("order must be between 0 and 4")
+    if terms < 1:
+        raise ValueError("terms must be positive")
+    old_precision = ctx.prec
+    try:
+        ctx.prec = precision
+        x = arb(x_ball); y = (2*x).exp(); ym = y.lower(); yp = y.upper(); pi=arb.pi()
+        lam = pi * ym; n0=arb(terms+1); total=arb(0)
+        for a,p,pref in ((Fraction(9,2),4,2*pi**2*(arb(9)*x.upper()/2).exp()),
+                         (Fraction(5,2),2,3*pi*(arb(5)*x.upper()/2).exp())):
+            for j,q in enumerate(q_coefficients(a,order)):
+                if not q: continue
+                power=p+2*j
+                rho=((n0+1)/n0)**power * (-lam*(2*n0+1)).exp()
+                total += (arb(abs(q.numerator))/abs(q.denominator)) * pref * (pi*yp)**j * gaussian_tail_bound(n0,lam,power,rho)
+        return total
+    finally:
+        ctx.prec = old_precision

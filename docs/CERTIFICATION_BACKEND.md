@@ -10,6 +10,12 @@ python3 -m venv .venv-cert
 ```
 
 The smoke test verifies Arb ball containment and directed lower/upper bounds.
-This does **not** certify the infinite Theta series: explicit derivative tail
-bounds and adaptive interval subdivision are still required before any energy
-status may become a theorem.
+The Theta interval path attaches its absolute Gaussian tail majorant as the
+symmetric error ball ``[-B, B]``; it never treats a magnitude bound as a
+signed remainder.  It also fails closed if the Theta denominator enclosure
+contains zero and restores the caller's FLINT precision.
+
+This does **not** certify the infinite Theta series globally: explicit
+derivative tail bounds are implemented, but adaptive interval subdivision and
+profile-bound certificates are still required before any energy status may
+become a theorem.
