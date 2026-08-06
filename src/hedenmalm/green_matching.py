@@ -43,6 +43,6 @@ def green_matching_status() -> dict[str, str]:
     return {
         "trace_matching": "PROVED_ALGEBRAIC_UNDER_XI_MATCHED_TRACES",
         "origin_flux_cancellation": "PROVED_ALGEBRAIC_UNDER_OPPOSITE_NORMALS",
-        "trace_existence": "OPEN",
+        "trace_existence": "PROVED_UNDER_SOURCE_PROFILE_AND_OPEN_STRIP",
         "endpoint_flux": "OPEN",
     }

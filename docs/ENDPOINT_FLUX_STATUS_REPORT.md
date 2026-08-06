@@ -91,6 +91,10 @@ compatible inputs.
   `Phi''`, and `Phi' - beta <= 0`.
 * `endpoint_theorem.py` now isolates the convex-tail and state-bound lemma;
   its global improper-limit status remains explicitly open.
+* `oriented_halfline_balance` records the finite-interval signs separately:
+  `left_origin-left_endpoint=left_production` and
+  `right_endpoint-right_origin=right_production`.  Endpoint terms are not
+  discarded until an explicit zero-limit theorem is supplied.
 
 ## What is and is not proved
 
