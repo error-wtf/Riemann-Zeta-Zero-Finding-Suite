@@ -21,21 +21,16 @@ echo "DEBUG: WORKDIR=$WORKDIR"
 echo "DEBUG: LOGDIR=$LOGDIR"
 echo "DEBUG: RUNROOT=$RUNROOT"
 
-cat <<'ACSL'
+cat <<'LICENSE_NOTICE'
 ============================================================
-Anti-Capitalist Software License (ACSL), Version 1.4
-Copyright (c) 2025 Lino Casu and Carmen Wrede
+Riemann Zeta Zero Finding Suite — proprietary source code
+Copyright © 2026 Carmen Wrede and Lino Casu
 
-You may use, modify, and distribute this software, but not
-for the purpose of generating profit, advertising, or in
-service of capitalist enterprise. You may not use it on
-behalf of organizations or individuals who fund, support, or
-perform exploitation, oppression, surveillance, policing,
-incarceration, or warfare. Distributions must keep this
-license and attribution intact and apply the same license to
-derivative works. (Full text in LICENSE)
+No copying, modification, redistribution, sublicensing, or commercial use is
+granted by this launcher. See LICENSE-CODE.md. The manuscript and non-executable
+documentation have separate terms in LICENSE-DOCUMENTATION.
 ============================================================
-ACSL
+LICENSE_NOTICE
 
 # -------------------------
 # Input (hours, sieve_max, dps)
