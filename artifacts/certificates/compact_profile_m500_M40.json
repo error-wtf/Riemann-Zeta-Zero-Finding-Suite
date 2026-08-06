@@ -1,6 +1,8 @@
 {
   "status": "PROVED_OUTWARD_ROUNDED_ON_[0,1/2]",
   "repository_commit": "e6c4c5e",
+  "certificate_source_commit": "e6c4c5e",
+  "certificate_published_in": "ca11930",
   "python_flint_version": "0.9.0",
   "flint_version": "0.9.0",
   "precision_bits": 256,
