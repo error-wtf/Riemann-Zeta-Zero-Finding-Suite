@@ -99,6 +99,23 @@ is absolutely convergent. The portal's live explorer can show the critical
 strip as a finite visual experiment, but it labels that continuation and its
 truncation explicitly.
 
+### Reproducible animation previews
+
+The same finite constructions are available directly from the repository as
+animated GIFs. They are explanatory artefacts, not proof certificates:
+
+![Finite Dirichlet partial sums](artifacts/periodicity/dirichlet_partial_sums.gif)
+
+*Finite partial sums (S_k(s)) walking through the complex plane.*
+
+![Prime logarithmic frequency spectrum](artifacts/periodicity/prime_frequency_spectrum.gif)
+
+*The logarithmic frequencies (log n), with prime generators highlighted.*
+
+![Prime phase torus projection](artifacts/periodicity/prime_phase_torus.gif)
+
+*A wrapped projection of the first prime phases ((tlog 2,tlog 3)mod 2pi); near-returns are approximate only.*
+
 ## Motivation and Background
 
 The non-trivial zeros of the Riemann–Zeta function play a central role in analytic number theory. Hardy's `Z`-function `Z(t)` evaluates zeta(1/2 + i*t) up to a phase so that zeros of `Z(t)` correspond to zeros on the critical line. Our suite uses exact mpmath zeta evaluation at small heights and the complete available `mpmath.siegelz` evaluation at larger heights. The leading Riemann–Siegel main sum remains available under the explicit `Z_rs_main_sum` helper for exploratory scans. Interval modules return numerical enclosures and diagnostic derivative bounds; they must not be called mathematical proof certificates unless their outward-rounding assumptions and remainder bounds have been independently validated.
