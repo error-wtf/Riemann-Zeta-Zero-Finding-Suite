@@ -6,6 +6,8 @@ from src.certification.theta_interval import (
     finite_phi_derivative_balls,
     finite_profile_status,
     theta_derivative_ball,
+    profile_derivative_balls,
+    profile_margin_balls,
 )
 
 
@@ -39,3 +41,19 @@ def test_zero_theta_denominator_fails_closed(monkeypatch):
     monkeypatch.setattr(module, "theta_derivative_ball", lambda *args, **kwargs: arb(0))
     with pytest.raises(RuntimeError, match="contains zero"):
         module.finite_phi_derivative_balls("0.1")
+
+
+def test_profile_derivatives_include_phi_four_and_margins():
+    values = profile_derivative_balls("0.1 +/- 0.0001", terms=20, precision=128)
+    assert len(values) == 5
+    margins = profile_margin_balls("0.1 +/- 0.0001", terms=20, precision=128)
+    assert margins["theta"].lower() > 0
+
+
+def test_negative_theta_ball_is_rejected(monkeypatch):
+    import src.certification.theta_interval as module
+    from flint import arb
+
+    monkeypatch.setattr(module, "theta_derivative_ball", lambda *args, **kwargs: arb("-1"))
+    with pytest.raises(RuntimeError, match="Strict positivity"):
+        module.profile_derivative_balls("0.1")
