@@ -1,0 +1,26 @@
+{
+  "repository_commit": "b7b0452",
+  "parameter_convention": "alpha=xi+i beta; s=1/2+i alpha",
+  "theta_profile_identity": "PROVED_SOURCE_PROFILE",
+  "xi_transform_identity": "OPEN",
+  "trace_existence": "OPEN",
+  "xi_zero_trace_matching": "OPEN",
+  "finite_interval_green_identity": "PROVED_FORMALLY_UNDER_AC_ASSUMPTIONS",
+  "global_profile_bounds": "PROVED",
+  "global_lyapunov_production": "PROVED",
+  "algebraic_green_matching": "PROVED_UNDER_MATCHED_TRACES",
+  "endpoint_flux_right": "OPEN",
+  "endpoint_flux_left": "OPEN",
+  "volterra_admissibility": "OPEN",
+  "strict_nondegeneracy": "OPEN",
+  "global_weyl_volterra_contradiction": "OPEN",
+  "rh_internal_chain": "INCOMPLETE",
+  "rh_public_status": "OPEN",
+  "assumptions": ["Xi normalization", "improper-integral domains", "endpoint limits"],
+  "open_obligations": ["trace existence", "endpoint flux", "strict nondegeneracy"],
+  "test_summary": "57 passed, 4 skipped at last validation",
+  "certificate_provenance": {
+    "compact": "source e6c4c5e; published ca11930",
+    "far": "source 48da3ce; published b28df76"
+  }
+}
