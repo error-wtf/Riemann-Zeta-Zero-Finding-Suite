@@ -33,14 +33,14 @@ This report supersedes the earlier historical 46-test audit.
 
 The unconditional argument still requires the following global lemmas:
 
-* the universal repository endpoint theorem as an unconditional theorem;
 * the improper oriented Green-limit theorem;
 * concrete right-state nondegeneracy and actual Xi-zero origin matching;
 * the Weyl contradiction assembly;
 * the final Xi symmetry and nontrivial-zero bridge.
 
-The profile, far-range, correction-Sturm, weighted-source, and absolute
-Volterra convergence blocks are now certified and provenance-bound. The
+The profile, far-range, correction-Sturm, weighted-source, absolute Volterra
+convergence, and fixed-parameter endpoint-decay blocks are now certified and
+provenance-bound. The
 mathematically valid conclusion remains conditional. The repository does not
 claim an unconditional proof of RH.
 
