@@ -33,8 +33,8 @@ def sturm_positive_certificate(poly: sp.Poly, left: sp.Rational, right: sp.Ratio
 def conservative_polynomial_certificate() -> dict[str, object]:
     qm, qp = conservative_polynomials()
     cut = sp.Rational(1, 125)
-    return {
-        "q_minus": sturm_positive_certificate(qm, sp.Rational(0), cut),
-        "q_plus": sturm_positive_certificate(qp, cut, sp.Rational(1)),
-        "status": "PROVED_EXACT_RATIONAL",
-    }
+    minus = sturm_positive_certificate(qm, sp.Rational(0), cut)
+    plus = sturm_positive_certificate(qp, cut, sp.Rational(1))
+    proven = bool(minus["positive_if_no_roots"] and plus["positive_if_no_roots"])
+    return {"q_minus": minus, "q_plus": plus,
+            "status": "PROVED_EXACT_RATIONAL" if proven else "CONTRADICTION_FOUND"}
