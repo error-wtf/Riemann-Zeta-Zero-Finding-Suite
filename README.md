@@ -116,6 +116,12 @@ animated GIFs. They are explanatory artefacts, not proof certificates:
 
 *A wrapped projection of the first prime phases ((tlog 2,tlog 3)mod 2pi); near-returns are approximate only.*
 
+![High-quality finite zeta complex-plane portrait](artifacts/periodicity/zeta_complex_plane.gif)
+
+*Precomputed dark-grid portrait of finite term orbits, the partial-sum path,
+and the current vector for (s=\sigma+it). This is an explanatory finite
+visualisation, not a convergence or zero certificate.*
+
 ## Motivation and Background
 
 The non-trivial zeros of the Riemann–Zeta function play a central role in analytic number theory. Hardy's `Z`-function `Z(t)` evaluates zeta(1/2 + i*t) up to a phase so that zeros of `Z(t)` correspond to zeros on the critical line. Our suite uses exact mpmath zeta evaluation at small heights and the complete available `mpmath.siegelz` evaluation at larger heights. The leading Riemann–Siegel main sum remains available under the explicit `Z_rs_main_sum` helper for exploratory scans. Interval modules return numerical enclosures and diagnostic derivative bounds; they must not be called mathematical proof certificates unless their outward-rounding assumptions and remainder bounds have been independently validated.
