@@ -5,6 +5,7 @@
   "precision_bits": 256,
   "formula_version": "far-remainder-v1",
   "source_commit": "48da3ce",
+  "certificate_published_in": "b28df76",
   "dominant_certificate": {
     "threshold": 8,
     "phi1_second_identity": "4*(z-3/2)^2+6",
