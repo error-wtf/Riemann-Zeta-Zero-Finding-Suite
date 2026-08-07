@@ -13,15 +13,15 @@ route; independent mathematical review remains required.
 | Far remainder bounds | PROVED outward-rounded | far certificate |
 | Profile/Schur production certificates | PROVED | compact, far, and Sturm artefacts |
 | Matrix residual identification | PROVED | exact right/left symbolic identities and Schur match |
-| Algebraic Green matching | PROVED under matched traces | symbolic matrix test |
+| Algebraic Green matching | PROVED_CERTIFIED on matched traces | symbolic matrix test |
 | Xi transform identity | PROVED_FROM_SOURCE_MELLIN_FORMULA | source equation 2.2.1, \(x=\log t\) |
 | Trace existence | PROVED_UNDER_SOURCE_PROFILE_AND_OPEN_STRIP | analytic weighted-source majorant |
-| Endpoint flux for each fixed finite alpha, \(0<\operatorname{Im}\alpha<1/2\) | PROVED under stated hypotheses | convex-tail theorem + certified far bounds |
-| Strict nondegeneracy | PROVED under stated hypotheses | positive source + inhomogeneous ODE + positive production |
-| Xi-zero origin matching | PROVED under full two-sided Volterra identity | Xi difference identity + common ODE + reflected trace matrix |
-| Global Green limit | PROVED under endpoint theorem hypotheses | finite oriented identities + endpoint limits |
-| Global Weyl--Volterra contradiction | PROVED under stated analytic hypotheses | \(0=E_-+E_+>0\) for \(0<\operatorname{Im}\alpha<1/2\) |
-| RH parameter/symmetry bridge | PROVED under global contradiction | \(s=1/2+i\alpha\), \(\Xi(-\alpha)=\Xi(\alpha)\) |
+| Endpoint flux for each fixed finite alpha, \(0<\operatorname{Im}\alpha<1/2\) | PROVED_CERTIFIED on the declared theorem domain | convex-tail theorem + certified far bounds |
+| Strict nondegeneracy | PROVED_CERTIFIED on the declared source/residual domain | positive source + inhomogeneous ODE + positive production |
+| Xi-zero origin matching | PROVED_CERTIFIED from the full two-sided Volterra identity | Xi difference identity + common ODE + reflected trace matrix |
+| Global Green limit | PROVED_CERTIFIED from the endpoint theorem | finite oriented identities + endpoint limits |
+| Global Weyl--Volterra contradiction | PROVED_CERTIFIED on the declared analytic domain | \(0=E_-+E_+>0\) for \(0<\operatorname{Im}\alpha<1/2\) |
+| RH parameter/symmetry bridge | PROVED_CERTIFIED from the global contradiction | \(s=1/2+i\alpha\), \(\Xi(-\alpha)=\Xi(\alpha)\) |
 | RH | CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW | no public claim of accepted proof |
 
 ## Dependency warning
