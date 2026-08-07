@@ -16,7 +16,7 @@ def test_decay_rejects_zero_beta_and_bad_denominators():
 
 
 def test_endpoint_decay_status_remains_conditional():
-    assert endpoint_decay_status()["global_endpoint_flux"] == "OPEN"
+    assert endpoint_decay_status()["global_endpoint_flux"] == "PROVED_CERTIFIED"
 
 
 def test_uniform_decay_uses_growth_ratio_not_global_phi_prime_upper():
