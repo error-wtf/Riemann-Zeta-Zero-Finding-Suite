@@ -91,7 +91,7 @@
     .formula {
       display: flex;
       align-items: center;
-      gap: 0.15em;
+      gap: 0.34em;
       margin-top: clamp(20px, 3.2vw, 56px);
       margin-left: clamp(80px, 10vw, 190px);
       font-family:
@@ -100,46 +100,53 @@
         "Times New Roman",
         serif;
       font-size: clamp(32px, 4vw, 72px);
-      line-height: 1;
+      line-height: 1.08;
       white-space: nowrap;
     }
 
     .sum-wrap {
       position: relative;
-      display: inline-flex;
-      align-items: center;
-      margin: 0 0.18em;
+      display: inline-block;
+      width: 1.62em;
+      height: 1.82em;
+      flex: 0 0 1.62em;
+      margin: 0 0.08em;
     }
 
     .sum-symbol {
-      display: inline-block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       font-size: 1.55em;
-      line-height: 0.8;
+      line-height: 1;
     }
 
     .sum-limits {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      width: max-content;
-      transform: translate(-50%, -50%);
+      inset: 0;
       pointer-events: none;
     }
 
     .sum-limits .top {
       position: absolute;
       left: 50%;
-      bottom: 0.58em;
+      top: -0.02em;
+      bottom: auto;
       transform: translateX(-50%);
-      font-size: 0.34em;
+      font-size: 0.28em;
+      line-height: 1;
     }
 
     .sum-limits .bottom {
       position: absolute;
       left: 50%;
-      top: 0.80em;
+      top: auto;
+      bottom: -0.02em;
       transform: translateX(-50%);
-      font-size: 0.30em;
+      font-size: 0.27em;
+      line-height: 1;
+      white-space: nowrap;
     }
 
     .fraction {
@@ -147,8 +154,8 @@
       grid-template-rows: auto 1px auto;
       align-items: center;
       justify-items: center;
-      min-width: 1.15em;
-      margin-left: 0.14em;
+      min-width: 1.25em;
+      margin-left: 0.10em;
       font-size: 0.9em;
     }
 
@@ -342,7 +349,13 @@
       .formula {
         margin-left: 0;
         margin-top: 22px;
+        gap: 0.24em;
         font-size: clamp(28px, 7vw, 54px);
+      }
+
+      .sum-wrap {
+        width: 1.52em;
+        flex-basis: 1.52em;
       }
 
       .controls {
