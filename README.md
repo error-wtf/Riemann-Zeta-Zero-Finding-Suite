@@ -52,9 +52,10 @@ The linear manuscript remains the canonical written statement:
   rendering conventions used throughout the repository.
 
 The dependency-aware scientific status is
-`CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`. The
-one-sided trace implication required by the Xi-zero origin matching remains a
-named review dependency; the repository does not claim an accepted RH proof.
+`CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`. The historical
+one-sided trace diagnostic is retained as a negative control, but the
+canonical Xi-zero matching uses the full two-sided Volterra identity. The
+repository does not claim an accepted RH proof.
 
 ## Classical Dirichlet series and recurrence perspective
 
