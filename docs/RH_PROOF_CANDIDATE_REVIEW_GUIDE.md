@@ -4,6 +4,12 @@ Review the frozen candidate at tag `rh-candidate-v1` (local branch
 `rh-candidate-review-v1`). The public status is
 `CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`.
 
+Before making any novelty or completeness claim, read
+[`PRIOR_ART_AND_NOVELTY_AUDIT.md`](PRIOR_ART_AND_NOVELTY_AUDIT.md).  It records
+the inspected Hedenmalm and Freedman primary sources and the fail-closed status
+conflict between the open one-sided trace diagnostic and the manuscript's
+stronger origin-matching label.
+
 ## Priority checks
 
 1. Re-derive the source Mellin/Fourier normalization, including every factor
