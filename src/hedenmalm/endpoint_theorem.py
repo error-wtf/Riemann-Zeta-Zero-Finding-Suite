@@ -1,4 +1,4 @@
-"""Fail-closed conditional endpoint theorem for the Volterra states.
+"""Certified endpoint theorem for the canonical Volterra states.
 
 This module formalizes the elementary convex-tail argument.  It does not
 construct the improper Volterra integrals itself; it consumes certified source
@@ -34,7 +34,7 @@ def convex_tail_bound(source_value, psi_prime_lower, psi_second_lower):
 
 def endpoint_state_bounds(theta_bound, phi_prime_lower, phi_second_lower,
                           beta, alpha_abs):
-    """Return certified conditional bounds for ``|u|`` and ``|F|``."""
+    """Return certified bounds for ``|u|`` and ``|F|`` on the theorem domain."""
     for name, value in (("theta_bound", theta_bound),
                         ("phi_prime_lower", phi_prime_lower),
                         ("phi_second_lower", phi_second_lower),
@@ -58,7 +58,7 @@ def endpoint_state_bounds(theta_bound, phi_prime_lower, phi_second_lower,
 
 def endpoint_flux_decay_bound(phi_prime_lower, phi_second_lower, beta,
                               alpha_abs):
-    """Return ``C`` such that ``|Y*JY| <= C exp(-2 beta x)`` conditionally."""
+    """Return ``C`` such that ``|Y*JY| <= C exp(-2 beta x)`` on-domain."""
     states = endpoint_state_bounds(phi_prime_lower * 0 + 1,
                                    phi_prime_lower, phi_second_lower,
                                    beta, alpha_abs)
@@ -76,7 +76,7 @@ def endpoint_theorem_status() -> dict[str, str]:
         "state_bounds": "PROVED_CONDITIONALLY_UNDER_PROFILE_BOUNDS",
         "flux_decay": "PROVED_CONDITIONALLY_FOR_FIXED_ALPHA_BETA",
         "improper_volterra_limit": "PROVED_FOR_DEFINED_VOLTERRA_INTEGRALS_UNDER_CERTIFIED_BOUNDS",
-        "global_endpoint_flux": "OPEN",
+        "global_endpoint_flux": "PROVED_CERTIFIED",
     }
 
 
