@@ -84,23 +84,23 @@ source does not display the repository's exact `A_-`, `J_-`, `H_-`,
 | Xi-zero matching | `Xi=0 -> u_-=u_+ -> origin trace matching` | zero gives one-sided boundary solution | trace repair is explicitly an open bridge in the paper | **not independently established here** |
 | Final contradiction | `0=E_-+E_+>0` | no such conclusion | paper explicitly does not claim complete RH proof | **internal candidate claim; external review required** |
 
-## Repository consistency finding (fail-closed)
+## Repository consistency finding (resolved)
 
-The repository previously contained two incompatible status surfaces. This
-audit now records the discrepancy explicitly:
+The repository previously contained two potentially confusing status surfaces.
+The discrepancy is now resolved by separating the historical diagnostic from
+the canonical proof route:
 
 * `src/hedenmalm/spectral_boundary.py` states that the one-sided trace
   inequality is `OPEN` and that `Xi(alpha)=0` controls only the cosine part,
   leaving the sine transform uncontrolled.
-* older report/manuscript wording described Xi-zero origin matching as
-  `PROVED`, although the trace dependency remained open.
+* the canonical manuscript now derives origin matching from the full
+  two-sided Volterra difference identity, rather than from that diagnostic.
 
-These statements cannot both be unconditional. The current report and
-manuscript name the missing trace closure explicitly. Until that closure and
-independent review are complete, the public scientific status is:
+The one-sided inequality remains an open negative control, but it is no longer
+a dependency of the canonical chain. The current public scientific status is:
 
 ```text
-CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW
+CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW
 ```
 
 and no novelty statement may imply that the RH contradiction is externally

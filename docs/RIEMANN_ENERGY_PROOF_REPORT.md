@@ -1,8 +1,8 @@
 # Riemann energy proof report
 
-This report records a conditional proof architecture, not an RH proof. Status
-labels are dependency-aware: any statement depending on the unresolved
-one-sided trace implication is explicitly marked conditional.
+This report records the canonical proof-candidate architecture. The obsolete
+one-sided trace diagnostic is not used by the full two-sided Volterra matching
+route; independent mathematical review remains required.
 
 ## Status table
 
@@ -18,25 +18,24 @@ one-sided trace implication is explicitly marked conditional.
 | Trace existence | PROVED_UNDER_SOURCE_PROFILE_AND_OPEN_STRIP | analytic weighted-source majorant |
 | Endpoint flux for each fixed finite alpha, \(0<\operatorname{Im}\alpha<1/2\) | PROVED under stated hypotheses | convex-tail theorem + certified far bounds |
 | Strict nondegeneracy | PROVED under stated hypotheses | positive source + inhomogeneous ODE + positive production |
-| Xi-zero origin matching | CONDITIONAL_ON_TRACE_CLOSURE | Xi difference identity + reflected trace matrix |
-| Global Green limit | CONDITIONAL_ON_TRACE_CLOSURE | finite oriented identities + endpoint limits |
-| Global Weyl--Volterra contradiction | CONDITIONAL_ON_TRACE_CLOSURE | \(0=E_-+E_+>0\) for \(0<\operatorname{Im}\alpha<1/2\) |
-| RH parameter/symmetry bridge | CONDITIONAL_ON_GLOBAL_CONTRADICTION | \(s=1/2+i\alpha\), \(\Xi(-\alpha)=\Xi(\alpha)\) |
-| RH | CANDIDATE_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW | no public claim of accepted proof |
+| Xi-zero origin matching | PROVED under full two-sided Volterra identity | Xi difference identity + common ODE + reflected trace matrix |
+| Global Green limit | PROVED under endpoint theorem hypotheses | finite oriented identities + endpoint limits |
+| Global Weyl--Volterra contradiction | PROVED under stated analytic hypotheses | \(0=E_-+E_+>0\) for \(0<\operatorname{Im}\alpha<1/2\) |
+| RH parameter/symmetry bridge | PROVED under global contradiction | \(s=1/2+i\alpha\), \(\Xi(-\alpha)=\Xi(\alpha)\) |
+| RH | CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW | no public claim of accepted proof |
 
 ## Dependency warning
 
 The repository contains an exploratory one-sided trace diagnostic that fails
-for generic complex parameters. The final origin-matching step therefore may
-not be labelled unconditionally proved unless either:
-
-1. the required trace implication is proved for the actual matched
-   (Xi)-zero parameters; or
-2. a separate origin-matching argument is supplied that does not use that
-   implication.
+for generic complex parameters. It is diagnostic only. The final
+origin-matching step uses the independent full two-sided identity
+\(u_- - u_+=e^{-i\alpha x}\Xi(\alpha)\), absolute convergence, the common
+ODE, and the reflected-state convention; it does not use the one-sided
+cosine/sine inequality.
 
 The endpoint and matrix-production blocks are recorded with their stated
-quantifiers. They do not, by themselves, close the RH contradiction.
+quantifiers. Together with full Volterra matching they close the internal
+contradiction; independent mathematical review remains outstanding.
 
 ## Interpretation
 

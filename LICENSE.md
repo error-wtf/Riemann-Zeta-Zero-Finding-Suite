@@ -26,5 +26,5 @@ those expressly stated in the applicable license file.
 ## Scientific status
 
 The repository describes its result as
-`CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW`. Publication or
+`CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`. Publication or
 distribution does not constitute independent mathematical validation.

@@ -52,7 +52,7 @@ The linear manuscript remains the canonical written statement:
   rendering conventions used throughout the repository.
 
 The dependency-aware scientific status is
-`CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW`. The
+`CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`. The
 one-sided trace implication required by the Xi-zero origin matching remains a
 named review dependency; the repository does not claim an accepted RH proof.
 

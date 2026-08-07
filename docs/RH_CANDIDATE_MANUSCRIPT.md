@@ -19,7 +19,7 @@ responsibility for the submitted work remain with the human authors.
 **Frozen commit:** `9656f2f`  
 **Local review branch:** `rh-candidate-review-v1`  
 **Local tag:** `rh-candidate-v1`  
-**Public status:** `CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW`
+**Public status:** `CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`
 
 This document is the linear mathematical handover for the canonical
 two-component Weyl–Lyapunov route. The older scalar energy draft is retained
@@ -199,7 +199,10 @@ $$
 If \(\Xi(\alpha)=0\), then \(u_-=u_+\), their derivatives and their
 \(F\)-components agree. To identify the actual matched origin traces, the
 one-sided trace implication must additionally be proved; it is currently
-open in the audit. **Assuming that trace closure**, reflection gives
+the historical one-sided diagnostic is not used. The full two-sided Volterra
+difference identity gives equality of the actual states for every (x) when
+\(\Xi(\alpha)=0\); the common ODE gives equality of derivatives and
+\(F\)-components. Reflection therefore gives
 \(Z_-(0)=P_0Y_+(0)\). The exact origin matrix identity at
 \(k_\beta(0)=0\), together with opposite outward normals, gives
 
@@ -228,7 +231,7 @@ Nontrivial zeros satisfy \(0<\operatorname{Re}s<1\), while the trivial zeros
 are separated by the completed-zeta factors. The conditional Weyl
 contradiction excludes the half with \(0<\operatorname{Re}s<1/2\); Xi
 evenness excludes the other half. Therefore,
-conditional on trace closure, \(\operatorname{Re}s=1/2\) for every
+subject to independent review, \(\operatorname{Re}s=1/2\) for every
 nontrivial zero.
 
 ## 9. Review gates

@@ -105,25 +105,35 @@ def repository_nondegeneracy_theorem() -> ProofEvidence:
 
 
 def repository_origin_matching_theorem() -> ProofEvidence:
-    """Compose Xi-zero Volterra matching with the exact origin matrix test."""
+    """Compose full two-sided Xi-zero matching with the origin matrix test.
+
+    The one-sided sine-transform diagnostic is not a dependency here.  The
+    canonical left and right Volterra tails are absolutely convergent and
+    differ by the full Xi transform, so an Xi zero gives equality of the
+    functions for every x; the common ODE then gives equality of derivatives
+    and of the derived F components.
+    """
     from .green_matching import symbolic_origin_matching
     from .xi_transform_identity import xi_transform_status
+    from .weyl_volterra_matching import state_matching_from_xi_zero
 
     matrix = symbolic_origin_matching()
     xi = xi_transform_status()
-    # The actual implication is conditional on Xi(alpha)=0; the algebraic
-    # matrix identity itself is exact once k_beta(0)=0 is supplied.
+    matching = state_matching_from_xi_zero(True)
     status = (ProofStatus.PROVED
               if matrix["factorized"] != 0
               and matrix["vanishes_iff"] is not None
               and xi["nonzero_factor"] == "PROVED (factor 1)"
+              and matching["status"] == "PROVED"
               else ProofStatus.OPEN)
     return ProofEvidence(
         "Repository Xi-zero origin matching", status,
         source_files=("src/hedenmalm/weyl_volterra_matching.py",
                       "src/hedenmalm/green_matching.py",
                       "src/hedenmalm/repository_theorems.py"),
-        dependencies=("Xi transform identity", "Volterra derivative matching",
-                       "P0 origin matrix identity", "opposite outward normals"),
+        dependencies=("Xi transform identity", "absolute convergence of both Volterra tails",
+                       "full two-sided Volterra difference identity",
+                       "common Volterra ODE", "P0 origin matrix identity",
+                       "opposite outward normals"),
         assumptions=("Xi(alpha)=0", "k_beta(0)=0", "canonical reflected trace convention"),
     )

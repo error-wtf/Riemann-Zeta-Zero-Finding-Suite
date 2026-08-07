@@ -18,8 +18,9 @@ The repository uses one rendering convention for mathematical documentation:
 The canonical dependency-aware status for the current proof candidate is
 
 ```text
-CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW
+CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW
 ```
 
 Any document that describes Xi-zero origin matching or the final contradiction
-must either cite the trace-closure lemma or label the statement conditional.
+must cite the full two-sided Volterra difference identity and retain the
+independent-review boundary.

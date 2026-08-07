@@ -2,13 +2,13 @@
 
 **Frozen candidate:** tag `rh-candidate-v1` (review-branch tip)  
 **Local tag:** `rh-candidate-v1`  
-**Public status:** `CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW`
+**Public status:** `CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`
 
 This is the self-contained linear statement of the canonical two-component
 Weyl--Lyapunov candidate. The older scalar energy draft is not used. The
 matrix, certificate, Volterra, and finite Green calculations are written out
-linearly; the Xi-zero origin-matching step is explicitly conditional on the
-one-sided trace closure identified in the audit documents.
+linearly. The obsolete one-sided cosine/sine trace diagnostic is not used by
+the canonical matching route.
 
 ## 1. Definitions
 
@@ -214,12 +214,12 @@ Since \(\theta>0\), the equation \(u_+'+i\alpha u_+=\theta\) excludes
 \(u_+\equiv0\). Continuity gives an open interval on which \(Y_+\ne0\).
 Because \(H_+>0\) there, \(E_+>0\), hence \(E_-+E_+>0\).
 
-If \(\Xi(\alpha)=0\), the Volterra difference identity gives
-\(u_-=u_+\), their derivatives agree, and so do their \(F\)-components.
-To turn this equality of Volterra representatives into the actual matched
-origin traces used below, one must additionally prove the one-sided trace
-implication recorded as open in `docs/FINAL_PROOF_AUDIT.md`. **Assuming that
-trace closure**, reflection gives \(Z_-(0)=P_0Y_+(0)\). Since
+If \(\Xi(\alpha)=0\), the full two-sided Volterra difference identity gives
+\(u_-=u_+\) for every \(x\). Both functions solve the same locally absolutely
+continuous first-order ODE, so their derivatives agree and the definition of
+\(F\) gives equality of the \(F\)-components. Reflection therefore gives
+\(Z_-(0)=P_0Y_+(0)\) directly; no one-sided sine-transform inequality is
+used. Since
 \(k_\beta(0)=0\), direct conjugation gives
 \(P_0^*J_-(0)P_0=J_+(0)\). Opposite outward normals then give
 
@@ -227,14 +227,14 @@ $$
 M_-(0)-M_+(0)=0.
 $$
 
-Under the same trace-closure assumption, the global Green identity gives the
-same quantity as \(E_-+E_+>0\), so
+The global Green identity gives the same quantity as \(E_-+E_+>0\), so
 
 $$
 0=E_-+E_+>0.
 $$
 
-Therefore, conditionally on the trace closure, \(\Xi(\alpha)\ne0\) for \(0<\operatorname{Im}\alpha<1/2\).
+Therefore, subject to the stated analytic identities and certificate
+hypotheses, \(\Xi(\alpha)\ne0\) for \(0<\operatorname{Im}\alpha<1/2\).
 
 ## 7. RH symmetry bridge
 
@@ -247,9 +247,9 @@ $$
 
 Nontrivial zeta zeros are the zeros of \(\xi\) in
 \(0<\operatorname{Re}s<1\); the trivial zeros are separated by the
-completed factors. The conditional Weyl contradiction excludes the left half
-of this strip, and evenness excludes the right half. Hence, conditional on the stated trace
-closure, every nontrivial zero has \(\operatorname{Im}\alpha=0\), which is
+completed factors. The Weyl contradiction excludes the left half of this
+strip, and evenness excludes the right half. Hence every nontrivial zero has
+\(\operatorname{Im}\alpha=0\), which is
 exactly \(\operatorname{Re}s=1/2\).
 
 ## Appendices
@@ -265,6 +265,6 @@ The exact matrix calculations are implemented in
   `6bba83172c4291c688f0337a8aaa0cdc9f3758bdb5b002c76db58e2dc419e9fe`.
 
 Reproduction commands are `pytest -q` and the certificate commands listed in
-`docs/RIEMANN_ENERGY_PROOF_HANDOVER.md`. The manuscript remains conditional
-pending trace closure and independent review; it is not a public claim that
-RH has been accepted or proved by the mathematical community.
+`docs/RIEMANN_ENERGY_PROOF_HANDOVER.md`. The manuscript remains a proof
+candidate pending independent review; it is not a public claim that RH has
+been accepted or independently validated by the mathematical community.

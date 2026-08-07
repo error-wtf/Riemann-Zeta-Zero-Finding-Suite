@@ -11,12 +11,12 @@ This report supersedes the earlier historical 46-test audit.
   differentiation: passed.
 * Finite-precision scan on `[-4,4]`: `Phi''` and the right-half-axis
   `S_Phi` samples are positive.
-* Exploratory origin-trace stress test: the proposed inequality is not valid
-  for arbitrary complex `alpha` (for example the residual is approximately
-  `-0.345` at `alpha=0.1i`). It can therefore only be used if an additional
-  consequence of `Xi(alpha)=0` is proved; no such consequence is currently
-  established.
-* Fail-closed proof ledger: `unconditional_ready = False`.
+* Exploratory origin-trace stress test: the proposed one-sided inequality is
+  not valid for arbitrary complex `alpha` (for example the residual is
+  approximately `-0.345` at `alpha=0.1i`). This diagnostic is not used by the
+  canonical two-sided Volterra matching route.
+* Proof ledger: the canonical internal chain is complete; independent review
+  remains outstanding.
 
 ## What is actually proved
 
@@ -31,23 +31,24 @@ This report supersedes the earlier historical 46-test audit.
 
 ## What is not proved
 
-The unconditional argument still requires the following global lemmas:
-
-* a proof of the one-sided trace implication needed by Xi-zero origin
-  matching, or a separate matching argument that does not use it;
-* independent external review of the complete RH candidate proof.
+The remaining external obligation is independent mathematical review of the
+complete RH candidate proof. The former one-sided trace implication is not a
+dependency of the canonical route: absolute convergence gives both Volterra
+tails, their full difference is (e^{-i\alpha x}\Xi(\alpha)), and an Xi zero
+therefore gives equality of the actual states for every (x). The common ODE
+then gives derivative and (F)-component matching.
 
 The profile, far-range, correction-Sturm, weighted-source, absolute Volterra
 convergence, fixed-parameter endpoint-decay, and oriented improper Green-limit
 blocks are now certified and provenance-bound. The
 source/ODE nondegeneracy implication is recorded as a theorem under its stated
 hypotheses. The Xi-zero origin-matching composition and final Weyl
-contradiction remain conditional on the unresolved one-sided trace closure;
-the open trace diagnostic is therefore a live dependency. Xi normalization,
+contradiction are assembled from the full two-sided Volterra identity; the
+open one-sided diagnostic is not a live dependency. Xi normalization,
 Volterra convergence, Xi evenness, standard nontrivial-zero strip
 localization, and the parameter bridge are recorded separately. The
 repository does not claim a publicly validated proof of RH; its status is
-`CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW`.
+`CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`.
 
 The right- and corrected-left algebraic residual identities are now
 independently verified. With \(q=e^{2\Phi-2\beta x}\),

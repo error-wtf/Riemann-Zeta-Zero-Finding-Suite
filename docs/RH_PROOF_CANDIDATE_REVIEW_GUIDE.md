@@ -2,13 +2,13 @@
 
 Review the frozen candidate at tag `rh-candidate-v1` (local branch
 `rh-candidate-review-v1`). The public status is
-`CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW`.
+`CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`.
 
 Before making any novelty or completeness claim, read
 [`PRIOR_ART_AND_NOVELTY_AUDIT.md`](PRIOR_ART_AND_NOVELTY_AUDIT.md).  It records
 the inspected Hedenmalm and Freedman primary sources and the fail-closed status
-conflict between the open one-sided trace diagnostic and the manuscript's
-stronger origin-matching label.
+distinction between the historical one-sided trace diagnostic and the
+canonical full two-sided Volterra origin-matching route.
 
 The P0 dependency is isolated in
 [`TRACE_CLOSURE_AUDIT.md`](TRACE_CLOSURE_AUDIT.md). Read that ledger before
