@@ -10,11 +10,11 @@ the inspected Hedenmalm and Freedman primary sources and the fail-closed status
 distinction between the historical one-sided trace diagnostic and the
 canonical full two-sided Volterra origin-matching route.
 
-The P0 dependency is isolated in
+The former P0 question is documented in
 [`TRACE_CLOSURE_AUDIT.md`](TRACE_CLOSURE_AUDIT.md). Read that ledger before
-reviewing the final contradiction: it separates the proved algebraic flux
-identity from the still-open implication that an Xi zero supplies the actual
-matched one-sided traces.
+reviewing the final contradiction: it separates the historical one-sided
+diagnostic from the proved full two-sided Volterra implication that an Xi zero
+supplies the actual matched states.
 
 ## Priority checks
 

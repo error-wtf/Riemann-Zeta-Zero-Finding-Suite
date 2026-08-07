@@ -81,7 +81,7 @@ source does not display the repository's exact `A_-`, `J_-`, `H_-`,
 | Scalar Schur term | `G_beta=(1+k_beta)(T-4 beta)+k_beta' - P k_beta^2/(2 beta)` | no identical term found | Schur factorizations, different kernel/quotient notation | **requires line-by-line literature search** |
 | Certified positivity | Arb/profile/Sturm certificates for the repository's formulas | not the same certificate chain | computer-assisted certificate framework, with external links separated | **related infrastructure; formula identity unproved** |
 | Endpoint/Green assembly | `M_-(0)-M_+(0)=E_-+E_+` | boundary conditions, not this flux identity | quotient/trace limits, different orientation | **candidate-specific, adversarial sign audit required** |
-| Xi-zero matching | `Xi=0 -> u_-=u_+ -> origin trace matching` | zero gives one-sided boundary solution | trace repair is explicitly an open bridge in the paper | **not independently established here** |
+| Xi-zero matching | `Xi=0 -> u_-=u_+ -> origin trace matching` | zero gives one-sided boundary solution | trace repair is explicitly an open bridge in the paper | **full two-sided route established here; independent review required** |
 | Final contradiction | `0=E_-+E_+>0` | no such conclusion | paper explicitly does not claim complete RH proof | **internal candidate claim; external review required** |
 
 ## Repository consistency finding (resolved)
