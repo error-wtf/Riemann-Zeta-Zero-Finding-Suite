@@ -25,5 +25,5 @@ def test_weighted_source_closes_absolute_convergence_but_not_endpoint_flux():
     status = volterra_weyl_status()
     assert status["ode"] == "PROVED_ALGEBRAIC"
     assert status["trace_existence"].startswith("PROVED_UNDER_SOURCE_PROFILE")
-    assert status["endpoint_flux"] == "OPEN"
+    assert status["endpoint_flux"] == "PROVED_CERTIFIED"
     assert status["xi_transform_identity"].startswith("PROVED_FROM_SOURCE")
