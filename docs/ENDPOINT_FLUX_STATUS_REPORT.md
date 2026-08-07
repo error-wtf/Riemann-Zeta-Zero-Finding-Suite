@@ -10,51 +10,51 @@ proof.
 
 For `z = pi*exp(2*x)` and `z >= 8`, the dominant profile satisfies
 
-\[
+$$
 \Phi_1'(z)-z=
 \frac{4z^2-24z+15}{2(2z-3)}.
-\]
+$$
 
 With `z = 8+w`, the numerator is
 
-\[
+$$
 4w^2+40w+79>0.
-\]
+$$
 
 Hence `Phi1_prime >= z >= 8`. The published far remainder certificate
 provides an outward-rounded bound `B_DR` for `|D R| = |L'|`, with
 
-\[
+$$
 |L'|\le B_{DR}<4.896\cdot 10^{-8}.
-\]
+$$
 
 Therefore the certified global lower bound used by the endpoint helper is
 
-\[
+$$
 m=8-B_{DR}>7.99999995.
-\]
+$$
 
 The same far certificate gives
 
-\[
+$$
 p_0=\inf_{x\ge 1/2}\Phi''(x)>19.999996.
-\]
+$$
 
 ## Ratio lemma
 
 For fixed `beta > 0`, the function
 
-\[
+$$
 f\mapsto \frac{f}{f-\beta}
-\]
+$$
 
 is strictly decreasing on `f > beta`. Consequently, from `Phi' >= m > beta`
 alone,
 
-\[
+$$
 \frac{\Phi'}{\Phi'-\beta}
 \le \frac{m}{m-\beta}.
-\]
+$$
 
 No global upper bound for `Phi'` is needed. The Arb implementation
 `certified_phi_prime_ratio_bound` computes this bound and rejects invalid
@@ -67,13 +67,13 @@ The legacy ratio helper returned only a bound for the second state component.
 It is therefore not a complete bound for `|Y*JY|`. The certified helper now
 uses the full estimate
 
-\[
+$$
 C_{\rm flux}
 =\frac{1}{(m-\beta)^2}
  +\frac{1}{p_0}
  \left(1+\frac{m}{m-\beta}
  +\frac{|\alpha|}{m-\beta}\right)^2.
-\]
+$$
 
 The first term bounds the `u` component and the second bounds the `F`
 component. Certified calls reject Python floats and require exact or Arb-

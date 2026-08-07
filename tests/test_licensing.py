@@ -40,5 +40,5 @@ def test_documentation_license_contains_unmodified_acsl_core():
 
 def test_public_scientific_status_is_not_rh_proved():
     notice = (ROOT / "NOTICE.md").read_text()
-    assert "CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW" in notice
+    assert "CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW" in notice
     assert "RH = PROVED" not in notice

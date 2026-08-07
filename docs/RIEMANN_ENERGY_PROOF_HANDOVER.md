@@ -6,9 +6,9 @@ The repository studies the source-faithful profile
 \(\theta(x)=\Theta_{00}(i e^{2x})>0\), \(\Phi=-\log\theta\),
 \(P=\Phi''\), and \(T=2\Phi'\Phi''-\Phi'''\).  The parameter convention is
 
-\[
-\alpha=\xi+i\beta,\qquad s=\tfrac12+i\alpha=	frac12-\beta+i\xi.
-\]
+$$
+\alpha=\xi+i\beta,\qquad s=\frac12+i\alpha=\frac12-\beta+i\xi.
+$$
 
 Thus \(\beta>0\) denotes a point left of the critical line.
 
@@ -29,9 +29,9 @@ The certificate artefacts are:
 
 The state is \(Y=(u,F)^T\), \(F=L_\Phi u=-i(u'+\Phi'u)\), with
 \(Y'=A_\alpha Y\) and
-\[
+$$
 A_\alpha=\begin{pmatrix}-\Phi'&i\\-i\Phi''&-i\alpha\end{pmatrix}.
-\]
+$$
 The actual symbolic calculation in `green_matching.py` verifies
 \(P_0^*J_-(0)P_0-J_+(0)=\operatorname{diag}(0,a k_\beta(0))\),
 where \(P_0=\operatorname{diag}(1,-1)\).  Hence the algebraic trace identity
@@ -59,5 +59,5 @@ python3 test_suite_integrity.py
 
 The next human review must independently check the Xi transform normalization,
 the left/right normal signs, the improper-integral limit, and the mapping
-\(s=\tfrac12+i\alpha\).  No public RH status may be upgraded before those
+\(s=\frac12+i\alpha\).  No public RH status may be upgraded before those
 lemmas are written and checked.

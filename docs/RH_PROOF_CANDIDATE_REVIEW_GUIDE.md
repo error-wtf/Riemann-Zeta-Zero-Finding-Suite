@@ -2,7 +2,7 @@
 
 Review the frozen candidate at tag `rh-candidate-v1` (local branch
 `rh-candidate-review-v1`). The public status is
-`CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`.
+`CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW`.
 
 Before making any novelty or completeness claim, read
 [`PRIOR_ART_AND_NOVELTY_AUDIT.md`](PRIOR_ART_AND_NOVELTY_AUDIT.md).  It records

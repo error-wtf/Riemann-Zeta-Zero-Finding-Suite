@@ -86,21 +86,21 @@ source does not display the repository's exact `A_-`, `J_-`, `H_-`,
 
 ## Repository consistency finding (fail-closed)
 
-The repository currently contains two incompatible status surfaces:
+The repository previously contained two incompatible status surfaces. This
+audit now records the discrepancy explicitly:
 
 * `src/hedenmalm/spectral_boundary.py` states that the one-sided trace
   inequality is `OPEN` and that `Xi(alpha)=0` controls only the cosine part,
   leaving the sine transform uncontrolled.
-* `docs/RIEMANN_ENERGY_PROOF_REPORT.md` and the complete manuscript describe
-  Xi-zero origin matching as `PROVED`.
+* older report/manuscript wording described Xi-zero origin matching as
+  `PROVED`, although the trace dependency remained open.
 
-These statements cannot both be unconditional.  The report and manuscript may
-be read as asserting a matching theorem only after additional hypotheses, but
-those hypotheses must be named and proved.  Until that reconciliation is done,
-the public scientific status must remain:
+These statements cannot both be unconditional. The current report and
+manuscript name the missing trace closure explicitly. Until that closure and
+independent review are complete, the public scientific status is:
 
 ```text
-CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW
+CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW
 ```
 
 and no novelty statement may imply that the RH contradiction is externally
@@ -135,4 +135,3 @@ Do not use:
 
 The former describes a defensible research direction; the latter is not
 supported by this audit.
-

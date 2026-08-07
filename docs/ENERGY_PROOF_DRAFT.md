@@ -8,19 +8,19 @@ global hypotheses are not established is explicitly marked `OPEN`.
 
 In logarithmic coordinates let
 
-\[
+$$
 D=-i\partial_x,\qquad L_\Phi=-i(\partial_x+\Phi'),\qquad
 \vartheta=e^{-\Phi}.
-\]
+$$
 
 The source boundary equation is
-\[
+$$
 L_\Phi(D+\alpha)u_\alpha=0.
-\]
+$$
 Under the source convention and the stated endpoint conditions,
-\[
+$$
 u_\alpha(x)=e^{-i\alpha x}\int_{-\infty}^x e^{i\alpha y}\vartheta(y)\,dy.
-\]
+$$
 
 The condition \(\Xi(\alpha)=0\) is the source spectral boundary condition.
 
@@ -28,44 +28,44 @@ The condition \(\Xi(\alpha)=0\) is the source spectral boundary condition.
 
 For real smooth \(a\), sufficiently regular \(u\), and vanishing Green
 boundary terms,
-\[
+$$
 2\operatorname{Im}(\alpha)\int a|L_\Phi u|^2dx
 =-\int a'|L_\Phi u|^2dx+\int R_a|u|^2dx,
-\]
+$$
 where
-\[
+$$
 R_a=(a\Phi'')'-2a\Phi'\Phi''.
-\]
+$$
 The repository verifies this identity symbolically. The endpoint hypotheses
 are not inferred from the symbolic calculation.
 
 ## Lemma 2 — canonical reduction (`PROVED_ALGEBRAICALLY`)
 
 If \(\Phi''>0\) and
-\[
+$$
 a_h=h\,e^{2\Phi}/\Phi'',
-\]
+$$
 then
-\[
+$$
 R_{a_h}=e^{2\Phi}h'.
-\]
+$$
 For \(h_b=e^{-2bx}\), \(b>0\), define
-\[
+$$
 S_\Phi=\frac{2\Phi'\Phi''-\Phi'''}{(\Phi'')^2}.
-\]
+$$
 The transformed identity for \(u=\vartheta w\) is formally
-\[
+$$
 \int_{\mathbb R}e^{-2bx}
 \left(S_\Phi|w'|^2+2b|w|^2\right)dx=0.
-\]
+$$
 
 ## Lemma 3 — global coefficient bounds (`PROVED_CERTIFIED`)
 
 The required statement is
-\[
+$$
 \Phi''(x)>0\quad(x\in\mathbb R),\qquad
 S_\Phi(x)>0\quad(x>0),
-\]
+$$
 with outward-rounded tail and compact-interval bounds. The compact Arb
 certificate, positive far-range majorant, and exact rational correction-Sturm
 certificate are independently validated and provenance-bound by the ledger.

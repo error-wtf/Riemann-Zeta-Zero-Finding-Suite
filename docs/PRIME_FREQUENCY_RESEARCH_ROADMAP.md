@@ -10,15 +10,15 @@ the portal contains the corresponding live finite-sum animation.
 |---|---|---|
 | Dirichlet partial-sum GIF | `REPRODUCIBLE_VISUAL` | finite computation only |
 | Prime-frequency spectrum GIF | `REPRODUCIBLE_VISUAL` | finite computation only |
-| (\log n=\sum_p v_p(n)\log p) | `EXACT_IDENTITY` | elementary factorisation |
-| No common finite prime period | `EXACT_IDENTITY` | uses (2^m\ne3^n) |
+| \(\log n=\sum_p v_p(n)\log p\) | `EXACT_IDENTITY` | elementary factorisation |
+| No common finite prime period | `EXACT_IDENTITY` | uses \(2^m\ne3^n\) |
 | Prime phase torus | `PLANNED` | interactive portal visual |
 | Recurrence search | `PLANNED` | numerical experiment |
 | Zero-spacing statistics | `PLANNED` | data-dependent experiment |
 | Pair correlation | `PLANNED` | data-dependent experiment |
 | Explicit-formula comparison | `PLANNED` | numerical comparison only |
 | Xi/Theta spectrogram | `PLANNED` | visual analysis only |
-| (z=8)/(20) defect plot | `PLANNED` | only certified if inputs are loaded |
+| \(z=8\)/(20) defect plot | `PLANNED` | only certified if inputs are loaded |
 
 ## Interpretation rule
 

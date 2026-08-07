@@ -33,27 +33,29 @@ This report supersedes the earlier historical 46-test audit.
 
 The unconditional argument still requires the following global lemmas:
 
+* a proof of the one-sided trace implication needed by Xi-zero origin
+  matching, or a separate matching argument that does not use it;
 * independent external review of the complete RH candidate proof.
 
 The profile, far-range, correction-Sturm, weighted-source, absolute Volterra
 convergence, fixed-parameter endpoint-decay, and oriented improper Green-limit
 blocks are now certified and provenance-bound. The
-source/ODE nondegeneracy implication and the Xi-zero origin-matching
-composition are also now recorded as canonical theorems. The
-Xi normalization, Volterra convergence, and the canonical Weyl contradiction
-assembly are now also closed on the open strip. Xi evenness, standard
-nontrivial-zero strip localization, and the parameter bridge are recorded as
-the final internal RH bridge. The repository does not claim a publicly
-validated proof of RH; its internal status is only a candidate pending
-independent review.
+source/ODE nondegeneracy implication is recorded as a theorem under its stated
+hypotheses. The Xi-zero origin-matching composition and final Weyl
+contradiction remain conditional on the unresolved one-sided trace closure;
+the open trace diagnostic is therefore a live dependency. Xi normalization,
+Volterra convergence, Xi evenness, standard nontrivial-zero strip
+localization, and the parameter bridge are recorded separately. The
+repository does not claim a publicly validated proof of RH; its status is
+`CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW`.
 
 The right- and corrected-left algebraic residual identities are now
-independently verified. With (q=e^{2\Phi-2\beta x}),
+independently verified. With \(q=e^{2\Phi-2\beta x}\),
 
-\[
+$$
 J_+'+A_\alpha^*J_++J_+A_\alpha
 =q\,\operatorname{diag}(2\beta,S_\Phi).
-\]
+$$
 
 The corrected-left residual has Schur complement
 (qG_\beta/\Phi''), so the profile/Sturm certificates are now connected to

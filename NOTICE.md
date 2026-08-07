@@ -18,7 +18,7 @@ that responsibility.
 
 ## Scientific status
 
-`CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`
+`CANDIDATE_PROOF_PENDING_TRACE_CLOSURE_AND_INDEPENDENT_REVIEW`
 
 This status means that the repository-internal proof chain has been assembled
 but has not received independent mathematical validation or formal peer
