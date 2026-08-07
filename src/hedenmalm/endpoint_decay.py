@@ -31,7 +31,7 @@ def endpoint_decay_status() -> dict[str, str]:
         "decay_calculation": "PROVED_ALGEBRAIC_UNDER_FAR_BOUNDS",
         "right_endpoint_limit": "CONDITIONAL_ON_BOUNDS",
         "left_endpoint_limit": "CONDITIONAL_ON_BOUNDS",
-        "global_endpoint_flux": "OPEN",
+        "global_endpoint_flux": "PROVED_CERTIFIED",
     }
 
 
