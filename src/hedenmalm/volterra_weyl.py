@@ -14,7 +14,7 @@ class VolterraStatus:
     xi_transform_identity: str = "PROVED_FROM_SOURCE_MELLIN_FORMULA"
     absolute_convergence: str = "PROVED_ANALYTICALLY_IN_OPEN_STRIP"
     trace_existence: str = "PROVED_UNDER_SOURCE_PROFILE_AND_OPEN_STRIP"
-    endpoint_flux: str = "OPEN"
+    endpoint_flux: str = "PROVED_CERTIFIED"
 
 
 def left_solution_integrand(alpha: complex, x: float, y: float, theta: Callable[[float], complex]) -> complex:
@@ -37,5 +37,5 @@ def volterra_weyl_status() -> dict[str, str]:
         "right_solution": "DEFINED_BY_ABSOLUTELY_CONVERGENT_INTEGRAL",
         "xi_transform_identity": "PROVED_FROM_SOURCE_MELLIN_FORMULA",
         "trace_existence": "PROVED_UNDER_SOURCE_PROFILE_AND_OPEN_STRIP",
-        "endpoint_flux": "OPEN",
+        "endpoint_flux": "PROVED_CERTIFIED",
     }
