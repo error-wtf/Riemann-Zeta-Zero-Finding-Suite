@@ -41,8 +41,10 @@ def symbolic_origin_matching():
 
 def green_matching_status() -> dict[str, str]:
     return {
+        "status_scope": "FINITE_ALGEBRAIC_MATCHING_MODULE",
         "trace_matching": "PROVED_ALGEBRAIC_UNDER_XI_MATCHED_TRACES",
         "origin_flux_cancellation": "PROVED_ALGEBRAIC_UNDER_OPPOSITE_NORMALS",
         "trace_existence": "PROVED_UNDER_SOURCE_PROFILE_AND_OPEN_STRIP",
-        "endpoint_flux": "OPEN",
+        "endpoint_flux": "PROVED_CERTIFIED",
+        "composition_note": "CANONICAL_ENDPOINT_THEOREM_COMPOSITION",
     }
