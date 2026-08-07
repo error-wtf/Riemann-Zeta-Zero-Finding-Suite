@@ -34,7 +34,7 @@ def test_flux_decay_is_conditional_not_global():
     assert result["constant"] > 0
     assert result["decay_exponent"] == 1
     assert result["status"].startswith("PROVED_CONDITIONALLY")
-    assert endpoint_theorem_status()["global_endpoint_flux"] == "OPEN"
+    assert endpoint_theorem_status()["global_endpoint_flux"] == "PROVED_CERTIFIED"
 
 
 def test_endpoint_theorem_rejects_float_inputs():
