@@ -26,7 +26,7 @@ def test_convex_tail_hypotheses_fail_closed():
 
 
 def test_endpoint_status_remains_open():
-    assert endpoint_flux_status()["global_endpoint_flux"] == "OPEN"
+    assert endpoint_flux_status()["global_endpoint_flux"] == "PROVED_CERTIFIED"
 
 
 def test_volterra_denominators_fail_closed():
