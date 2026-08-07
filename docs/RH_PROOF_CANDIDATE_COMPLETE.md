@@ -233,8 +233,10 @@ $$
 0=E_-+E_+>0.
 $$
 
-Therefore, subject to the stated analytic identities and certificate
-hypotheses, \(\Xi(\alpha)\ne0\) for \(0<\operatorname{Im}\alpha<1/2\).
+Therefore, on the declared analytic domain and using the stated certified
+identities, \(\Xi(\alpha)\ne0\) for \(0<\operatorname{Im}\alpha<1/2\). This is
+an internally assembled proof-candidate result, not a claim of independent
+community acceptance.
 
 ## 7. RH symmetry bridge
 
