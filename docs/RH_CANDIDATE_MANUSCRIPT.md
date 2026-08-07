@@ -1,5 +1,12 @@
 # Internal RH proof candidate — review version 1
 
+> **Historical draft notice.** This file is retained for provenance and
+> regression review. It is superseded by
+> [`RH_PROOF_CANDIDATE_COMPLETE.md`](RH_PROOF_CANDIDATE_COMPLETE.md), which is
+> the canonical manuscript. Conditional language later in this historical
+> draft describes the obsolete one-sided trace route and must not be read as a
+> status statement about the canonical two-sided Volterra route.
+
 ## Authorship and contribution statement
 
 This proof candidate and its supporting repository were created through the
@@ -20,6 +27,7 @@ responsibility for the submitted work remain with the human authors.
 **Local review branch:** `rh-candidate-review-v1`  
 **Local tag:** `rh-candidate-v1`  
 **Public status:** `CANDIDATE_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW`
+**Document status:** `HISTORICAL_SUPERSEDED_DRAFT`
 
 This document is the linear mathematical handover for the canonical
 two-component Weyl–Lyapunov route. The older scalar energy draft is retained

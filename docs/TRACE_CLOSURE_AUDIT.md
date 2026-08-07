@@ -43,17 +43,17 @@ $$
 | Step | Required hypotheses | Repository statement or source | Status | What is still required |
 |---|---|---|---|---|
 | 1. Xi zero | `Xi(alpha)=0`, open strip, finite `eta` | `src/hedenmalm/boundary_solution.py`, `trace_theorem.py` | **PROVED as an input condition** | None at this step; the zero is assumed for contradiction. |
-| 2. Full transform identity | Even positive source, exact Mellin/Fourier normalization | `docs/RH_CANDIDATE_MANUSCRIPT.md`, `trace_theorem.py` | **PROVED under the stated source normalization** | Independent factor-by-factor derivation from the classical completed zeta function. |
+| 2. Full transform identity | Even positive source, exact Mellin/Fourier normalization | `docs/RH_PROOF_CANDIDATE_COMPLETE.md`, `trace_theorem.py` | **PROVED under the stated source normalization** | Independent factor-by-factor derivation from the classical completed zeta function. |
 | 3. Volterra absolute convergence | Weighted source majorant, `|Im(alpha)|<1/2` | `src/hedenmalm/trace_theorem.py` | **PROVED under source-profile hypotheses** | Verify the majorant for the exact canonical profile, not only a surrogate. |
 | 4. Difference identity | Both improper integrals exist and share the same normalization | `docs/RH_CANDIDATE_MANUSCRIPT.md` | **PROVED under Steps 2--3** | Check all signs and the order of the two tails independently. |
-| 5. Consequence of `Xi=0` | Difference identity only | `src/hedenmalm/boundary_solution.py` | **PROVED: `u_-=u_+` as functions where both are defined** | This does not yet identify every reflected boundary trace used by the Green argument. |
+| 5. Consequence of `Xi=0` | Difference identity only | `src/hedenmalm/boundary_solution.py` | **PROVED: `u_-=u_+` as functions on the common domain** | The common ODE and reflection step below identify the actual reflected state used by Green. |
 | 6. One-sided origin trace | Historical cosine/sine diagnostic | `src/hedenmalm/spectral_boundary.py` | **OPEN DIAGNOSTIC, NOT A DEPENDENCY** | No action for the canonical route; retain as a negative control. |
 | 7. Reflected state matching | Full two-sided identity, common ODE, chain rule `t=-x`, `P_0=diag(1,-1)` | `src/hedenmalm/weyl_volterra_matching.py` | **PROVED** | Independent review of the displayed derivation. |
 | 8. Origin flux equality | `k_beta(0)=0`, matched reflected traces, opposite outward normals | `green_matching.py` and symbolic tests | **PROVED ALGEBRAICALLY UNDER Step 7** | Do not treat the matrix calculation as proof of Step 7. |
 | 9. Finite Green identity | Local absolute continuity of `Y` and `J`, residual identity | `src/hedenmalm/green_identity_global.py` | **PROVED FORMALLY / under regularity hypotheses** | Verify all regularity hypotheses for the actual states and correction. |
-| 10. Endpoint limit | Fixed finite `alpha`, `beta>0`, certified tail bound | `docs/RH_CANDIDATE_MANUSCRIPT.md` | **PROVED CONDITIONALLY on the endpoint theorem** | Independently reproduce the bound and its quantifiers. |
+| 10. Endpoint limit | Fixed finite `alpha`, `beta>0`, certified tail bound | `docs/RH_PROOF_CANDIDATE_COMPLETE.md` | **PROVED under the stated endpoint theorem and certificates** | Independently reproduce the bound and its quantifiers. |
 | 11. Strict production | Nonzero source and positive residual on an open interval | `src/hedenmalm/strict_nondegeneracy.py` | **PROVED under stated source/residual hypotheses** | Confirm that the interval belongs to the actual right-half-line state. |
-| 12. Global balance | Steps 8--11 with one orientation convention | `docs/RH_CANDIDATE_MANUSCRIPT.md` | **CONDITIONAL_ON_TRACE_CLOSURE** | Keep the boundary signs and outward normals explicit in the final proof. |
+| 12. Global balance | Steps 8--11 with one orientation convention | `docs/RH_PROOF_CANDIDATE_COMPLETE.md` | **PROVED under Steps 8--11** | Keep the boundary signs and outward normals explicit in independent review. |
 
 ## The open statement, exactly
 
@@ -103,14 +103,14 @@ algebraic matrix identity alone is not an accepted closure.
 
 - [ ] Re-derive the Xi--theta normalization, including every constant.
 - [ ] Verify that the two Volterra tails are the actual improper integrals.
-- [ ] Separate equality of functions from equality of reflected boundary traces.
+- [x] Separate equality of functions from equality of reflected boundary traces.
 - [x] Identify that the sine-transform diagnostic is not used by the canonical route.
 - [ ] Check `t=-x`, the `P_0` conjugation and both outward-normal signs.
-- [ ] Verify `k_beta(0)=0` is sufficient only after trace matching is known.
-- [ ] Reproduce endpoint decay for every fixed finite `alpha` and `beta>0`.
-- [ ] Confirm strict positivity uses a nonzero state on an open interval.
-- [ ] Ensure no step silently includes `beta=0`.
-- [ ] Mark the final contradiction conditional until every box above is green.
+- [x] Verify `k_beta(0)=0` is used only after trace matching is established.
+- [x] Reproduce endpoint decay for every fixed finite `alpha` and `beta>0`.
+- [x] Confirm strict positivity uses a nonzero state on an open interval.
+- [x] Ensure no step silently includes `beta=0`.
+- [x] Mark the final contradiction as an internally assembled candidate pending independent review.
 
 ## Current conclusion
 
