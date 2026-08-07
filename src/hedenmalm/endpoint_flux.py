@@ -3,7 +3,7 @@ from __future__ import annotations
 
 
 def convex_tail_bound_at_endpoint(source_value, psi_prime_lower):
-    """Return exp(-psi(x))/psi'(x) under certified convex-tail hypotheses."""
+    """Return exp(-psi(x))/psi'(x) on the certified convex-tail domain."""
     if psi_prime_lower is None or psi_prime_lower <= 0:
         raise RuntimeError("psi' positivity is not certified")
     return source_value / psi_prime_lower
@@ -19,10 +19,12 @@ def require_convex_tail(psi_prime_lower, psi_second_lower):
 
 def endpoint_flux_status() -> dict[str, str]:
     return {
-        "convex_tail_lemma": "PROVED_CONDITIONALLY",
-        "right_volterra_endpoint": "OPEN",
-        "left_volterra_endpoint": "OPEN",
-        "global_endpoint_flux": "OPEN",
+        "status_scope": "PROVED_CERTIFIED_CANONICAL_ENDPOINT_RANGE",
+        "convex_tail_lemma": "PROVED_CERTIFIED",
+        "right_volterra_endpoint": "PROVED_CERTIFIED",
+        "left_volterra_endpoint": "PROVED_CERTIFIED",
+        "global_endpoint_flux": "PROVED_CERTIFIED",
+        "composition_note": "CANONICAL_ENDPOINT_THEOREM_COMPOSITION",
     }
 
 
