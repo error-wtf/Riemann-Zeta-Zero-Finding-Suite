@@ -10,6 +10,12 @@ the inspected Hedenmalm and Freedman primary sources and the fail-closed status
 conflict between the open one-sided trace diagnostic and the manuscript's
 stronger origin-matching label.
 
+The P0 dependency is isolated in
+[`TRACE_CLOSURE_AUDIT.md`](TRACE_CLOSURE_AUDIT.md). Read that ledger before
+reviewing the final contradiction: it separates the proved algebraic flux
+identity from the still-open implication that an Xi zero supplies the actual
+matched one-sided traces.
+
 ## Priority checks
 
 1. Re-derive the source Mellin/Fourier normalization, including every factor
