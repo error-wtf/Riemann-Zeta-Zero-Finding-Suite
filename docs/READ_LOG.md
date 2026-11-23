@@ -155,3 +155,16 @@ trägt das Produkt; der ausgelassene Index e liefert den 3b-Faktor.
 pst_mul_le (Weil-Oberschranke). Jede Stufe sitzt, jede Idee benannt.**
 LESER-BILANZ E1 (BesselWaveGrids/InterlacingGrids): 10 Dateien gelesen
 und verstanden — die komplette formalisierte Weil-Formel-Maschine.
+
+### StableLattices/AdaptExistsStatement.lean (10 Zeilen) — 2026-11-23 — GELESEN_VERSTANDEN (WRAPPER)
+ARCHITEKTUR-BEFUND: die Datei ist ein Wrapper — re-exportiert
+GlobalTheory.T.AdaptedBasisExistsAlt aus BmuAdapt.adaptExists (der echte
+Beweis liegt im GlobalTheory-Layer). Die first|exact|exact|Kette = robuste
+Verifikation desselben Beweis-Terms über mehrere Tactic-Wege.
+KARTEN-VERFEINERUNG: part01 hat nur 4 GlobalTheory-Dateien (LocalGlobalProofs/
+GlobalTheory/: BernsteinZelevinskyFiniteness, ExistsExpUnitary, ImportsAlt,
+ParabolicInductionFiniteLength). Der Haupt-GlobalTheory-Layer (BmuAdapt,
+GroundTheory.BlockD etc.) verteilt sich auf spaetere Parts — die naechsten
+Lese-Einheiten folgen dem Beweis-Layer, nicht der Companion-Fassade.
+Die Adjoint-Valued-Matrix (GroundTheory.AdjointValued.MatrixAdapt …) =
+in part01 gefunden (GroundTheory-Layer existiert teilweise hier).
