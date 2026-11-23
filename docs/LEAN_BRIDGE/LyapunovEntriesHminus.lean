@@ -31,7 +31,9 @@ theorem Hm22_entry (q φ' β P Φ3 T kk kk' q' dJ22 : ℝ)
 strukturrichtig (nur der T-Koeffizient folgt als T−2β, nicht T−4β). -/
 theorem schur_structure (q kk0 : ℂ) :
     (Complex.I * q * kk0) * (-(Complex.I * q * kk0)) = q * kk0 * (q * kk0) := by
-  ring
+  calc (Complex.I * q * kk0) * (-(Complex.I * q * kk0))
+      = -(Complex.I * Complex.I) * (q * kk0) * (q * kk0) := by ring
+    _ = q * kk0 * (q * kk0) := by rw [Complex.I_mul_I]; ring
 
 #print axioms Hm22_entry
 #print axioms schur_structure
