@@ -270,3 +270,19 @@ QuadField, ClsNorm). Verbleiben: LocDict, ClsOnto. Die Architektur ist
 jetzt als Ganzes sichtbar: CM-Basis → Zerlegung → Norm-Charakterisierung
 → lokales Woerterbuch → Vertreter → Surjektivität = die parametrische
 Zerlegung der Twisted-Klassen-Theorie.**
+
+### LocDict + ClsOnto (param_main-Bedingungen 4 und 6) — GELESEN_VERSTANDEN — PARAM_MAIN KOMPLETT (6/6)
+ClsOnto: die Klassen-TRANSITIVITAET — fuer jedes y mit derselben
+separablen elliptischen Charakteristik: y = g^-1 * pt(delta,t) * theta(g)
+— die Charakteristik ist die VOLLSTAENDIGE Klassen-Invariante.
+LocDict: das lokale Woerterbuch — lokale Existenz <=> lokale
+Norm-Zerlegung x = t*(a^2-d*b^2) in den Kompletionen (das HASSE-PRINZIP,
+verteilt ueber alle Plaetze).
+**PARAM_MAIN KOMPLETT (6/6): SkewEx (CM-Basis) → Struct (total-reelle
+Zerlegung) → QuadField (Pell/Hasse a^2-d*b^2) → LocDict (Hasse-Prinzip
+lokal<->global) → ClsNorm (Vertreter) → ClsOnto (Transitivitaet).
+Die Jacquet-Klassen sind durch (Charakteristik, Norm-Werte) PARAMETRIERT.
+Logische Spiegel zu unserem Feld: Charakteristik = vollstaendige
+Invariante <=> unsere EW-Knoten als Instabilitaets-Klassifikation;
+Hasse lokal<->global <=> unsere lokale Arb-Enclosures → globale
+Null-Claims.**
