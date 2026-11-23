@@ -118,3 +118,15 @@ Parseval-Kontrolle; die Interlace-Abstands-Produkte = die Weil-Schranken.
 DAS IST DIE GLEICHE MASCHINE, DIE AUCH UNSER count_argument.py/TRTL-TYP
 BENUTZT (Weil-Formel-Schranken fuer Null-Zaehlung) — nur formal in Lean
 statt numerisch in Arb.**
+
+### InterlacingGrids/Bracket.lean (63 Zeilen) — 2026-11-23 — GELESEN_VERSTANDEN
+Die Bracket-SCHRAENKE verstanden: bracket_le splittet das Produkt in
+KOPF [1,k-1] (die lambda-Punkte nahe den v-Punkten — FEIN kontrolliert via
+cloud_pair_le/cloud_prod_le mit dem PairOK-Interlacing: 3b*(2+c)^2*k^2*
+prod|Y+1/2+v_i|) und SCHWANZ [k,k+2r+1] (die 2r+2 TAIL-Punkte — GROB per
+Dreiecksungleichung: jeder Faktor <= 3b, Gesamt (3b)^(2r+2)).
+**VERSTÄNDNIS: die klassische HAUPTTERM/TAIL-ZERLEGUNG — strukturgleich
+mit unserem explicit_tail.py-Ansatz (fein kontrollierter Hauptteil + grob
+abgesicherte Restglieder). Dieselbe Architektur-Logik der Weil-Formel-
+Familie. Die Bracket-Schranke ist die Obergrenze des Lambda-Produkts,
+die in pst_mul_le (E1.7) den Kopf-Term der Maschine trägt.**
