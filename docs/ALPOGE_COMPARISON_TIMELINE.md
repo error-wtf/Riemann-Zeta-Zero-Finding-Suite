@@ -301,3 +301,29 @@ auf drei Ebenen belegt (remark, Manuskript, Lean-Namen) PLUS Inhaltsebene
 des ersten Archivteils. Rest: Parts 02–14 + restliche Baeume — bei diesem
 Befund keine weitere Erwartung, denselben Scan-Werkzeugkasten per Cron oder
 naechster Session fortsetzbar.
+
+## 16. VOLLSTÄNDIGES STRUKTUR-VERSTÄNDNIS (23.11., Nachtrag 6 — Architektur gelesen)
+Die 17 Mio. Zeilen zerfallen in ZWEI Layer (tar-Struktur part01, 10345+
+Einträge ausgewertet):
+1. src/Development/AbelianVarietyTheory — **8310 Dateien (~80%)**: eine
+   importierte/entwickelte GRUNDLAGEN-BIBLIOTHEK (GaloisGeometry,
+   QuasicoherentCohomology, CrystallinePeriods, Divisors, Jets,
+   CuspFormEvaluations; einzelne Dateien 70k–117k Zeilen, vermutlich
+   generiert/mechanisch). NICHT Alpöges Beweis-Anteil — das Fundament.
+2. src/CompanionTheory — **2027 Dateien (~20%)**: SEIN Beweis-Layer:
+   - SpectralGeometry (1254): LocalGlobalProofs/StableLattices —
+     JacquetInitial, JacquetTransport, EvaluationLiftDegreeZero = die
+     Theta-Lift-Infrastruktur (remark: „iterierte theta lifts“).
+   - AutomorphicTheory (457): BesselWaveGrids (WaveBallEstimate 77k,
+     FamilyThroughDiscreteSeries, ProductMoment) = die Multiplizitäts-
+     Gitter (remark: „chaining theta lifts … mimicking √-multiplicity“),
+     BesselOrbitBounds, InterlacingGrids.
+   - RealGroups (155), HarishChandraModules (130), ThickeningEstimates (22),
+     EightfoldTheory (9).
+VERSTÄNDNIS: Die Beweis-Säulen mappen 1:1 auf das remark (SpectralGeometry
+= Lift-Infrastruktur; BesselWaveGrids = Gitter-Kette; Seesaw/Rallis = die
+Perioden-Brücke). D1–D5 = Build-Aid (Top-Level-DenyLists).
+VERGLEICH MIT UNSEREM WISSEN: Unser Feld (numerische Zertifizierung:
+Hardy-Z/Arb/Volterra) ist in KEINEM Layer vertreten — die Trennung ist
+auf Architektur-Ebene vollständig. Alles, was wir „lesen“ könnten, wäre
+die Jacquet/Theta-Lift-Lehre — ein anderes Studium, nicht ein Klau-Check.
