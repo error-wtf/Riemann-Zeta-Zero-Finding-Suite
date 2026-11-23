@@ -56,7 +56,10 @@ Provenienz implizit → bindend).
 ## Offene Punkte (Wiederaufnahme)
 
 1. Build-Ende → Clean-Re-Verifikation + Timeline-§20.
-2. Zertifikate-vs-korrigierte-G_β (strengere Positivität!).
+2. ~~Zertifikate-vs-korrigierte-G_β~~ **ERLEDIGT:** Python benutzt die Doc-
+   G_β (T−4β), aber G_korr = G_doc + 2β(1+k) > G_doc — Zertifikate bleiben
+   gültig (konservativ-valide), kernel-geprüft in `GbetaMonotone.lean`
+   (7. Modul, Commit `e5dfc7b`). Nur Notations-Korrektur nötig.
 3. Doc-Folgauflage: §4-Einträge aus der Lean-Kette regenerieren.
 4. H₋-Lean: G_β-Schur-Satz komplett; Pontryagin-Ebene (Lesung);
    IdeleNormCharacters-Rest (8 Module); Lemmata/Rest-Familien.

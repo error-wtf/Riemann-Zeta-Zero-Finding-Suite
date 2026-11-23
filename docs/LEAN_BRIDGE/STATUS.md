@@ -88,12 +88,21 @@ ANDERE J (a·diag(−Φ″, 1) — ohne q und ohne 1/P, Hedenmalm-Diagnostik-Lin
 und berechnet H nur generisch-symbolisch (`lyapunov_residual`); ihr eigener
 Status: `positive_J_or_H: CONDITIONAL_ON_RESIDUE_IDENTIFICATION`,
 `rh_conclusion: CONDITIONAL_ONLY`. **Es gibt KEIN Python-Zertifikat, das die
-Doc-§4-H₊-Formel benutzt** — die falsche Formel war prosaisch und stand
+Doc-§4-H₊-Formel benutzt** — der Fehler war prosaisch und stand
 ungeprüft neben der offenen Positivitäts-Frage. **Urteil: Doc-§4-(2,2)-Formel
 = Rechenfehler im Prosa-Text (−2βP-Term verschluckt), KEIN Zertifikats-Impact;
 Doc-Korrektur nötig; die korrekte (strengere) Positivitäts-Bedingung ist
 kernel-geprüft in LyapunovEntries.lean.** Statusvokabel: FAILED→CORRECTED
 (für die Doc-Formel), Lean-Satz VERIFIED.
+
+**ZERTIFIKATS-FRAGE für H₋/G_β — AUFGELÖST (23.11., dritter Check):** Die
+Python-Positivitäts-Zertifikate BENUTZEN die Doc-G_β mit T−4β
+(`residue_identification.py:83,89`, `scaled_left_correction.py:26`). Aber:
+G_korr = G_doc + 2β(1+k) > G_doc (kernel-geprüft in `GbetaMonotone.lean`,
+Sätze `G_korr_identity` + `G_korr_positive`, exit 0, Target success). Die
+zertifizierte Positivität der KLEINEREN Funktion impliziert die der korrekten
+— **Zertifikate bleiben gültig (konservativ-valide)**; zu korrigieren ist nur
+die Notation (Doc + Python-Kommentare auf T−2β).
 
 ## Nächste Schritte (Lean-Ziel 4)
 
