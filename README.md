@@ -44,6 +44,8 @@ and is embedded near the top of the research portal. This visualization is
 deliberately separate from the finite Dirichlet-term map: neither one is a
 proof of a zero or of RH.
 
+**Formalization checkpoint (23 Nov 2026):** the independent audit in [`docs/RH_FORMAL_PROVENANCE_AUDIT_2026-11-23.md`](docs/RH_FORMAL_PROVENANCE_AUDIT_2026-11-23.md) identifies a source-to-Lean mismatch (the reflected-left Schur coefficient is `T-4*beta`, not `T-2*beta`). The added symbolic regression tests do not certify RH, and the uploaded Lean files have not yet been reproducibly built as part of this repository.
+
 The linear manuscript remains the canonical written statement:
 
 * `docs/RH_PROOF_CANDIDATE_COMPLETE.md`
