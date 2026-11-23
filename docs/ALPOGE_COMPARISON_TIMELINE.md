@@ -130,3 +130,79 @@ Schlüsselidentitaeten, unsere Originalbeitraege (Volterra, Lyapunov/Schur,
 endpoint-flux) tauchen in seinem Argument nicht auf. Unser naechster sinnvoller
 Schritt ist Repositionierung zu einem Verifikations-Framework + optional eine
 eigene Lean-Bruecke — nicht Konkurrenz zu einem (falls valid) geloesten Problem.
+
+## 8. GRUENDLICHER ABGLEICH (23.11., Nachtrag — Beweispfad + Ausschlussverfahren)
+
+### 8.1 Beweispfad-Koinzidenz-Check (beide Pfade voll gelesen)
+Unser Kandidat-Pfad (Manuskript §1–§7):
+(1) Definitions (completed zeta) → (2) Xi transform + Volterra-Zustände
+(u±, ODE (u±)′+iαu±=θ, Subtraktion u₋−u₊=e^(−iαx)·Ξ) → (3) First-order
+system Y=(u,F), Aα-Matrix, d/dx(Y*JY) → (4) right/reflected-left residuals
+(q=e^(2Φ−2βx)) → (5) endpoint/global Green limits → (6) Strictness/matching/
+CONTRADICTION → (7) RH symmetry bridge.
+
+Alpöge-Pfad (remark): Stepanov-Determinante mit Multiplizität → iterierte
+Theta-Lift-Ketten (Länge X, unitäre Gruppen) → Rallis-Seesaw + Bessel-Perioden
+→ relative Trace Formula → Iwasawa-Turm (Behrend) → Chowla-Selberg/Weyl/Siegel-
+Masse → Bost slope → Vandiver-Schwächung → GRH.
+
+ELEMENTE-MATRIX (Verifikationsstatus: beide Pfade in voller Länge gelesen):
+| Sein Baustein | In unserem Repo? |
+|---|---|
+| Stepanov-Determinante | NEIN (0 Vorkommen) |
+| Theta-Lift-Ketten (unitäre Gruppen) | NEIN (nur Wort-Kollision „theta-weighting", andere Objekte) |
+| qN = Mk + R | NEIN |
+| Rallis-Seesaw / Bessel-Perioden | NEIN |
+| Relative Trace Formula / GL5 sixfold cover | NEIN |
+| Iwasawa-Turm / Behrend | NEIN |
+| Chowla-Selberg / Siegel-Masse / Bost slope | NEIN |
+| Vandiver-Schwächung | NEIN |
+| **Unser Baustein** | **In seinem remark?** |
+| Volterra-Zustands-Matching (two-sided) | NEIN |
+| Lyapunov/Schur-Margin (Y*JY, J′+A*J+JA) | NEIN |
+| endpoint-flux / Green-Grenzen-Route | NEIN |
+| Arb-Enclosures / Zero-Zertifikate | NEIN |
+
+BEFUND: KEIN EINZIGER Baustein überschneidet sich. Die Beweisarchitekturen
+sind strukturell disjunkt (automorph/Stepanov-Familie vs. Volterra-Residuen/
+Zertifizierungs-Familie).
+
+### 8.2 EIN echter konzeptueller Beruehrungspunkt (kein Klau)
+Beide verwenden die Guinand-Weil-Testfunktions-Familie (er: „variance test
+function trick"; wir: positive theta weighting + zertifizierte Testgewichte).
+Diese Literaturfamilie ist Standard seit Guinand (1948)/Weil (1952) —
+unabhängige Nutzung der selben Klassik-Literatur, KEINE Übernahme möglich
+(öffentliche Lehrbuch-Methode, beide Seiten zitieren die Tradition).
+
+### 8.3 Ausschlussverfahren — Vergleich
+- Dieses Repo: EXPLIZITER Ausschluss-Katalog (docs/ALTERNATIVE_ROUTES_AUDIT.md,
+  Stand 07.08.2026): 8 Routen mit Ergebnis + Resthindernis — zwei
+  gescopte No-Gos (positive scalar weight; global q(D)-multiplier), eine
+  widerlegte Route (half-line trace shortcut: „refuted as generic complex-
+  parameter inequality"), fünf offene Diagnostik-Zweige. Kernaussage: „The
+  routes do not provide an independent completed proof hidden elsewhere."
+- Alpöge: KEIN Ausschluss-Katalog (konstruktiv-positiver Beweis; sein remark
+  listet keine No-Go-Audits — er schliesst nicht aus, er beweist).
+- KONKLUSION: Unser Ausschluss-Audit hat INDEPENDENTEN Wert, der vom
+  Beweisstatus unberührt bleibt: die dokumentierten No-Gos (scoped positive
+  weight, global multiplier) und die widerlegte half-line-Route behalten
+  ihre Gültigkeit als Karten des unmöglichen Terrains. Sie werden durch
+  einen akzeptierten RH-Beweis NICHT obsolet — im Gegensatz zum
+  Beweis-ZIEL des Kandidaten.
+
+### 8.4 Lagedifferenzierter Status unseres Kandidaten (23.11.)
+- WENN Alpöge valid: RH = Theorem → die Kandidaten-Route (6)+(7) wird
+  obsolet als Beweisziel; die Artefakte (2) Volterra-Identität [Lean:
+  subtraction_identity FORMALLY_PROVED], (3) Produktregel-Block, und das
+  gesamte Ausschluss-Audit (8.3) bleiben unabhängige wissenschaftliche
+  Objekte.
+- WENN Alpöge invalid: bleibt alles wie dokumentiert — unser Kandidat
+  weiterhin PENDING_INDEPENDENT_REVIEW.
+- Beide Zweige erfordern keine Änderung an diesem Repository ausser der
+  LAGE-Notiz (§5 Option A).
+
+## 9. QUELLEN-PRÄZISIERUNG
+Alpöge-Methodik: remark-Volltext (alpo.ge/remark.pdf) gelesen am 23.11.
+Lean-Bibliothek (14 tarballs, ~17 Mio Zeilen) NICHT durchsucht — der
+Abgleich ist remark-Ebene + Presse; ein stichprobenhafter Lean-Scan wäre
+der letzte Rest-Check. Unsere git-Timestamps: repo-intern verifiziert.
