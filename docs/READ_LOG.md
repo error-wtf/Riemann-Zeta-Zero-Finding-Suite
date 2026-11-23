@@ -253,3 +253,20 @@ unter IsFrame — die Multiplikator-Gleichung des Twists (Bedingung 5/6).
 **param_main-Fortschritt: 2 von 6 Bedingungen verstanden (SkewEx = CM-
 Feld-Basis, ClsNorm = Vertreter-Normierung). Die verbleibenden: Struct,
 QuadField, LocDict, ClsOnto.**
+
+### Struct + QuadField (param_main-Bedingungen 2 und 3) — GELESEN_VERSTANDEN
+Struct: fuer delta mit (delta*thE delta)-charpoly in Ell (elliptische
+Charakteristik) existiert die Zerlegung in total-reelle Zahlkoerper K_i
+(card iota = nfac(charpoly) = Faktorisierungszahl, Rang-Summe = n) plus
+die E-Algebra-Struktur rho mit Frame-Bedingung — die Zerlegung des
+twisted Endomorphismus in total-reelle Komponenten.
+QuadField: die Hasse-Norm-Charakterisierung — global UND lokal:
+x in Norms K L <=> x = a^2 - d*b^2 (die Norm-Form von L = K(sqrt d),
+die PELL-Struktur). Die Kette: s anti-fixiert (SkewEx) → d = s^2 reell
+→ L = K(sqrt d) → Normen = a^2 - d*b^2 — die kanonische CM→quadratisch-
+Pipeline.
+**param_main-Stand: 4 von 6 Bedingungen verstanden (SkewEx, Struct,
+QuadField, ClsNorm). Verbleiben: LocDict, ClsOnto. Die Architektur ist
+jetzt als Ganzes sichtbar: CM-Basis → Zerlegung → Norm-Charakterisierung
+→ lokales Woerterbuch → Vertreter → Surjektivität = die parametrische
+Zerlegung der Twisted-Klassen-Theorie.**
