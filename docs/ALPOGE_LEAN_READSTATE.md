@@ -192,6 +192,67 @@ Verdrahtung + Generierung (GeneralBFact*-Familie). Für Eleganz-Frage relevant:
 unser eigener Stil (wenige größere Sätze, Kapselung) ist hier MÖGLICH und würde
 die Verdrahtungslast stark reduzieren.
 
+---
+
+# GESAMT-BILANZ 23.11. (Fortsetzung nach Stufe 8 — Stufen 9-15)
+
+*(Die Stufen 9-15 wurden nach diesem Abzug in der Arbeitskopie
+/home/error/alpoge-lean-rh/WORKSTATE_LESUNG.md geführt; Zusammenfassung:)*
+
+## STUFE 9: Blattbasis + TLiftK-Descent (100 Z.)
+- LubinTatePeriodNotFiltered.lean (65 Z.) KOMPLETT: echter Sen-Theorie-Beweis
+  (Normalabschluss L, res: Gal(Om/L)→GK K, ∏t(μ)≠0, t_BdR-Uniformizer-DVR-Zerlegung,
+  zyklotomische Verträglichkeit, n=1 via Sen-Theorie, Nicht-Filtriertheit)
+- TwoUpOKOfSteps.lean (35 Z.): TLiftK+ChrPairs+BaseNG → zwei up-Zustände U₁/U₂
+  (das TwoUp-Input von toCore); alle 3 Zusatzsätze bewiesen
+
+## STUFE 10: Descent-Kern + Siegel-Weil (164 Z.)
+- LimOddOfLimFinOdd.lean (64 Z.): toCore-Kette komplett (LimFinOdd→LimOdd→
+  core_of_limU→rowCsd_of→joinUp/joinAll/joinU→joinEnd→core_of_rowStarCore;
+  4 sphDown-Klauseln; 16 CrystallineDescent-Importe)
+- Siegel-Weil aufgelöst: siegelWeilStd_k via Poisson + CTSplit_k;
+  **CTSplit_k NICHT vacuous** (Constant-Term-Splitting mit Dilatations-Eigen-
+  verhalten, LiftedSchrodingerDatum:81-88); auxiliaryExistence_holds echter Beweis
+
+## STUFE 11/11b: GeneralBFact*-STICHPROBE — slop quantifiziert
+- 94/167 Lemmata-Verzeichnisse = Cauchy-Binet-Varianten (GeneralBFact*/Imports.lean
+  gelesen: legitimer Satz, Redundanz-Generierung; Diff vs Left: 78 Z. — echte Varianten)
+- GlobalTheory.Published.UnusedSlot72 : Prop := True — benutzt als Hypothese mit
+  trivial-Lieferung; "admitted"-Namespace harmlos (echte Beweise geprüft)
+
+## STUFE 12: Sen/Hodge-Blätter + Inventar (57 Z.)
+- hodge_tate_character_weight / sen_period_finite_extension /
+  sen_unramified_character_period: Statement-Wrapper gelesen; Kette:
+  sen_unramified_character_period liefert die Sen-Hypothese für sen_period_...
+
+## STUFE 14: LTPer-Kern HodgeTateCharacterWeight KOMPLETT (94 Z.)
+- eq_one_of_tpow_mul_unit_eigen: gal_smul_tBdR (Hodge-Tate-Eigenschaft von
+  Fontaines t), Eigencharakter-Extraktion, **ACris.senTateCharacters** (finites
+  Bild), Widerspruch unendliches zyklotomisches Bild ⊆ endliche z^{1−n}-Potenzen
+  ⇒ n = 1. Klassische Sen-Tate-Argumentation, kein Vacuum.
+
+## STUFE 15: SEN-SÄULE KOMPLETT (195 Z.)
+- SenPeriodFiniteExtension.lean (102 Z.): Zyklotomie-Widerspruchsargument
+  (M endlich, n=|M|, cycloChar^n=1 auf H, alle unramifizierten ∈ H via
+  primeToPRoots/Witt, ψ=cycloChar^n erfüllt Sen-Hypothese, x ∈ cpTwistRep(−nf)-
+  Invarianten, cpTwistRep_invariants_eq_bot ⇒ x = 0 — Widerspruch)
+- SenUnramifiedCharacterPeriod.lean (93 Z.) — DIE WAHRE BASIS:
+  exists_pow_eigenvector_of_unramified_units via **B_cris-Eigencharakter-
+  Konstruktion** (Witt-Vektor → fontaineTheta → eigenChar → eq_one_of_degree_one)
+  ⇒ ψ^f = z ⇒ xc ist der Sen-Eigenvektor. Basis: GroundTheory.PAdicHodge.
+  BCrisEigenChar (letzte nennenswerte Eigen-Ebene, Mathlib-nah)
+
+## STUFE 16 (offen)
+- BCrisEigenChar/Fontaine-Theta-Basis-Stichprobe; toCore-Inputs
+  (ChrPairs/UpOf/BaseNG); Lemmata/Rest-Familien
+- Full-Build-Ausgang (läuft: 8744/12913, 0 Fehler — Notify)
+
+## Invarianten der Lesung (gültig für alle Stufen)
+- Jede Aussage mit Datei:Zeile belegt; GELESEN_VERSTANDEN vs GESKIMMT getrennt
+- Eigenes Parallel-Wissen: 3 kernel-verifizierte Lean-Module (RH-Reduktion,
+  P0-No-Go-Kern, Volterra-Differenzidentität + Ξ-Null-Folgerung) in
+  docs/LEAN_BRIDGE/ — alle exit 0, Grundaxiome, kein sorryAx
+
 **Offen in der Zirkularitäts-Kette:** field_of_leaves (PositivityTheory.SecR.Hladr2 —
 noch nicht lokalisiert), exact_degrees_of_product (LubinTatePeriodNotFiltered.lean),
 toCore/LimOddOfLimOdd/twoUpOK_of_k, die 8 P*-Hilfssätze.
