@@ -67,3 +67,21 @@ Zertifizierung bei Turing-Checks implizit nutzt. Seine Bibliothek
 formalisiert exakt die Robustheits-Eigenschaft unserer Methode-Familie.**
 Verbindung zum cfg_inter (E1.3): die Bedingung ist dieselbe — der Satz
 ist ihre Stabilitäts-Garantie.
+
+### NQText.lean (162 Zeilen) — 2026-11-23 — GELESEN_VERSTANDEN (Mathe-Kern)
+Die TIEFE verstanden: den_core garantiert |Y+1/2+u_i| >= 1 UND
+|Y+1/2+u'_i| >= 1 fuer ALLE i (Beweis via Antitonie der Interlace-Folge:
+u_step/antitone_on — Grenzpunkte l kontrollieren 3 Faelle i<l/i=l/i>l).
+qpoly_eq_of_pos: das qpoly ist das PRODUKT T*T'*prod(|Y+1/2+u_i| * |Y+1/2+u'_i|)
+— eine PRODUKT-ABSTANDS-SCHRANKE.
+**VERSTÄNDNIS: das ist die formale Fassung des Herzstuecks der
+Zaehlmethode — separierte Punkte => alle Abstands-Faktoren >= 1 => das
+Produkt hat kontrollierte Untergrenze. Dasselbe Prinzip traegt unsere
+count_argument.py/certify_zero.py-Zertifizierung (Abstands-Produkte =>
+Null-Zaehlung). Die methodische Verwandtschaft ist jetzt konkret auf
+Mathe-Ebene: dieselbe Kern-Ungleichung, beide Seiten unabhaengig
+formalisiert (Lean/Interlace-Antitonie vs. Arb-Enclosures).**
+Auch gelesen: interlaces_of_OK (OK => Interlaces-Praedikat, min/max-Form),
+den_onCut (beide Cut-Varianten via interlaces_swap), abs_le_of_onCut
+(|Y| <= b aus der Cut-Bedingung). LamData-Struktur beginnt (gleiche
+Felder wie PairData + inter-Feld).
