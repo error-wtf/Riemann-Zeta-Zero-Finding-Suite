@@ -698,6 +698,20 @@ any published proof. The exclusion audit
 ([`docs/ALTERNATIVE_ROUTES_AUDIT.md`](docs/ALTERNATIVE_ROUTES_AUDIT.md))
 retains its validity as a documented map of routes that do not close.
 
+### Lean bridge (2026-11-23)
+
+Three kernel-verified Lean 4 modules now encode this repository's own
+results — the RH reduction, the P0 global-multiplier no-go core, and the
+two-sided Volterra difference identity with its Xi-zero consequence
+(all exit 0, axioms `[propext, Classical.choice, Quot.sound]`, no
+`sorryAx`; see [`docs/LEAN_BRIDGE/STATUS.md`](docs/LEAN_BRIDGE/STATUS.md)
+for modules, commands and the full error history). The same day, the
+Alpöge/Claude library core chain was read line-by-line with a documented
+14-stage protocol ([`docs/ALPOGE_LEAN_READSTATE.md`](docs/ALPOGE_LEAN_READSTATE.md)),
+including a three-level circularity check of the LLC-substitution layer
+(no cycle found at read depth) and quantified redundancy findings
+(94 Cauchy–Binet variants in `src/Lemmata/`).
+
 ### Prior art (verified)
 
 The full certifying toolkit already existed publicly at the reference date
