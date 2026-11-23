@@ -186,3 +186,18 @@ Normalisierung der Form auf -1.
 Traegheits-Gesetz als Konstruktion). STRUKTURELL UNSER b4g-SYLVESTER-SCHRITT
 aus der SSZ-Operator-Rekonstruktion — dieselbe lineare Algebra-Kernidee
 (hermitesche Formen, Traegheit, unitaere Anpassung), zwei Realisierungen.**
+
+### Bmu-Definitions-Layer (Hpk/Tz/wI/bvec/inWb, Z. 12546080+) — GELESEN_VERSTANDEN
+Die Kern-FORM der Bessel-Map-Geometrie komplett gelesen: Hpk = Blockstruktur
+(r Anti-Diagonalen-Bloecke [[0,1],[1,0]] oben, gespiegelt hermitesch;
+Mittelblock (k+1)x(k+1) mit +1-Diagonale, EIN −1 bei i=r+k) →
+Sylvester-Traegheit (r+k, r+1). Tz = −(herm Hpk z z).re (negatives
+Form-Funktional); rho = sqrt(Tz/2) normalisiert auf Formwert −1 (die
+Hyperbel-Struktur). bvec = Pi.single-Basis; wI = Mittelblock-Index;
+inWb = mittlerer Traeger-Unterraum.
+**VERSTÄNDNIS: Hpk ist die kanonische Signatur-Form — dasselbe Objekt,
+das unser b4g-Sylvester-Schritt behandelt (Traegheits-Gleichheit). Seine
+Konstruktion ist explizit blockweise, unsere Traegheits-Argumentation
+algebraisch — dieselbe Sylvester-Welt, jetzt auf Definitions-Ebene
+verstanden. Die Bessel-Map-Lehre: die Form Hpk + die adapted basis G0
+= die komplette Normalform-Maschinerie der Geometrie.**
