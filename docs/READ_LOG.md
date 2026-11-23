@@ -19,3 +19,18 @@ das Zielsatz-Paket ThmBpAt ist die Kern-Aussage des WaveGrid-Layers. KEIN
 Beweis in dieser Datei — sie definiert nur die Hypothesen-Props für die
 späteren Beweis-Dateien (vermutlich Bridge.lean etc.).
 Offen: Was ist ThmBpAt inhaltlich? → nächste Dateien (Bridge, ThmBpAt-Definition).
+
+### Bridge.lean (148 Zeilen) — 2026-11-23 — GELESEN_VERSTANDEN
+Zweck: SEPARATIONS-LAYER der WaveGrids — Y = 5-separierte „freie" Punkte,
+CutWord = Wort über Letters (Bool, y') mit paarweisem Abstand >2, und der
+Kern-Satz gridOK_of_free: Letters frei von Grid-Punkten (Abstand >2 auf y
+und y+1) + Injektivität des grids + Positivität (nn·nn ≤ B²·Re(qw)) ⇒
+TBBx5.GridOK. Bausteine: cutWord_of_list/list_of_cutWord (List↔CutWord
+Isomorphie), two_lt_of_five, free_dist (Freiheit beider Enden y, y+1).
+**ERSTER ECHTER KONZEPTUELLER BERÜHRUNGSPUNKT mit unserem Repo:** die
+Architektur ist Gram/Turing-artig (separierte Anker-Punkte + Muster-Freiheit)
+— verwandt mit unseren zeros_by_gram.py/turing_check.py. KLASSIFIKATION:
+gemeinsame klassische Methode-Familie (Gram/Turing seit den 1940ern,
+Standardliteratur) — KEIN Klau (beide unabhängig). ABER: anders als die
+Wort-Kollisionen (theta/Weyl/Siegel) ist das eine echte methodische
+Verwandtschaft — weitere WaveGrid-Dateien auf diese Verwandtschaft prüfen.
