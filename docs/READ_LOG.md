@@ -201,3 +201,19 @@ Konstruktion ist explizit blockweise, unsere Traegheits-Argumentation
 algebraisch — dieselbe Sylvester-Welt, jetzt auf Definitions-Ebene
 verstanden. Die Bessel-Map-Lehre: die Form Hpk + die adapted basis G0
 = die komplette Normalform-Maschinerie der Geometrie.**
+
+### HpkFacts/NSubgroup/EllAdd/PsiChar/HeadOrbit/CharBlock/DetZj (Prop-Strukturen) — GELESEN_VERSTANDEN
+Die bewiesenen Form-Eigenschaften: HpkFacts = (hermitesch, INVOLUTORISCH
+(Hpk^2 = 1 — selbstinvers!), eI/esI-Orthonormalpaare, SYLVESTER-Kongruenz:
+exists P mit P^H * Jm(eps) * P = Hpk, Traegheit (k+r, ...) als Kongruenz-
+Existenz). NSubgroup = die Form-erhaltende Gruppe (g^H H g = H);
+EllAdd = ell additiv auf der Gruppe (Charakter-Funktional); PsiChar = psi
+multiplikativ, ||psi|| = 1 (unitaere Charaktere); HeadOrbit = LDU-Zerlegung
+l*hMat*u MIT EINDEUTIGKEIT (Iwasawa!); CharBlock/CornerInv = Block-Algebra
+der unipotenten Ränder; DetZj = Determinanten-Faktorisierung.
+**VERSTÄNDNIS: die lokale Gruppen-Theorie der Bessel-Map = Form
+(involutorisch!) + isotrope Gruppe + unitaere Charaktere + eindeutige
+Iwasawa-Zerlegung. Die Sylvester-Kongruenz (HpkFacts-4) ist EXAKT unser
+b4g-Thema (Traegheits-Gleichheit) — seine Formalisierung: Kongruenz-
+Existenz mit explizitem eps-Vektor. Die involutorische Struktur (Hpk^2=1)
+ist der elegante Kern: die Form ist ihr eigenes Inverses.**
