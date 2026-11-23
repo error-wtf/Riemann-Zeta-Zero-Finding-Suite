@@ -71,6 +71,23 @@ senkt die Verdrahtungslast.
   `Iic_disjoint_Ioi le_rfl` + `← setIntegral_univ` als Notations-Brücke;
   `sub_eq_zero` statt `linarith` (ℂ hat keine Ordnung).
 
+## FINDING 23.11. — §4-(2,2)-Eintrag (kernel-geprüft, aufgelöst)
+
+`LyapunovEntries.lean` verifiziert: **(H₊)₂₂ = q·(2Φ′P − 2βP − Φ‴)/P²**.
+Das Doc (RH_PROOF_CANDIDATE_COMPLETE §4) behauptet q·(2Φ′P − Φ‴)/P² = q·T/P
+(mit T = (2Φ′Φ″ − Φ‴)/Φ″, P = Φ″ aus §1 — Definitionen geprüft, ändern nichts).
+
+**Differenz: −2βq/P.** Die (1,1)-Einträge stimmen exakt (2βq ✓), die
+α-Kreuzterme heben exakt (0 ✓). Der Fehler: q′ = 2(Φ′−β)q wurde im (1,1)-
+Eintrag korrekt verarbeitet (−q′ + 2qΦ′ = 2βq), im (2,2)-Eintrag der Doc-
+Formel aber der −2βq/P-Anteil von (q/P)′ verschluckt.
+
+**Konsequenz (offen, nicht urteilend):** die zweite Diagonale der Green-
+Identität verändert sich um −2βq/P < 0 — die H₊-Positivitäts-Bedingung ist
+STRENGER als im Doc. Zu prüfen: benutzen die Python-Zertifikate (3× SHA256)
+die korrekte Matrix (dann nur Doc-Tippfehler) oder die Doc-Matrix (dann
+Zertifikate neu)? Nächste Session.
+
 ## Nächste Schritte (Lean-Ziel 4)
 
 Energie-Lemma 1/2 aus `ENERGY_PROOF_DRAFT.md` (§3): `R_{a_h} = e^{2Φ}·h'`
@@ -78,3 +95,4 @@ unter `a_h = h·e^{2Φ}/Φ''` — **ERLEDIGT** (siehe `EnergyReduction.lean`,
 kern-verifiziert mit Ableitungswerten als Hypothesen-Schnittstelle).
 Weiter: §4-Matrixidentitäten (H₊ = J₊' + A*J₊ + J₊A₊ = q·diag(2β, T/P))
 als 2×2-Matrix-ring-Sätze mit deklarierten Ableitungs-Gleichungen.
+→ **ERLEDIGT** (LyapunovEntries.lean) + FINDING oben.
