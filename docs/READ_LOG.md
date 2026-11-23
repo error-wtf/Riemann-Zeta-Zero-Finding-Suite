@@ -142,3 +142,16 @@ RANG/MATCHING-Argument (injektive Zuordnung je Cloud-Punkt zu einem Rang).
 b^k-Katastrophe rettet — die Null-Abstände (Gaps) machen die Cloud-Faktoren
 harmonisch summierbar. Dasselbe Prinzip, das unsere count_argument.py-
 Schranken trägt: Abstände machen Produkte kontrollierbar.**
+
+### InterlacingGrids/CloudPair.lean (140 Zeilen, Kern) — 2026-11-23 — GELESEN_VERSTANDEN
+DIE PAIR-ZUORDNUNG verstanden: φ s = if 0 < Y+λs then s else s+1 — die
+SIGNATUR-ABHÄNGIGE Zuordnung (das Vorzeichen von Y+λs wählt den v-Partner;
+das PairOK-Interlace-Pairing in Aktion). cloud_pair_factor: die
+Faktorisierung a <= (Gewicht 1+(1+c)/d) × (Partner-Abstand |Y+1/2+v_i|)
+— das Gewicht wird durch die Gaps harmonisch klein, der Partner-Abstand
+trägt das Produkt; der ausgelassene Index e liefert den 3b-Faktor.
+**DIE MASCHINE VOLLSTÄNDIG VERSTANDEN: CloudPair (Pairing) → CloudProd
+(harmonische Gewichte, linear) → Bracket (Kopf fein + Schwanz grob) →
+pst_mul_le (Weil-Oberschranke). Jede Stufe sitzt, jede Idee benannt.**
+LESER-BILANZ E1 (BesselWaveGrids/InterlacingGrids): 10 Dateien gelesen
+und verstanden — die komplette formalisierte Weil-Formel-Maschine.
