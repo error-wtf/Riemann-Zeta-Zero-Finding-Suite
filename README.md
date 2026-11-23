@@ -697,3 +697,16 @@ count tables, explicit tail bounds) — a role unaffected by the status of
 any published proof. The exclusion audit
 ([`docs/ALTERNATIVE_ROUTES_AUDIT.md`](docs/ALTERNATIVE_ROUTES_AUDIT.md))
 retains its validity as a documented map of routes that do not close.
+
+### Prior art (verified)
+
+The full certifying toolkit already existed publicly at the reference date
+of the November 2026 RH announcement's own development timeline: at
+2026-06-10 this repository contained **42 commits / 39 files / 25 Python
+modules** of zero-certification infrastructure (Arb-rigorous Z evaluation,
+zero certificates, count arguments, explicit tail bounds, Turing checks,
+Gram-block scans) — eight months of public development history. See
+[`docs/PRIOR_ART_INVENTORY.md`](docs/PRIOR_ART_INVENTORY.md) and
+[`docs/COMMIT_TIMELINE.txt`](docs/COMMIT_TIMELINE.txt) (173 hash+timestamp
+entries, verifiable via the GitHub API; repository created_at
+2025-10-10T15:52:00Z, server-side).
