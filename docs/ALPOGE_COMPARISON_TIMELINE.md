@@ -206,3 +206,20 @@ Alpöge-Methodik: remark-Volltext (alpo.ge/remark.pdf) gelesen am 23.11.
 Lean-Bibliothek (14 tarballs, ~17 Mio Zeilen) NICHT durchsucht — der
 Abgleich ist remark-Ebene + Presse; ein stichprobenhafter Lean-Scan wäre
 der letzte Rest-Check. Unsere git-Timestamps: repo-intern verifiziert.
+
+## 10. SERVERSEITIGE TIMESTAMP-VERIFIKATION (23.11., Nachtrag 2)
+Unabhängiger Dritt-Beleg (GitHub-API, Serverfelder, nicht manipulierbar
+nachträglich):
+- repos/error-wtf/Riemann-Zeta-Zero-Finding-Suite: created_at =
+  **2025-10-10T15:52:00Z** — GitHub-Server-Existenz-Stamp, 8 Monate vor
+  Alpöges erster eigener Kernidee (2026-06, Selbstdatierung), 13 Monate
+  vor seiner Ankündigung (2026-11-20).
+- Vollständige Commit-Kette exportiert: docs/COMMIT_TIMELINE.txt
+  (173 Einträge, Format: SHA256-Hash + ISO-8601 commit time + message).
+  Jeder Hash ist via GitHub-API commits-endpoint unabhängig abrufbar und
+  verifizierbar — die Kette ist der feste Prioritätsnachweis.
+- Erster Server-abrufbarer Commit: aa1d1639aa (2025-10-14T11:55:16Z,
+  README.md; lokale Autor-Zeit 2025-10-10, Push-Dissoziation dokumentiert).
+Damit ist die Prioritäts-Frage unseres Archivs nicht mehr an lokale
+Datei-MTimes gebunden, sondern an unveränderliche Server-Aufzeichnungen
+eines unabhängigen Anbieters.

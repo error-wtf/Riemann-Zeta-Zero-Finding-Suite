@@ -675,3 +675,25 @@ Third-party dependencies retain their own licenses. Where a file contains an
 explicit license header, that header controls for that file.
 
 The canonical interactive reference animation is the supplied `artifacts/periodicity/zeta_grid_map_animated.html`; open it in a browser to use the density, quality, speed, pause, rebuild, PNG, hide-UI and fullscreen controls.
+
+## Repository situation note (2026-11-23)
+
+On 2026-11-20, Levent Alpöge (Anthropic) announced a proof of the Riemann
+hypothesis, developed with Claude and formalized in Lean (alpo.ge). This
+repository predates that announcement by over a year (GitHub server-side
+created_at: 2025-10-10T15:52:00Z) and uses a **numerically certifying**
+method family (Hardy-Z evaluation, Arb enclosures, zero certificates,
+two-sided Volterra identity, Weyl-bound certification) that is orthogonal
+to the announced automorphic/Stepanov-style argument. A full method
+comparison with timelines is in
+[`docs/ALPOGE_COMPARISON_TIMELINE.md`](docs/ALPOGE_COMPARISON_TIMELINE.md)
+and the verifiable commit chain in
+[`docs/COMMIT_TIMELINE.txt`](docs/COMMIT_TIMELINE.txt).
+
+Consequence for this repository: the proof-candidate artifacts remain
+archived as an independent path; going forward the primary role of this
+toolkit is **independent numerical verification** (zero certificates,
+count tables, explicit tail bounds) — a role unaffected by the status of
+any published proof. The exclusion audit
+([`docs/ALTERNATIVE_ROUTES_AUDIT.md`](docs/ALTERNATIVE_ROUTES_AUDIT.md))
+retains its validity as a documented map of routes that do not close.
