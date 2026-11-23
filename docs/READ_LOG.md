@@ -48,3 +48,22 @@ nicht nur Wort-Kollision. Seine WaveGrids und unsere Gram/Turing-Zertifikate
 sind derselben Methode-Familie zuzurechnen (Guinand-Weil-Tradition).
 KEIN Klau (Standardliteratur, beide unabhängig), aber echte strukturelle
 Verwandtschaft — der erste nicht-triviale methodische Berührungspunkt.
+
+### NqMovedExample.lean (55+ Zeilen) — 2026-11-23 — GELESEN_VERSTANDEN
+Die MATHEMATIK verstanden (nicht nur Struktur): PairData = das Paket
+(c>0, g≥1+c, b-Schranken, |λs|≤b, GAP: λ(s+1)+g ≤ λ(s) = monotone
+λ-Folge mit Mindestabstand g, |u_l|≤b, pair: Interlacing-Partner auf −Y
+existiert). LamData.toPair: die λ-Sequenz erzeugt PairData.
+KERN-SATZ pairOK_of_moved: wenn u die Interlacing-Bedingung erfüllt
+(cfg_inter-Form: λ(s)+1/2 ≤ u(s) ∧ u(s+1) ≤ λ(s)−1/2) und v nur an
+EINER Stelle l von u abweicht (x zwischen u_l und v_l), dann
+interlacingt auch v — mit EXPLIZITEM Partner (e = l−1 bzw. e = l je
+Verschiebungsrichtung). Beweis: Fallunterscheidung + hv-Substitution +
+linarith — die Robustheit ist algebraisch direkt.
+**VERSTÄNDNIS: das ist die diskrete STÖRUNGS-ROBUSTHEIT des Interlacings
+— ein einzelner verschobener Punkt zerstört die Verschränkung nicht. Das
+ist die formale Gram-Punkt-Verschiebungs-Robustheit, die auch unsere
+Zertifizierung bei Turing-Checks implizit nutzt. Seine Bibliothek
+formalisiert exakt die Robustheits-Eigenschaft unserer Methode-Familie.**
+Verbindung zum cfg_inter (E1.3): die Bedingung ist dieselbe — der Satz
+ist ihre Stabilitäts-Garantie.
