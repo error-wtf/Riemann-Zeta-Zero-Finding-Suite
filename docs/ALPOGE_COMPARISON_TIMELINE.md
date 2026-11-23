@@ -365,3 +365,53 @@ Beweis-Deklarations-Anzahl).
 DAS IST DIE ENDGÜLTIGE BELEGUNG: nicht Teil-Ausschnitt, nicht Stichprobe —
 jede Zeile des gesamten 14-Part-Werks ist gescannt. Kein Klau, keine
 Übernahme, orthogonale Methoden — belegt über die GESAMTHEIT.
+
+## 19. TIEFENLESUNG DER KERNKETTE + ZIRKULARITÄTS-PRÜFUNG (23.11., Nachtrag 9)
+
+Nachtrag zum §18-Scan: der Scan war Wort-Ebene; die Lesung (23.11., Bingsi,
+Protokoll: `ALPOGE_LEAN_READSTATE.md` in diesem Ordner, 14 Stufen) ist
+Verständnis-Ebene — ~4.030 Zeilen der Kernkette Zeile für Zeile gelesen und
+verstanden, jede Aussage mit Datei:Zeile belegt.
+
+**Was jetzt gelesen + verstanden ist (Stufen 1–14):**
+- Apex-Kette: Main → rhOfAll → rh_of_every → everyCharacter (12+16+32+62+18 Z.)
+- Literatur-Schicht komplett (EveryCharacterOfLiteratureOfVWin, 814 Z.): nur 3
+  Stellen konsultieren die OpenLiteratureStatements wirklich
+- LLC-Ersetzung komplett bis zur Basis: RecTExists → artEx (Artin-Exponent) →
+  cuspEx (GoodCusp/Junk-Zweig) → GoodMap (epsilon + rel_unique) → parEx
+  (Deligne-Induktion via typeEx/extEx/resEx/eta_j/indEx) → ParUniq (tameUniq +
+  nameLaws + detByType); exists_isLExt konstruktiv aus BZ-Exhaustion
+- Row0b-Verdrahtung komplett (GaloisLocalGlobalOfLocalGlobalCompatibility, 198 Z.)
+- Baire-Konstruktion (LimOddOfLimFinOdd + LimFinOddOf, 199+64 Z.): remark-Punkt 15
+  ("gcd via extra averaging") — Dichtigkeit endlich vieler Kompatibilitätsmengen,
+  Trace-Limit, Limes-Darstellung
+- Siegel-Weil: CTSplit_k NICHT vacuous (Constant-Term-Splitting mit
+  Dilatations-Eigenverhalten, LiftedSchrodingerDatum:81–88)
+- p-adische Hodge-Basis: HodgeTateCharacterWeight KOMPLETT (94 Z. — Sen-Tate +
+  ACris + gal_smul_tBdR, n=1-Widerspruch), LubinTatePeriodNotFiltered (65 Z. —
+  DVR-Zerlegung gegen den Fontaine-t-Uniformizer)
+- Inp-Struktur (11 Published-Felder) AUFGELÖST: alle Felder argumentlos bewiesen
+  (InputsOf/Crys.lean); Zirkularitäts-Kette 3 Ebenen (Inp.hk → Lit.deRham →
+  field_outright → field_of_leaves → LubinTate-Kammern): KREISFREI
+
+**Quantifizierte slop-Befunde (nicht behauptet, gezählt):**
+- 94/167 Lemmata-Verzeichnisse = Cauchy-Binet-Varianten (GeneralBFact*-Familie;
+  Stichprobe GeneralBFact/Imports.lean gelesen: legitimer Satz, Redundanz-Generierung)
+- GlobalTheory.Published.UnusedSlot72 : Prop := True (DiscreteSpectrumResidual-
+  Classification.lean:7), benutzt als Hypothese mit trivial-Lieferung — Null-Inhalt,
+  kein Beweisfehler
+- "admitted"-Namespace: harmlos (echte Beweise, AdmissibleOfFiniteRank.lean geprüft)
+
+**Mechanik (unabhängig nachgezählt):** 0 sorry (wortgenau), 0 eigene axiom-
+Deklarationen, 0 native_decide, 751.497 Theoreme, Zeilen exakt abgeglichen
+(17.374.215 + 179 Config). Full-Build mit Autors-Toolchain v4.33.1 läuft
+(Log: /home/error/alpoge-lean-rh/full_build.log, Notify bei Abschluss).
+
+**Lean-Bridge gestartet (Option C, Konkretisierung):** drei kernel-verifizierte
+Module aus unserem eigenen Wissen — `docs/LEAN_BRIDGE/` (RhReduction: RH-Reduktion;
+P0NoGo: unser P0-Kern als Maßtheorie-Satz; VolterraCore: §2-Differenzidentität +
+Ξ-Null-Folgerung) — alle exit 0, Grundaxiome, kein sorryAx, mit Axiom-Zertifikats-
+zeilen in den Dateien und vollständiger Fehlerhistorie in
+`docs/LEAN_BRIDGE/STATUS.md`. Detail-Befund: Alpöges RhOfRight (62 Z.) vs. unsere
+Version — gleiche Beweistiefe, kompaktere Struktur (CritOrTrivial-Integration
+eliminiert sein hnat-Zwischenlemma).
