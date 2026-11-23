@@ -240,3 +240,16 @@ klassischen Twisted-Conjugacy — die Klassen-Quotienten parametrisieren
 die Jacquet-Moduln. Die 6-Bedingungs-Struktur von param_main ist ein
 modulares Beweis-Architektur-Muster (jede Bedingung eine eigene Datei-
 Gruppe). Naechste Einheit: die 6 Bedingungen einzeln (SkewEx zuerst).**
+
+### SkewEx + ClsNorm (param_main-Bedingungen 1 und 5) — GELESEN_VERSTANDEN
+SkewEx (15 Z., komplett): in jedem CM-Koerper E existiert s != 0 mit
+conj(s) = -s und s^2 im maximalen reellen Teilkörper. BEWEIS verstanden:
+z mit conj(z) != z (aus conj != id, der CM-Eigenschaft); s := z - conj(z)
+(der klassische anti-fixierte Trick); conj(s) = -s via Linearitaet+
+Involution; s^2 fixiert → reeller Teilkörper. Die kanonische Konstruktion
+rein-imaginaerer Elemente, sauber in Lean.
+ClsNorm: die Vertreter-Normierung pt*thetaGL(pt) = delta*thetaGL(delta)
+unter IsFrame — die Multiplikator-Gleichung des Twists (Bedingung 5/6).
+**param_main-Fortschritt: 2 von 6 Bedingungen verstanden (SkewEx = CM-
+Feld-Basis, ClsNorm = Vertreter-Normierung). Die verbleibenden: Struct,
+QuadField, LocDict, ClsOnto.**
