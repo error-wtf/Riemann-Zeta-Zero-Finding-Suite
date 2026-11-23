@@ -217,3 +217,13 @@ Iwasawa-Zerlegung. Die Sylvester-Kongruenz (HpkFacts-4) ist EXAKT unser
 b4g-Thema (Traegheits-Gleichheit) — seine Formalisierung: Kongruenz-
 Existenz mit explizitem eps-Vektor. Die involutorische Struktur (Hpk^2=1)
 ist der elegante Kern: die Form ist ihr eigenes Inverses.**
+
+### Formalism.REAL.Jm (Z. 6632602) — GELESEN_VERSTANDEN
+Jm N p = diagonal fun a => sgn(p, a) — die SIGNATUR-DIAGONALE (±1 auf der
+Diagonalen, p zaehlt die negativen Positionen). Schliesst die Sylvester-
+Kette der Geometrie-Saeule: Hpk (involutorische Blockform, Hpk^2=1)
+≅_kongruent Jm(eps) (Signatur-Diagonale, Traegheit (k+r, r+1)) via P.
+Das Traegheits-Gesetz als explizite Kongruenz auf die kanonische
+Diagonalform — die Standardform-Definition ist trivial (diagonal + sgn),
+die Substanz liegt in der Kongruenz-Existenz (HpkFacts-4).
+**SAEULE 2 (Sylvester-Geometrie) JETZT VOLLSTAENDIG: Hpk → G0 → Jm.**
