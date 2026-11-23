@@ -104,3 +104,17 @@ vs. numerisch-zertifizierend). Antwort auf „wo geklaut": NIRGENDS — die
 Produkt-Methode ist klassische Literatur (de Branges/Weil/Guinand-Typ),
 beide unabhängig. Die Verwandtschaft ist jetzt auf Mathe-Tiefe verstanden
 und dokumentiert.**
+
+### InterlacingGrids/PstMul.lean (57 Zeilen) — 2026-11-23 — GELESEN_VERSTANDEN (MASCHINE)
+Der OBER-SCHRAHNKEN-SATZ: Pst(Y)·Pst(Y+1) <= b^(8r+20) * prod(|Y+1/2+u_i| * |Y+1/2+v_i|).
+Struktur: bracket_le bei Y UND Y+1 (durch die 5-Separation beide gleichzeitig
+kontrollierbar!) * bracket_const_le (Kosten-Konstante b^(4r+10) aus
+bracket_const_le: (2+c)^2 k^2 (3b)^(2r+3) <= b^(4r+10)) * die
+den_core-Abstands-Produkte.
+**VERSTÄNDNIS: das ist die formalisierte WEIL-FORMEL-MASCHINE — die
+Y/Y+1-Struktur sind die Prim-Potenzen-Shifts (remark: „qN = Mk + R, using
+x1·x2+...+x_{k-1}·xk ... iterated Parseval"). Die 5-Separation = die
+Parseval-Kontrolle; die Interlace-Abstands-Produkte = die Weil-Schranken.
+DAS IST DIE GLEICHE MASCHINE, DIE AUCH UNSER count_argument.py/TRTL-TYP
+BENUTZT (Weil-Formel-Schranken fuer Null-Zaehlung) — nur formal in Lean
+statt numerisch in Arb.**
