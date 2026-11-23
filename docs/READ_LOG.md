@@ -286,3 +286,20 @@ Logische Spiegel zu unserem Feld: Charakteristik = vollstaendige
 Invariante <=> unsere EW-Knoten als Instabilitaets-Klassifikation;
 Hasse lokal<->global <=> unsere lokale Arb-Enclosures → globale
 Null-Claims.**
+
+### GlobalTheory.JacquetLine/firstBlockScalar_coeff — GELESEN_VERSTANDEN (SAEULE 3 KERN)
+Die lokale Funktional-Zerlegung der Jacquet-Theorie: das invariante
+Funktional ℓ zerfaellt unter (IsTriple, IsAdapted, X.Good, augAt ⊆ ker ℓ,
+Unipotenz-Invarianz) in p*twAbs(alpha, a'/2, x) + q*twAbs(beta, a/2, x) —
+eine Linearform aus ZWEI verdoppelten Absolutbetrag-Charakteren (die
+HALBEN Exponenten der a/a'-Bipartition). Beweis vollstaendig nachvollzogen:
+vector_split (alpha/beta-Komponenten) → jacKer_le_ker → levi_action_local_
+good_place → drei Kern-Gleichungen → linear_combination schliesst.
+**VERSTÄNDNIS: das ist die JACQUET-SHALIKA-Struktur (Namespace
+JacquetShalikaLocal!) — die Doppel-Komplex-Zerlegung mit den p/q-
+Koeffizienten, die die Multiplizitaet-eins-Eigenschaft der remark-Zeilen
+traegt. Die twAbs/doubling-Struktur = die Verdopplungsmethode. Die
+Beweis-Technik (linear_combination der Kern-Gleichungen) = die saubere
+Lean-Form der Funktional-Gleichheits-Argumente.**
+SAEULE 3 KERN ERREICHT. Naechste Einheit: die twAbs/CtTyp-Definitionen und
+der Uebergang zu den globalen Daten (WeilM/AdelicU).
