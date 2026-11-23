@@ -227,3 +227,16 @@ Das Traegheits-Gesetz als explizite Kongruenz auf die kanonische
 Diagonalform — die Standardform-Definition ist trivial (diagonal + sgn),
 die Substanz liegt in der Kongruenz-Existenz (HpkFacts-4).
 **SAEULE 2 (Sylvester-Geometrie) JETZT VOLLSTAENDIG: Hpk → G0 → Jm.**
+
+### Jacquet-Saeule: Twisted-Conjugacy-Basis (Z. 70085-70350) — GELESEN_VERSTANDEN
+Die Fundament-Technik: twR = theta-Twist-Aequivalenz (y = g^-1 * x * theta g
+— twisted conjugacy, die Standard-Technik der Jacquet-Modul-Rechnung);
+cls = Twisted-Klassen als Quotient (twR_equiv = Aequivalenz bewiesen);
+thE = die Involution (thE thE = id); nrm_tw/locEl_tw = Norm-Vertauschung
+unter dem Twist; param_main = der Parametrisierungs-Hauptsatz unter 6
+Voraussetzungen (SkewEx, Struct, QuadField, LocDict, ClsNorm, ClsOnto).
+**VERSTÄNDNIS: die orbitale Struktur der Jacquet-Saeule beginnt mit der
+klassischen Twisted-Conjugacy — die Klassen-Quotienten parametrisieren
+die Jacquet-Moduln. Die 6-Bedingungs-Struktur von param_main ist ein
+modulares Beweis-Architektur-Muster (jede Bedingung eine eigene Datei-
+Gruppe). Naechste Einheit: die 6 Bedingungen einzeln (SkewEx zuerst).**
