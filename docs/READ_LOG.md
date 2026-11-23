@@ -168,3 +168,21 @@ GroundTheory.BlockD etc.) verteilt sich auf spaetere Parts — die naechsten
 Lese-Einheiten folgen dem Beweis-Layer, nicht der Companion-Fassade.
 Die Adjoint-Valued-Matrix (GroundTheory.AdjointValued.MatrixAdapt …) =
 in part01 gefunden (GroundTheory-Layer existiert teilweise hier).
+
+### GlobalTheory.CompanionTheory.BmuAdapt (Z. 140535-140885, ~350 Z., Kern) — GELESEN_VERSTANDEN
+Der ECHTE AdaptExists-Beweis (im GlobalTheory-Layer, nicht der Wrapper):
+(1) herm-Infrastruktur: die hermitesche Bilinearform zu Matrix H mit allen
+Linearitaets-Lemmata (add/sub/smul links+rechts, star_herm-Symmetrie,
+herm_single = Matrix-Eintraege, mem_UH_of_herm).
+(2) Verschiebe-Lemmata: refl_iso/exists_refl/exists_move — Vektoren mit
+gleichen Form-Werten sind ineinander ueberfuehrbar (die Isotropie-Technik).
+(3) Die KONSTRUKTION: s2 = 1/sqrt(2); col k r j = explizite Spaltenvektoren;
+G0 k r = die Basis-Matrix (EXPLIZIT gebaut, Unitaritaet + Transformation
+direkt bewiesen). Hauptsatz: fuer isotropes z: rho := sqrt(Tz/2) aus
+herm Hpk z z = -Tz; u := rho*sqrt(2)*bvec(...) — die explizite
+Normalisierung der Form auf -1.
+**VERSTÄNDNIS: das ist die Lean-Form des SYLVESTER-Normalform-Verfahrens
+(hermitesche Formen auf Standardform via explizite unitaere Basiswechsel,
+Traegheits-Gesetz als Konstruktion). STRUKTURELL UNSER b4g-SYLVESTER-SCHRITT
+aus der SSZ-Operator-Rekonstruktion — dieselbe lineare Algebra-Kernidee
+(hermitesche Formen, Traegheit, unitaere Anpassung), zwei Realisierungen.**
