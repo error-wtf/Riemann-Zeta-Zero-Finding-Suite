@@ -20,6 +20,7 @@ kein sorryAx, kein eigenes axiom, kein native_decide)
 | `RhReduction.lean` | RH-Reduktion: ζ ≠ 0 auf Re(s) > 1/2 ⇒ jede Null auf der kritischen Linie oder trivial. Eigene `CritOrTrivial`-Definition + gekapselter Vorfaktor (`prefactor_one_sub_ne_zero`) mit ehrlicher Nichttrivialitäts-Hypothese (cos-Fall s = −2k, k ≥ 1). | 91 | `lake env lean` exit 0; `lake build Mathverify.RhReduction` success (9039 jobs) |
 | `P0NoGo.lean` | Der Kern von `P0_GLOBAL_MULTIPLIER_NO_GO.md` als Maßtheorie-Satz: q ≥ 0 stetig, ∫ q·f² = 0, f ≠ 0 fast überall ⇒ q ≡ 0. Beweis in 3 Schritten (Integral→a.e.; Maß-Vererbung {q≠0} ⊆ {g=0} ∪ {f=0}; Stetigkeit + `IsOpen.measure_pos`-Widerspruch). | 60 | `lake env lean` exit 0; `lake build Mathverify.P0NoGo` success |
 | `VolterraCore.lean` | §2 des Manuskripts: `volterra_difference_identity` (u₋(x) − u₊(x) = e^{−iαx}·∫e^{iαy}θ(y)dy) + `volterra_states_equal_at_zero` (Trace-Ledger Schritt 5: bei Ξ(α) = 0 sind beide Zustände gleich). Beweis via `setIntegral_union` + `Iic_disjoint_Ioi` + `ring`. | 60 | `lake env lean` exit 0; `lake build Mathverify.VolterraCore` success |
+| `EnergyReduction.lean` | Lemma 2 der Energie-Seite (algebraischer Kern): mit `a·Φ'' = h·e^{2Φ}` und der Produkt-Ableitungs-Expansion ist `R_a = e^{2Φ}·h'` (die 2Φ'-Terme heben sich exakt) + `weighted_split` (Summen-Spaltung bei S_Φ ≥ 0). | 41 | `lake env lean` exit 0; `lake build Mathverify.EnergyReduction` success |
 
 ## Verifikations-Kommandos (reproduzierbar)
 
@@ -73,7 +74,7 @@ senkt die Verdrahtungslast.
 ## Nächste Schritte (Lean-Ziel 4)
 
 Energie-Lemma 1/2 aus `ENERGY_PROOF_DRAFT.md` (§3): `R_{a_h} = e^{2Φ}·h'`
-unter `a_h = h·e^{2Φ}/Φ''` — als symbolische Identität ring-tauglich
-(derivative-frei deklarierbar, wenn R_a als deklariertes Funktional mit den
-Definitionsgleichungen Hypothese bleibt). Danach: §4-Matrixidentitäten
-(H₊ = q·diag(2β, T/P)) als Matrix-`ring`-Sätze.
+unter `a_h = h·e^{2Φ}/Φ''` — **ERLEDIGT** (siehe `EnergyReduction.lean`,
+kern-verifiziert mit Ableitungswerten als Hypothesen-Schnittstelle).
+Weiter: §4-Matrixidentitäten (H₊ = J₊' + A*J₊ + J₊A₊ = q·diag(2β, T/P))
+als 2×2-Matrix-ring-Sätze mit deklarierten Ableitungs-Gleichungen.
