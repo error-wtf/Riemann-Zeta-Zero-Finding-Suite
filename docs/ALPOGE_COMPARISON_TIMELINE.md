@@ -223,3 +223,30 @@ nachträglich):
 Damit ist die Prioritäts-Frage unseres Archivs nicht mehr an lokale
 Datei-MTimes gebunden, sondern an unveränderliche Server-Aufzeichnungen
 eines unabhängigen Anbieters.
+
+## 11. TEST-LAUF NACH 3,5 MONATEN FREEZE (23.11.)
+turing_check.py auf big_run-Teildaten (T ∈ [0.1, 300], 5 bins, 2000 steps):
+EXIT 0, CSV sauber, Riemann-von-Mangoldt-Summe korrekt (11.1/27.1/31.0/33.0/36.0 —
+exakt die ψ-Werte), MISMATCH-Status korrekt gemeldet weil die Zero-Daten des
+Archiv-Clones unvollständig sind (nur block_00001; die 48h-Läufe liegen nicht im
+git). Tool-Status: LAUFFÄHIG. (Vollständige Zertifikats-Läufe: historisch grün
+per Commit-Serie „Sync certified canonical Weyl status", 07.08.)
+
+## 12. ELEGANZ-ANALYSE: KÖNNEN WIR DAS ELEGANTER? — JA, KONKRET
+Ist-Zustand: flat 25-Modul-Layout, Windows-PowerShell-Runbook (commands.txt),
+keine automatisierte Testsuite, keine Paketierung; Ergebnisse als CSV/Artifacts.
+ZIEL-BILD (Eleganz-Stufen):
+E1 PAKETIERUNG: src/rzcert/ (zero_cert, arb_z, count, tails, turing) +
+pyproject.toml + ein CLI (rzcert certify 14.1347 ...) — das 25-Modul-Chaos
+wird eine Bibliothek mit 5 Subkommandos.
+E2 TEST-SUITE: pytest mit golden fixtures (bekannte Nullen γ1=14.134725…,
+γ2=21.022040…, γ3=25.010858…): jeder Kern-Schritt hat einen Sekunden-Schnelltest
+(statt 48h-Batches). Der heutige turing_check-Lauf ist das Muster.
+E3 CI: GitHub Actions (ubuntu, pip install arb-flint) — grüne Zertifikate
+bei jedem Push, automatisiert statt run_until_deadline.ps1.
+E4 LEAN-BRÜCKE: Zertifikat-Ausgabe → exportierbares Format, das ein Lean-
+Lemma konsumieren kann (der Standard, den Alpöge gesetzt hat) — Option C
+aus §5, nach E1-E3.
+REIHENFOLGE: E1 (1 Sitzung) → E2 (1 Sitzung) → E3 (kurz) → E4 (Projekt).
+DAS ist die elegante Form der Vorarbeit: gleiche Mathematik, moderne
+Architektur, automatisierte Güte.
