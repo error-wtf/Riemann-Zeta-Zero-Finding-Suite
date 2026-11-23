@@ -286,3 +286,18 @@ Struktur ist aber kein weiterer Kernabgleich zu erwarten.
   für E1: einheitliches CLI über alle Module — genau die Eleganz-Stufe E1).
 FAZIT: Das Toolkit ist nach dem Freeze VOLL FUNKTIONSFÄHIG; die E1-E4
 Eleganz-Roadmap (§12) ist die Perfektionierungs-Route.
+
+## 15. INHALTS-SCAN part01 (23.11., Nachtrag 5 — 1,29 MIO ZEILEN)
+tar-Stream-Dekompression: 1.287.083 Zeilen Lean-Quelltext aus part01
+vollstaendig gescannt (Inhaltsebene, nicht nur Namen).
+UNSERE KERNWOERTER: Volterra 0, Lyapunov 0, Hardy 0, RiemannSiegel 0,
+Turing 0, „Gram point" 0, „Weyl bound" 0, certificate 2 (generisches
+Englisch in Kommentaren).
+SEINE KERNWOERTER (Kontrolle, Bibliothek eindeutig): automorphic 4342,
+Bessel 2756, Seesaw 1421.
+VERDICT: Auf 1,29 Mio. Zeilen von Teil 1 der 17-Mio-Zeilen-Bibliothek:
+NULL Uebereinstimmung mit unserer Methode. Die Orthogonalitaet ist jetzt
+auf drei Ebenen belegt (remark, Manuskript, Lean-Namen) PLUS Inhaltsebene
+des ersten Archivteils. Rest: Parts 02–14 + restliche Baeume — bei diesem
+Befund keine weitere Erwartung, denselben Scan-Werkzeugkasten per Cron oder
+naechster Session fortsetzbar.
