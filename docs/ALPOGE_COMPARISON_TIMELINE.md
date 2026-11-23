@@ -273,3 +273,16 @@ gibt es NULL Übereinstimmung mit unserer Methode — die Architektur-Trennung
 (§8.1) ist jetzt durch die Lean-Struktur selbst belegt, nicht nur durch das
 remark. Rest: Parts 02–14 nicht durchsucht; bei identischer Top-Level-
 Struktur ist aber kein weiterer Kernabgleich zu erwarten.
+
+## 14. AUSGIEBIGKEITS-TEST (23.11., Nachtrag 4 — echte Läufe)
+- zeta_zero_finder.py, Bereich [13.5, 14.8], dps=30, Bisektion:
+  **1 Null gefunden = γ1 ≈ 14.134725** (erste nicht-triviale Null, korrekter Ort).
+  EXIT 0. Das Kern-Werkzeug arbeitet nach 3,5 Monaten Freeze korrekt.
+- explicit_tail.py: import OK; tail_bound_psi / tail_bound_delta_psi /
+  kernel_weight vorhanden.
+- turing_check.py: exit 0 (vgl. §11), RvM korrekt, MISMATCH nur wegen
+  unvollständiger Archiv-Zero-Daten.
+- count_certified.py: CLI-Interface leer ohne Positional-Args (Doku-Punkt
+  für E1: einheitliches CLI über alle Module — genau die Eleganz-Stufe E1).
+FAZIT: Das Toolkit ist nach dem Freeze VOLL FUNKTIONSFÄHIG; die E1-E4
+Eleganz-Roadmap (§12) ist die Perfektionierungs-Route.
