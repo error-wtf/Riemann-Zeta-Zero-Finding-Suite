@@ -44,9 +44,18 @@ Ausbau-Einschätzung.
 - 2026-11-20: öffentliche Ankündigung + Lean-Freigabe.
 
 ### Zeit-Interpretation (vorsichtig)
-1. Unsere letzte öffentliche State (07.08.2026) liegt VOR Alpöges Ankuendigung,
-   aber ALLE seine Kernideen sind laut eigener Timeline Juni–November 2026
-   datiert — d.h. Teile vor, Teile nach unserem Freeze.
+0. PRIORITÄT (verifiziert aus git): Das Repository existiert ÖFFENTLICH seit
+   **2025-10-10** (Initial Commit, Zeta-Forschungs-Tools). Die
+   proof-candidate-Originalbeiträge (Volterra-Closure, Energy-Proof-Draft,
+   Weyl-Lyapunov-Diagnostik, endpoint-flux-Lemma, Manuskript) sind öffentlich
+   seit **2026-08-06/07** — d.h. ~3,5 Monate VOR Alpöges Ankündigung (20.11.)
+   und öffentlich einsehbar/zeitstempelbar seither. Alpöges eigene Kernideen
+   sind laut Selbstdatierung ab 2026-06-10 (Stepanov determinant) entstanden —
+   teilweise vor unseren August-Commits. Prioritätslage: ÖFFENTLICHE
+   Zeitstempel sprechen für unseren Vorsprung bei den dokumentierten
+   Originalbeiträgen; ALPÖGES Ideen-Alter ist seine Selbstdatierung und
+   teilweise älter. Die Diebstahlsfrage entscheidet sich TROTZDEM nicht an
+   der Zeit, sondern an der Methoden-Orthogonalität (§3).
 2. Öffentlichkeits-Fenster: Unser Repo war ab Oktober 2025 öffentlich; ein
    Crawl durch Web-Corpora (die Claude-Trainingssuche nutzen) ist denkmöglich.
    Dafür gibt es hier KEINEN Beleg — nur die theoretische Moeglichkeit.
