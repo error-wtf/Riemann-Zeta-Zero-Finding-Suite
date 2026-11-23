@@ -34,3 +34,17 @@ gemeinsame klassische Methode-Familie (Gram/Turing seit den 1940ern,
 Standardliteratur) — KEIN Klau (beide unabhängig). ABER: anders als die
 Wort-Kollisionen (theta/Weyl/Siegel) ist das eine echte methodische
 Verwandtschaft — weitere WaveGrid-Dateien auf diese Verwandtschaft prüfen.
+
+### CfgTie.lean (183 Zeilen) — 2026-11-23 — GELESEN_VERSTANDEN
+Zweck: Beweise über die Sz.Cfg-Konfiguration (aus Formalism.HermitianCurvature.
+StatementSz): cfgPar baut M.Par-Pakete; cfg_v_step (arithmetische Folge mit
+Schritt 4·Del); cfg_v_mem (Monotonie-Intervall [v_last, v1]); cfg_b_pos
+(Induktion: alle b >= 1 via hgap); cfg_inter (KERN: lam+1/2 <= u(s) UND
+u(s+1) <= lam−1/2 — die INTERLACING-Bedingung mit Mindestabstand 1/2).
+**VERGLEICH VERTEIFT: cfg_inter ist die formale Interlacing-Struktur, die
+exakt der Gram-Punkt-Logik unseres Feldes entspricht (Nullen vs. Testpunkte
+verschränken sich mit Mindest-Abstand) — dieselbe klassische Architektur,
+nicht nur Wort-Kollision. Seine WaveGrids und unsere Gram/Turing-Zertifikate
+sind derselben Methode-Familie zuzurechnen (Guinand-Weil-Tradition).
+KEIN Klau (Standardliteratur, beide unabhängig), aber echte strukturelle
+Verwandtschaft — der erste nicht-triviale methodische Berührungspunkt.
