@@ -1,0 +1,26 @@
+name: RH symbolic sign regression (NOT AN RH PROOF)
+
+on:
+  pull_request:
+  push:
+    paths:
+      - "src/hedenmalm/residue_identification.py"
+      - "tests/test_residue_identification.py"
+      - "tests/test_rh_schur_provenance.py"
+      - ".github/workflows/rh-symbolic-regression.yml"
+  workflow_dispatch:
+
+jobs:
+  check-symbolic-identities:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install symbolic-test dependencies
+        run: python -m pip install "sympy>=1.12,<2" "pytest>=8,<10"
+      - name: Independently check left residual and negative control
+        run: python -m pytest -q tests/test_rh_schur_provenance.py tests/test_residue_identification.py
