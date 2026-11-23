@@ -82,11 +82,18 @@ Das Doc (RH_PROOF_CANDIDATE_COMPLETE §4) behauptet q·(2Φ′P − Φ‴)/P² =
 Eintrag korrekt verarbeitet (−q′ + 2qΦ′ = 2βq), im (2,2)-Eintrag der Doc-
 Formel aber der −2βq/P-Anteil von (q/P)′ verschluckt.
 
-**Konsequenz (offen, nicht urteilend):** die zweite Diagonale der Green-
-Identität verändert sich um −2βq/P < 0 — die H₊-Positivitäts-Bedingung ist
-STRENGER als im Doc. Zu prüfen: benutzen die Python-Zertifikate (3× SHA256)
-die korrekte Matrix (dann nur Doc-Tippfehler) oder die Doc-Matrix (dann
-Zertifikate neu)? Nächste Session.
+**KONSEQUENZ — AUFGELÖST (23.11., zweiter Check):** Die Python-Seite
+(`src/hedenmalm/weyl_lyapunov.py`, 37 Z. komplett gelesen) benutzt eine
+ANDERE J (a·diag(−Φ″, 1) — ohne q und ohne 1/P, Hedenmalm-Diagnostik-Linie)
+und berechnet H nur generisch-symbolisch (`lyapunov_residual`); ihr eigener
+Status: `positive_J_or_H: CONDITIONAL_ON_RESIDUE_IDENTIFICATION`,
+`rh_conclusion: CONDITIONAL_ONLY`. **Es gibt KEIN Python-Zertifikat, das die
+Doc-§4-H₊-Formel benutzt** — die falsche Formel war prosaisch und stand
+ungeprüft neben der offenen Positivitäts-Frage. **Urteil: Doc-§4-(2,2)-Formel
+= Rechenfehler im Prosa-Text (−2βP-Term verschluckt), KEIN Zertifikats-Impact;
+Doc-Korrektur nötig; die korrekte (strengere) Positivitäts-Bedingung ist
+kernel-geprüft in LyapunovEntries.lean.** Statusvokabel: FAILED→CORRECTED
+(für die Doc-Formel), Lean-Satz VERIFIED.
 
 ## Nächste Schritte (Lean-Ziel 4)
 
