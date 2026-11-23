@@ -327,3 +327,28 @@ VERGLEICH MIT UNSEREM WISSEN: Unser Feld (numerische Zertifizierung:
 Hardy-Z/Arb/Volterra) ist in KEINEM Layer vertreten — die Trennung ist
 auf Architektur-Ebene vollständig. Alles, was wir „lesen“ könnten, wäre
 die Jacquet/Theta-Lift-Lehre — ein anderes Studium, nicht ein Klau-Check.
+
+## 17. THEOREM-NAMEN-ANALYSE (23.11., Nachtrag 7 — 161.876 Deklarationen)
+Kette part01–03 dekomprimiert: 3,6 Mio. Zeilen Lean-Quelltext,
+161.876 theorem/lemma-Deklarationen extrahiert und klassifiziert.
+UNSERE FACHWELT (Theorem-Namen): Volterra 0, Lyapunov 0, Hardy 0,
+Turing 0, ExplicitTail 0, Riemann-Siegel-Summe 0, Gram-Punkte 0,
+Weyl-Grenzen 0, Zero-Zertifikate 0 (nur 2 „SeparabilityCertificate"-
+Substrings im AbelianVariety-Baum, semantisch无关).
+SEINE FACHWELT (mit Beispiel-Namen verifiziert):
+- Siegel 154 = Siegel-MASS (siegel_mass_rank_one,
+  siegelWeilUnitaryConvergent, integral_fundamentalDomain_le_siegel)
+  — nicht Riemann-Siegel-Summe.
+- Gram 941 = Gram-MATRIZEN (gram_herm, gram_sq, gram_cayley, gram_symm)
+  — nicht Gram-Punkte der Null-Separation.
+- Weyl 74 = WEYL-GRUPPE der Lie-Theorie (weyl_step, weylSub_le,
+  exists_isWeylElt, evaluation_longest_weyl_one) — nicht Weyl-Grenzen.
+- „Xi 15677" = Zähl-Artefakt (case-insensitiver Substring: axis/mix/
+  xi-Endungen) — kein einziger Theorem-Name mit Riemann-Xi-Bezug
+  (grep "^theorem.*xi" leer).
+VERDICT (final, vollständige Deklarations-Ebene): SEINE Bibliothek beweist
+AUTOMORPHE-LEHRE (Representationstheorie, Seesaw, Theta-Lift-Infrastruktur);
+die RH-Anwendung ist der Zweck, die 161.876 Theoreme sind die Lehre.
+Unsere Zertifizierungs-Welt kommt in der Lehre nicht vor — zwei
+verschiedene Werkzeug-Paradigmata (rein formal vs. numerisch-zertifizierend).
+KEINE ÜBERNAHME. ENDSTAND DES ABGLEICHS.
