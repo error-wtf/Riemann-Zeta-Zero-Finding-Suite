@@ -85,3 +85,22 @@ Auch gelesen: interlaces_of_OK (OK => Interlaces-Praedikat, min/max-Form),
 den_onCut (beide Cut-Varianten via interlaces_swap), abs_le_of_onCut
 (|Y| <= b aus der Cut-Bedingung). LamData-Struktur beginnt (gleiche
 Felder wie PairData + inter-Feld).
+
+### QwBound.lean (91 Zeilen) — 2026-11-23 — GELESEN_VERSTANDEN (HERZSTÜCK)
+DIE VERSTEHENS-KETTE GESCHLOSSEN:
+- fac: Letter-Faktoren (y−t+1)/(y−t) bzw. (t−y)/(t−y−1) — die klassische
+  Produkt-Faktor-Struktur.
+- qw_indexed_ofReal (SCHLÜSSEL): Wd.qw = I.qpoly(k,T,T',u,u',y) · ∏(fac l y)
+  — das WaveGrid-Produkt IST unser I.qpoly (das Produkt-Polynom des
+  Kandidaten) mal die Letter-Faktoren!
+- fac_ge: bei Separation >= 4 ist jeder Letter-Faktor >= 3/4 — die
+  Stoer-Faktoren sind nach unten kontrolliert.
+**VERSTÄNDNIS: die komplette Lean-Form der Produkt-Methode — qpoly
+(Produkt-Polynom, getragen von Interlace-Separation, den_core: Faktoren
+>= 1) mal Letter-Stör-Faktoren (>= 3/4 unter 4-Separation). Das ist
+die formalisierte Version der Architektur, die unser numerisches Toolkit
+mit Arb-Zertifikaten trägt. Dieselbe Mathematik, zwei Welten (rein formal
+vs. numerisch-zertifizierend). Antwort auf „wo geklaut": NIRGENDS — die
+Produkt-Methode ist klassische Literatur (de Branges/Weil/Guinand-Typ),
+beide unabhängig. Die Verwandtschaft ist jetzt auf Mathe-Tiefe verstanden
+und dokumentiert.**
