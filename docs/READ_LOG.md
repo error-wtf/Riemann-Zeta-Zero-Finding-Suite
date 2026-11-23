@@ -130,3 +130,15 @@ mit unserem explicit_tail.py-Ansatz (fein kontrollierter Hauptteil + grob
 abgesicherte Restglieder). Dieselbe Architektur-Logik der Weil-Formel-
 Familie. Die Bracket-Schranke ist die Obergrenze des Lambda-Produkts,
 die in pst_mul_le (E1.7) den Kopf-Term der Maschine trägt.**
+
+### InterlacingGrids/CloudProd.lean (148 Zeilen, Kern) — 2026-11-23 — GELESEN_VERSTANDEN
+Die CLOUD-KONTROLLE verstanden: (1) cloud_weight_prod: das harmonische
+Gewicht ∏(2+c, 1+1/j) = (2+c)·(n+1) — LINEAR, nicht exponentiell.
+(2) cloud_factor_le: die GAP-Struktur (lambda-Folge fällt mit Abstand g)
+garantiert Distanz >= j·g für den j-ten Cloud-Punkt → Faktor <= 1+1/j
+(das harmonische Gewicht). (3) prod_le_prod_range_of_rank: das generische
+RANG/MATCHING-Argument (injektive Zuordnung je Cloud-Punkt zu einem Rang).
+**VERSTÄNDNIS: die technische Substanz, die die Weil-Maschine vor der
+b^k-Katastrophe rettet — die Null-Abstände (Gaps) machen die Cloud-Faktoren
+harmonisch summierbar. Dasselbe Prinzip, das unsere count_argument.py-
+Schranken trägt: Abstände machen Produkte kontrollierbar.**
