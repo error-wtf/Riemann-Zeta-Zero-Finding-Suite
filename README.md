@@ -675,3 +675,52 @@ Third-party dependencies retain their own licenses. Where a file contains an
 explicit license header, that header controls for that file.
 
 The canonical interactive reference animation is the supplied `artifacts/periodicity/zeta_grid_map_animated.html`; open it in a browser to use the density, quality, speed, pause, rebuild, PNG, hide-UI and fullscreen controls.
+
+## Repository situation note (2026-11-23)
+
+On 2026-11-20, Levent Alpöge (Anthropic) announced a proof of the Riemann
+hypothesis, developed with Claude and formalized in Lean (alpo.ge). This
+repository predates that announcement by over a year (GitHub server-side
+created_at: 2025-10-10T15:52:00Z) and uses a **numerically certifying**
+method family (Hardy-Z evaluation, Arb enclosures, zero certificates,
+two-sided Volterra identity, Weyl-bound certification) that is orthogonal
+to the announced automorphic/Stepanov-style argument. A full method
+comparison with timelines is in
+[`docs/ALPOGE_COMPARISON_TIMELINE.md`](docs/ALPOGE_COMPARISON_TIMELINE.md)
+and the verifiable commit chain in
+[`docs/COMMIT_TIMELINE.txt`](docs/COMMIT_TIMELINE.txt).
+
+Consequence for this repository: the proof-candidate artifacts remain
+archived as an independent path; going forward the primary role of this
+toolkit is **independent numerical verification** (zero certificates,
+count tables, explicit tail bounds) — a role unaffected by the status of
+any published proof. The exclusion audit
+([`docs/ALTERNATIVE_ROUTES_AUDIT.md`](docs/ALTERNATIVE_ROUTES_AUDIT.md))
+retains its validity as a documented map of routes that do not close.
+
+### Lean bridge (2026-11-23)
+
+Three kernel-verified Lean 4 modules now encode this repository's own
+results — the RH reduction, the P0 global-multiplier no-go core, and the
+two-sided Volterra difference identity with its Xi-zero consequence
+(all exit 0, axioms `[propext, Classical.choice, Quot.sound]`, no
+`sorryAx`; see [`docs/LEAN_BRIDGE/STATUS.md`](docs/LEAN_BRIDGE/STATUS.md)
+for modules, commands and the full error history). The same day, the
+Alpöge/Claude library core chain was read line-by-line with a documented
+14-stage protocol ([`docs/ALPOGE_LEAN_READSTATE.md`](docs/ALPOGE_LEAN_READSTATE.md)),
+including a three-level circularity check of the LLC-substitution layer
+(no cycle found at read depth) and quantified redundancy findings
+(94 Cauchy–Binet variants in `src/Lemmata/`).
+
+### Prior art (verified)
+
+The full certifying toolkit already existed publicly at the reference date
+of the November 2026 RH announcement's own development timeline: at
+2026-06-10 this repository contained **42 commits / 39 files / 25 Python
+modules** of zero-certification infrastructure (Arb-rigorous Z evaluation,
+zero certificates, count arguments, explicit tail bounds, Turing checks,
+Gram-block scans) — eight months of public development history. See
+[`docs/PRIOR_ART_INVENTORY.md`](docs/PRIOR_ART_INVENTORY.md) and
+[`docs/COMMIT_TIMELINE.txt`](docs/COMMIT_TIMELINE.txt) (173 hash+timestamp
+entries, verifiable via the GitHub API; repository created_at
+2025-10-10T15:52:00Z, server-side).
